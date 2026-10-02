@@ -53,6 +53,7 @@ export const Header: React.FC<HeaderProps> = ({
   const [editName, setEditName] = useState('');
   const [editEmail, setEditEmail] = useState('');
   const [savingTeacherClass, setSavingTeacherClass] = useState<string | null>(null);
+  const [configNotification, setConfigNotification] = useState<string | null>(null);
 
   const handleOpenConfig = () => {
     setWebhookInput(config?.makeWebhookUrl || '');
@@ -96,6 +97,8 @@ export const Header: React.FC<HeaderProps> = ({
         );
       }
       setEditingTeacherClass(null);
+      setConfigNotification(`Đã lưu thông tin GVCN lớp ${className}!`);
+      setTimeout(() => setConfigNotification(null), 3000);
     } catch (err: any) {
       alert(err.message || 'Lỗi lưu thông tin GVCN');
     } finally {
@@ -115,6 +118,8 @@ export const Header: React.FC<HeaderProps> = ({
       });
       onRefresh();
       setShowConfigModal(false);
+      setConfigNotification('Đã lưu cấu hình kết nối Webhook / Google Sheet thành công!');
+      setTimeout(() => setConfigNotification(null), 4000);
     } catch (err: any) {
       alert(err.message || 'Lỗi lưu cấu hình');
     } finally {
@@ -504,6 +509,15 @@ export const Header: React.FC<HeaderProps> = ({
               </div>
             </form>
           </div>
+        </div>
+      )}
+
+      {/* Toast Notification */}
+      {configNotification && (
+        <div className="fixed bottom-5 right-5 z-50 bg-slate-900 text-white px-4 py-2.5 rounded-lg shadow-xl text-xs flex items-center gap-2 border border-slate-700">
+          <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+          <span>{configNotification}</span>
+          <button onClick={() => setConfigNotification(null)} className="ml-2 text-slate-400 hover:text-white cursor-pointer">✕</button>
         </div>
       )}
     </header>
