@@ -10,10 +10,16 @@ import {
   Mail,
   Search,
   Check,
-  Edit3
+  Edit3,
+  Smartphone,
+  QrCode,
+  Copy,
+  ExternalLink
 } from 'lucide-react';
 import { api } from '../services/api.ts';
 import { Teacher } from '../types/index.ts';
+
+const OFFICIAL_SHARED_URL = 'https://ais-pre-4sx3rf535uubyub7pgl4aa-658614430471.asia-east1.run.app';
 
 interface HeaderProps {
   activeTab: string;
@@ -37,6 +43,8 @@ export const Header: React.FC<HeaderProps> = ({
   onRefresh
 }) => {
   const [showConfigModal, setShowConfigModal] = useState(false);
+  const [showMobileSyncModal, setShowMobileSyncModal] = useState(false);
+  const [copiedLink, setCopiedLink] = useState(false);
   const [webhookInput, setWebhookInput] = useState(config?.makeWebhookUrl || '');
   const [sheetIdInput, setSheetIdInput] = useState(config?.googleSheetId || '');
   const [apiKeyInput, setApiKeyInput] = useState(config?.makeApiKey || '');

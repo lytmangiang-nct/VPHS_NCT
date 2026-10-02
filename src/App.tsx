@@ -18,6 +18,22 @@ export default function App() {
 
   useEffect(() => {
     fetchConfig();
+
+    const handleFocus = () => {
+      fetchConfig();
+      setRefreshKey((prev) => prev + 1);
+    };
+    window.addEventListener('focus', handleFocus);
+
+    // Auto-sync every 8 seconds so entries from phone appear on PC automatically
+    const interval = setInterval(() => {
+      setRefreshKey((prev) => prev + 1);
+    }, 8000);
+
+    return () => {
+      window.removeEventListener('focus', handleFocus);
+      clearInterval(interval);
+    };
   }, []);
 
   const handleViolationRecorded = (violationId: string) => {
