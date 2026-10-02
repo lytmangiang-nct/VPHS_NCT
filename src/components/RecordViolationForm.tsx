@@ -7,7 +7,6 @@ import {
   Eye,
   X,
   FileCheck2,
-  ChevronDown,
   MapPin,
   User as UserIcon,
   Tag,
@@ -40,7 +39,6 @@ export const RecordViolationForm: React.FC<RecordViolationFormProps> = ({
 }) => {
   // Pilot class locked to 10C1 by default
   const [selectedClass, setSelectedClass] = useState<string>('10C1');
-  const [showClassSwitch, setShowClassSwitch] = useState<boolean>(false);
   const [availableClasses, setAvailableClasses] = useState<string[]>(['10C1']);
 
   // 1. Tự nhập họ tên học sinh (không có gợi ý datalist)
@@ -264,55 +262,17 @@ export const RecordViolationForm: React.FC<RecordViolationFormProps> = ({
         /* STREAMLINED COMPACT FORM */
         <div className="bg-white rounded-xl shadow-xs border border-slate-200 overflow-hidden">
           {/* Header */}
-          <div className="px-5 py-3 bg-slate-900 text-white flex items-center justify-between">
+          <div className="px-5 py-3.5 bg-slate-900 text-white flex items-center justify-between">
             <div className="flex items-center gap-2.5">
               <FileCheck2 className="w-5 h-5 text-blue-400" />
               <div>
                 <h2 className="text-sm font-bold">Ghi nhận vi phạm</h2>
-                <div className="text-[11px] text-slate-300 flex items-center gap-1.5">
-                  <span>Lớp hiện tại:</span>
-                  <span className="bg-blue-600 text-white px-1.5 py-0.2 rounded font-semibold text-[10px]">
-                    {selectedClass}
-                  </span>
-                  <span>&bull; GVCN: {currentTeacher?.teacherName || 'Thầy Lê Văn Hùng'}</span>
+                <div className="text-[11px] text-slate-300">
+                  Ghi nhận nề nếp học sinh &bull; Tự động đồng bộ Google Sheet & Email GVCN
                 </div>
               </div>
             </div>
-
-            {/* Quick Class Switcher */}
-            <div>
-              <button
-                type="button"
-                onClick={() => setShowClassSwitch(!showClassSwitch)}
-                className="text-[11px] text-slate-300 hover:text-white bg-slate-800 hover:bg-slate-700 px-2 py-1 rounded border border-slate-700 transition flex items-center gap-1 cursor-pointer"
-              >
-                <span>Đổi lớp ({selectedClass})</span>
-                <ChevronDown className="w-3 h-3" />
-              </button>
-            </div>
           </div>
-
-          {/* Optional Class switcher dropdown */}
-          {showClassSwitch && (
-            <div className="p-3 bg-blue-50 border-b border-blue-200 text-xs flex items-center gap-3">
-              <span className="font-semibold text-blue-900">Chọn nhanh lớp:</span>
-              <select
-                value={selectedClass}
-                onChange={(e) => {
-                  setSelectedClass(e.target.value);
-                  setStudentId(e.target.value);
-                  setShowClassSwitch(false);
-                }}
-                className="h-8 px-2.5 bg-white border border-blue-300 rounded font-bold text-blue-800"
-              >
-                {ALL_CLASSES.map((cls) => (
-                  <option key={cls} value={cls}>
-                    Lớp {cls} {cls === '10C1' ? '(Mẫu thí điểm)' : ''}
-                  </option>
-                ))}
-              </select>
-            </div>
-          )}
 
           {errorMessage && (
             <div className="m-4 p-3 bg-red-50 border border-red-200 rounded-lg flex items-center gap-2 text-red-800 text-xs">
