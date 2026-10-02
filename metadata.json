@@ -1,0 +1,6 @@
+{
+  "name": "Sổ ghi nhận vi phạm học sinh",
+  "description": "Hệ thống ghi nhận vi phạm học sinh, tự động kết nối Webhook Make, lưu Google Sheets và gửi email thông báo cho Giáo viên chủ nhiệm.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

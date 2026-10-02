@@ -1,0 +1,2689 @@
+{
+  "config": {
+    "makeWebhookUrl": "https://hook.eu1.make.com/corl1dg4fl1uoi2guqoi6ycphutv4pl7",
+    "googleSheetId": "Vipham",
+    "otherViolationDefaultRule": "Kiểm điểm trước lớp hoặc xử lý theo quyết định nhà trường.",
+    "otherViolationDefaultSteps": 0,
+    "schoolName": "Trường THPT Nguyễn Chí Thanh",
+    "timezone": "Asia/Ho_Chi_Minh",
+    "testModeSimulation": true,
+    "makeApiKey": "",
+    "senderEmail": "lytm.angiang@gmail.com",
+    "senderName": "BCH Đoàn trường THPT Nguyễn Chí Thanh"
+  },
+  "teachers": [
+    {
+      "className": "10C1",
+      "teacherName": "Thầy/Cô Nguyễn Văn An",
+      "email": "lytm.angiang@gmail.com",
+      "isActive": true
+    },
+    {
+      "className": "10C2",
+      "teacherName": "Thầy/Cô Trần Thị Mai",
+      "email": "gvcn.10c2@thpt.edu.vn",
+      "isActive": true
+    },
+    {
+      "className": "10C3",
+      "teacherName": "Thầy/Cô Lê Hoàng Long",
+      "email": "gvcn.10c3@thpt.edu.vn",
+      "isActive": true
+    },
+    {
+      "className": "10C4",
+      "teacherName": "Thầy/Cô Phạm Quốc Bảo",
+      "email": "gvcn.10c4@thpt.edu.vn",
+      "isActive": true
+    },
+    {
+      "className": "10C5",
+      "teacherName": "Thầy/Cô Hoàng Thu Trang",
+      "email": "gvcn.10c5@thpt.edu.vn",
+      "isActive": true
+    },
+    {
+      "className": "10C6",
+      "teacherName": "Thầy/Cô Đỗ Minh Tuấn",
+      "email": "gvcn.10c6@thpt.edu.vn",
+      "isActive": true
+    },
+    {
+      "className": "10C7",
+      "teacherName": "Thầy/Cô Vũ Hồng Hạnh",
+      "email": "gvcn.10c7@thpt.edu.vn",
+      "isActive": true
+    },
+    {
+      "className": "10C8",
+      "teacherName": "Thầy/Cô Bùi Văn Hưng",
+      "email": "gvcn.10c8@thpt.edu.vn",
+      "isActive": true
+    },
+    {
+      "className": "10C9",
+      "teacherName": "Thầy/Cô Đặng Thanh Thảo",
+      "email": "",
+      "isActive": true
+    },
+    {
+      "className": "11C1",
+      "teacherName": "Thầy/Cô Ngô Kiến Huy",
+      "email": "gvcn.11c1@thpt.edu.vn",
+      "isActive": true
+    },
+    {
+      "className": "11C2",
+      "teacherName": "Thầy/Cô Dương Thúy Nga",
+      "email": "gvcn.11c2@thpt.edu.vn",
+      "isActive": true
+    },
+    {
+      "className": "11C3",
+      "teacherName": "Thầy/Cô Võ Đình Trí",
+      "email": "gvcn.11c3@thpt.edu.vn",
+      "isActive": true
+    },
+    {
+      "className": "11C4",
+      "teacherName": "Thầy/Cô Nguyễn Văn An",
+      "email": "gvcn.11c4@thpt.edu.vn",
+      "isActive": true
+    },
+    {
+      "className": "11C5",
+      "teacherName": "Thầy/Cô Trần Thị Mai",
+      "email": "gvcn.11c5@thpt.edu.vn",
+      "isActive": true
+    },
+    {
+      "className": "11C6",
+      "teacherName": "Thầy/Cô Lê Hoàng Long",
+      "email": "gvcn.11c6@thpt.edu.vn",
+      "isActive": true
+    },
+    {
+      "className": "11C7",
+      "teacherName": "Thầy/Cô Phạm Quốc Bảo",
+      "email": "gvcn.11c7@thpt.edu.vn",
+      "isActive": true
+    },
+    {
+      "className": "11C8",
+      "teacherName": "Thầy/Cô Hoàng Thu Trang",
+      "email": "gvcn.11c8@thpt.edu.vn",
+      "isActive": true
+    },
+    {
+      "className": "11C9",
+      "teacherName": "Thầy/Cô Đỗ Minh Tuấn",
+      "email": "gvcn.11c9@thpt.edu.vn",
+      "isActive": true
+    },
+    {
+      "className": "12C1",
+      "teacherName": "Thầy/Cô Vũ Hồng Hạnh",
+      "email": "gvcn.12c1@thpt.edu.vn",
+      "isActive": true
+    },
+    {
+      "className": "12C2",
+      "teacherName": "Thầy/Cô Bùi Văn Hưng",
+      "email": "gvcn.12c2@thpt.edu.vn",
+      "isActive": true
+    },
+    {
+      "className": "12C3",
+      "teacherName": "Thầy/Cô Đặng Thanh Thảo",
+      "email": "gvcn.12c3@thpt.edu.vn",
+      "isActive": true
+    },
+    {
+      "className": "12C4",
+      "teacherName": "Thầy/Cô Ngô Kiến Huy",
+      "email": "gvcn.12c4@thpt.edu.vn",
+      "isActive": true
+    },
+    {
+      "className": "12C5",
+      "teacherName": "Thầy/Cô Dương Thúy Nga",
+      "email": "gvcn.12c5@thpt.edu.vn",
+      "isActive": true
+    },
+    {
+      "className": "12C6",
+      "teacherName": "Thầy/Cô Võ Đình Trí",
+      "email": "gvcn.12c6@thpt.edu.vn",
+      "isActive": true
+    },
+    {
+      "className": "12C7",
+      "teacherName": "Thầy/Cô Nguyễn Văn An",
+      "email": "gvcn.12c7@thpt.edu.vn",
+      "isActive": true
+    },
+    {
+      "className": "12C8",
+      "teacherName": "Thầy/Cô Trần Thị Mai",
+      "email": "gvcn.12c8@thpt.edu.vn",
+      "isActive": true
+    },
+    {
+      "className": "12C9",
+      "teacherName": "Thầy/Cô Lê Hoàng Long",
+      "email": "gvcn.12c9@thpt.edu.vn",
+      "isActive": true
+    },
+    {
+      "className": "12C10",
+      "teacherName": "Thầy/Cô Phạm Quốc Bảo",
+      "email": "gvcn.12c10@thpt.edu.vn",
+      "isActive": true
+    }
+  ],
+  "students": [
+    {
+      "id": "HS10C101",
+      "name": "Phạm Ngọc Quân",
+      "grade": 10,
+      "className": "10C1",
+      "isActive": true
+    },
+    {
+      "id": "HS10C102",
+      "name": "Phan Hữu Cường",
+      "grade": 10,
+      "className": "10C1",
+      "isActive": true
+    },
+    {
+      "id": "HS10C103",
+      "name": "Đặng Thị Tâm",
+      "grade": 10,
+      "className": "10C1",
+      "isActive": true
+    },
+    {
+      "id": "HS10C104",
+      "name": "Nguyễn Gia Đạt",
+      "grade": 10,
+      "className": "10C1",
+      "isActive": true
+    },
+    {
+      "id": "HS10C105",
+      "name": "Phạm Quốc Yến",
+      "grade": 10,
+      "className": "10C1",
+      "isActive": true
+    },
+    {
+      "id": "HS10C201",
+      "name": "Phan Minh Huy",
+      "grade": 10,
+      "className": "10C2",
+      "isActive": true
+    },
+    {
+      "id": "HS10C202",
+      "name": "Đặng Đình Phương",
+      "grade": 10,
+      "className": "10C2",
+      "isActive": true
+    },
+    {
+      "id": "HS10C203",
+      "name": "Nguyễn Văn Lâm",
+      "grade": 10,
+      "className": "10C2",
+      "isActive": true
+    },
+    {
+      "id": "HS10C204",
+      "name": "Phạm Thanh Hương",
+      "grade": 10,
+      "className": "10C2",
+      "isActive": true
+    },
+    {
+      "id": "HS10C205",
+      "name": "Phan Ngọc Phong",
+      "grade": 10,
+      "className": "10C2",
+      "isActive": true
+    },
+    {
+      "id": "HS10C301",
+      "name": "Đặng Hữu Bình",
+      "grade": 10,
+      "className": "10C3",
+      "isActive": true
+    },
+    {
+      "id": "HS10C302",
+      "name": "Nguyễn Thị Sơn",
+      "grade": 10,
+      "className": "10C3",
+      "isActive": true
+    },
+    {
+      "id": "HS10C303",
+      "name": "Phạm Gia Dũng",
+      "grade": 10,
+      "className": "10C3",
+      "isActive": true
+    },
+    {
+      "id": "HS10C304",
+      "name": "Phan Quốc Việt",
+      "grade": 10,
+      "className": "10C3",
+      "isActive": true
+    },
+    {
+      "id": "HS10C305",
+      "name": "Đặng Minh Hải",
+      "grade": 10,
+      "className": "10C3",
+      "isActive": true
+    },
+    {
+      "id": "HS10C401",
+      "name": "Nguyễn Đình Trang",
+      "grade": 10,
+      "className": "10C4",
+      "isActive": true
+    },
+    {
+      "id": "HS10C402",
+      "name": "Phạm Văn Khoa",
+      "grade": 10,
+      "className": "10C4",
+      "isActive": true
+    },
+    {
+      "id": "HS10C403",
+      "name": "Phan Thanh Linh",
+      "grade": 10,
+      "className": "10C4",
+      "isActive": true
+    },
+    {
+      "id": "HS10C404",
+      "name": "Đặng Ngọc Nam",
+      "grade": 10,
+      "className": "10C4",
+      "isActive": true
+    },
+    {
+      "id": "HS10C405",
+      "name": "Nguyễn Hữu An",
+      "grade": 10,
+      "className": "10C4",
+      "isActive": true
+    },
+    {
+      "id": "HS10C501",
+      "name": "Phạm Thị Quân",
+      "grade": 10,
+      "className": "10C5",
+      "isActive": true
+    },
+    {
+      "id": "HS10C502",
+      "name": "Phan Gia Cường",
+      "grade": 10,
+      "className": "10C5",
+      "isActive": true
+    },
+    {
+      "id": "HS10C503",
+      "name": "Đặng Quốc Tâm",
+      "grade": 10,
+      "className": "10C5",
+      "isActive": true
+    },
+    {
+      "id": "HS10C504",
+      "name": "Nguyễn Minh Đạt",
+      "grade": 10,
+      "className": "10C5",
+      "isActive": true
+    },
+    {
+      "id": "HS10C505",
+      "name": "Phạm Đình Yến",
+      "grade": 10,
+      "className": "10C5",
+      "isActive": true
+    },
+    {
+      "id": "HS10C601",
+      "name": "Phan Văn Huy",
+      "grade": 10,
+      "className": "10C6",
+      "isActive": true
+    },
+    {
+      "id": "HS10C602",
+      "name": "Đặng Thanh Phương",
+      "grade": 10,
+      "className": "10C6",
+      "isActive": true
+    },
+    {
+      "id": "HS10C603",
+      "name": "Nguyễn Ngọc Lâm",
+      "grade": 10,
+      "className": "10C6",
+      "isActive": true
+    },
+    {
+      "id": "HS10C604",
+      "name": "Phạm Hữu Hương",
+      "grade": 10,
+      "className": "10C6",
+      "isActive": true
+    },
+    {
+      "id": "HS10C605",
+      "name": "Phan Thị Phong",
+      "grade": 10,
+      "className": "10C6",
+      "isActive": true
+    },
+    {
+      "id": "HS10C701",
+      "name": "Đặng Gia Bình",
+      "grade": 10,
+      "className": "10C7",
+      "isActive": true
+    },
+    {
+      "id": "HS10C702",
+      "name": "Nguyễn Quốc Sơn",
+      "grade": 10,
+      "className": "10C7",
+      "isActive": true
+    },
+    {
+      "id": "HS10C703",
+      "name": "Phạm Minh Dũng",
+      "grade": 10,
+      "className": "10C7",
+      "isActive": true
+    },
+    {
+      "id": "HS10C704",
+      "name": "Phan Đình Việt",
+      "grade": 10,
+      "className": "10C7",
+      "isActive": true
+    },
+    {
+      "id": "HS10C705",
+      "name": "Đặng Văn Hải",
+      "grade": 10,
+      "className": "10C7",
+      "isActive": true
+    },
+    {
+      "id": "HS10C801",
+      "name": "Nguyễn Thanh Trang",
+      "grade": 10,
+      "className": "10C8",
+      "isActive": true
+    },
+    {
+      "id": "HS10C802",
+      "name": "Phạm Ngọc Khoa",
+      "grade": 10,
+      "className": "10C8",
+      "isActive": true
+    },
+    {
+      "id": "HS10C803",
+      "name": "Phan Hữu Linh",
+      "grade": 10,
+      "className": "10C8",
+      "isActive": true
+    },
+    {
+      "id": "HS10C804",
+      "name": "Đặng Thị Nam",
+      "grade": 10,
+      "className": "10C8",
+      "isActive": true
+    },
+    {
+      "id": "HS10C805",
+      "name": "Nguyễn Gia An",
+      "grade": 10,
+      "className": "10C8",
+      "isActive": true
+    },
+    {
+      "id": "HS10C901",
+      "name": "Phạm Quốc Quân",
+      "grade": 10,
+      "className": "10C9",
+      "isActive": true
+    },
+    {
+      "id": "HS10C902",
+      "name": "Phan Minh Cường",
+      "grade": 10,
+      "className": "10C9",
+      "isActive": true
+    },
+    {
+      "id": "HS10C903",
+      "name": "Đặng Đình Tâm",
+      "grade": 10,
+      "className": "10C9",
+      "isActive": true
+    },
+    {
+      "id": "HS10C904",
+      "name": "Nguyễn Văn Đạt",
+      "grade": 10,
+      "className": "10C9",
+      "isActive": true
+    },
+    {
+      "id": "HS10C905",
+      "name": "Phạm Thanh Yến",
+      "grade": 10,
+      "className": "10C9",
+      "isActive": true
+    },
+    {
+      "id": "HS11C101",
+      "name": "Phan Ngọc Huy",
+      "grade": 11,
+      "className": "11C1",
+      "isActive": true
+    },
+    {
+      "id": "HS11C102",
+      "name": "Đặng Hữu Phương",
+      "grade": 11,
+      "className": "11C1",
+      "isActive": true
+    },
+    {
+      "id": "HS11C103",
+      "name": "Nguyễn Thị Lâm",
+      "grade": 11,
+      "className": "11C1",
+      "isActive": true
+    },
+    {
+      "id": "HS11C104",
+      "name": "Phạm Gia Hương",
+      "grade": 11,
+      "className": "11C1",
+      "isActive": true
+    },
+    {
+      "id": "HS11C105",
+      "name": "Phan Quốc Phong",
+      "grade": 11,
+      "className": "11C1",
+      "isActive": true
+    },
+    {
+      "id": "HS11C201",
+      "name": "Đặng Minh Bình",
+      "grade": 11,
+      "className": "11C2",
+      "isActive": true
+    },
+    {
+      "id": "HS11C202",
+      "name": "Nguyễn Đình Sơn",
+      "grade": 11,
+      "className": "11C2",
+      "isActive": true
+    },
+    {
+      "id": "HS11C203",
+      "name": "Phạm Văn Dũng",
+      "grade": 11,
+      "className": "11C2",
+      "isActive": true
+    },
+    {
+      "id": "HS11C204",
+      "name": "Phan Thanh Việt",
+      "grade": 11,
+      "className": "11C2",
+      "isActive": true
+    },
+    {
+      "id": "HS11C205",
+      "name": "Đặng Ngọc Hải",
+      "grade": 11,
+      "className": "11C2",
+      "isActive": true
+    },
+    {
+      "id": "HS11C301",
+      "name": "Nguyễn Hữu Trang",
+      "grade": 11,
+      "className": "11C3",
+      "isActive": true
+    },
+    {
+      "id": "HS11C302",
+      "name": "Phạm Thị Khoa",
+      "grade": 11,
+      "className": "11C3",
+      "isActive": true
+    },
+    {
+      "id": "HS11C303",
+      "name": "Phan Gia Linh",
+      "grade": 11,
+      "className": "11C3",
+      "isActive": true
+    },
+    {
+      "id": "HS11C304",
+      "name": "Đặng Quốc Nam",
+      "grade": 11,
+      "className": "11C3",
+      "isActive": true
+    },
+    {
+      "id": "HS11C305",
+      "name": "Nguyễn Minh An",
+      "grade": 11,
+      "className": "11C3",
+      "isActive": true
+    },
+    {
+      "id": "HS11C401",
+      "name": "Phạm Đình Quân",
+      "grade": 11,
+      "className": "11C4",
+      "isActive": true
+    },
+    {
+      "id": "HS11C402",
+      "name": "Phan Văn Cường",
+      "grade": 11,
+      "className": "11C4",
+      "isActive": true
+    },
+    {
+      "id": "HS11C403",
+      "name": "Đặng Thanh Tâm",
+      "grade": 11,
+      "className": "11C4",
+      "isActive": true
+    },
+    {
+      "id": "HS11C404",
+      "name": "Nguyễn Ngọc Đạt",
+      "grade": 11,
+      "className": "11C4",
+      "isActive": true
+    },
+    {
+      "id": "HS11C405",
+      "name": "Phạm Hữu Yến",
+      "grade": 11,
+      "className": "11C4",
+      "isActive": true
+    },
+    {
+      "id": "HS11C501",
+      "name": "Phan Thị Huy",
+      "grade": 11,
+      "className": "11C5",
+      "isActive": true
+    },
+    {
+      "id": "HS11C502",
+      "name": "Đặng Gia Phương",
+      "grade": 11,
+      "className": "11C5",
+      "isActive": true
+    },
+    {
+      "id": "HS11C503",
+      "name": "Nguyễn Quốc Lâm",
+      "grade": 11,
+      "className": "11C5",
+      "isActive": true
+    },
+    {
+      "id": "HS11C504",
+      "name": "Phạm Minh Hương",
+      "grade": 11,
+      "className": "11C5",
+      "isActive": true
+    },
+    {
+      "id": "HS11C505",
+      "name": "Phan Đình Phong",
+      "grade": 11,
+      "className": "11C5",
+      "isActive": true
+    },
+    {
+      "id": "HS11C601",
+      "name": "Đặng Văn Bình",
+      "grade": 11,
+      "className": "11C6",
+      "isActive": true
+    },
+    {
+      "id": "HS11C602",
+      "name": "Nguyễn Thanh Sơn",
+      "grade": 11,
+      "className": "11C6",
+      "isActive": true
+    },
+    {
+      "id": "HS11C603",
+      "name": "Phạm Ngọc Dũng",
+      "grade": 11,
+      "className": "11C6",
+      "isActive": true
+    },
+    {
+      "id": "HS11C604",
+      "name": "Phan Hữu Việt",
+      "grade": 11,
+      "className": "11C6",
+      "isActive": true
+    },
+    {
+      "id": "HS11C605",
+      "name": "Đặng Thị Hải",
+      "grade": 11,
+      "className": "11C6",
+      "isActive": true
+    },
+    {
+      "id": "HS11C701",
+      "name": "Nguyễn Gia Trang",
+      "grade": 11,
+      "className": "11C7",
+      "isActive": true
+    },
+    {
+      "id": "HS11C702",
+      "name": "Phạm Quốc Khoa",
+      "grade": 11,
+      "className": "11C7",
+      "isActive": true
+    },
+    {
+      "id": "HS11C703",
+      "name": "Phan Minh Linh",
+      "grade": 11,
+      "className": "11C7",
+      "isActive": true
+    },
+    {
+      "id": "HS11C704",
+      "name": "Đặng Đình Nam",
+      "grade": 11,
+      "className": "11C7",
+      "isActive": true
+    },
+    {
+      "id": "HS11C705",
+      "name": "Nguyễn Văn An",
+      "grade": 11,
+      "className": "11C7",
+      "isActive": true
+    },
+    {
+      "id": "HS11C801",
+      "name": "Phạm Thanh Quân",
+      "grade": 11,
+      "className": "11C8",
+      "isActive": true
+    },
+    {
+      "id": "HS11C802",
+      "name": "Phan Ngọc Cường",
+      "grade": 11,
+      "className": "11C8",
+      "isActive": true
+    },
+    {
+      "id": "HS11C803",
+      "name": "Đặng Hữu Tâm",
+      "grade": 11,
+      "className": "11C8",
+      "isActive": true
+    },
+    {
+      "id": "HS11C804",
+      "name": "Nguyễn Thị Đạt",
+      "grade": 11,
+      "className": "11C8",
+      "isActive": true
+    },
+    {
+      "id": "HS11C805",
+      "name": "Phạm Gia Yến",
+      "grade": 11,
+      "className": "11C8",
+      "isActive": true
+    },
+    {
+      "id": "HS11C901",
+      "name": "Phan Quốc Huy",
+      "grade": 11,
+      "className": "11C9",
+      "isActive": true
+    },
+    {
+      "id": "HS11C902",
+      "name": "Đặng Minh Phương",
+      "grade": 11,
+      "className": "11C9",
+      "isActive": true
+    },
+    {
+      "id": "HS11C903",
+      "name": "Nguyễn Đình Lâm",
+      "grade": 11,
+      "className": "11C9",
+      "isActive": true
+    },
+    {
+      "id": "HS11C904",
+      "name": "Phạm Văn Hương",
+      "grade": 11,
+      "className": "11C9",
+      "isActive": true
+    },
+    {
+      "id": "HS11C905",
+      "name": "Phan Thanh Phong",
+      "grade": 11,
+      "className": "11C9",
+      "isActive": true
+    },
+    {
+      "id": "HS12C101",
+      "name": "Đặng Ngọc Bình",
+      "grade": 12,
+      "className": "12C1",
+      "isActive": true
+    },
+    {
+      "id": "HS12C102",
+      "name": "Nguyễn Hữu Sơn",
+      "grade": 12,
+      "className": "12C1",
+      "isActive": true
+    },
+    {
+      "id": "HS12C103",
+      "name": "Phạm Thị Dũng",
+      "grade": 12,
+      "className": "12C1",
+      "isActive": true
+    },
+    {
+      "id": "HS12C104",
+      "name": "Phan Gia Việt",
+      "grade": 12,
+      "className": "12C1",
+      "isActive": true
+    },
+    {
+      "id": "HS12C105",
+      "name": "Đặng Quốc Hải",
+      "grade": 12,
+      "className": "12C1",
+      "isActive": true
+    },
+    {
+      "id": "HS12C201",
+      "name": "Nguyễn Minh Trang",
+      "grade": 12,
+      "className": "12C2",
+      "isActive": true
+    },
+    {
+      "id": "HS12C202",
+      "name": "Phạm Đình Khoa",
+      "grade": 12,
+      "className": "12C2",
+      "isActive": true
+    },
+    {
+      "id": "HS12C203",
+      "name": "Phan Văn Linh",
+      "grade": 12,
+      "className": "12C2",
+      "isActive": true
+    },
+    {
+      "id": "HS12C204",
+      "name": "Đặng Thanh Nam",
+      "grade": 12,
+      "className": "12C2",
+      "isActive": true
+    },
+    {
+      "id": "HS12C205",
+      "name": "Nguyễn Ngọc An",
+      "grade": 12,
+      "className": "12C2",
+      "isActive": true
+    },
+    {
+      "id": "HS12C301",
+      "name": "Phạm Hữu Quân",
+      "grade": 12,
+      "className": "12C3",
+      "isActive": true
+    },
+    {
+      "id": "HS12C302",
+      "name": "Phan Thị Cường",
+      "grade": 12,
+      "className": "12C3",
+      "isActive": true
+    },
+    {
+      "id": "HS12C303",
+      "name": "Đặng Gia Tâm",
+      "grade": 12,
+      "className": "12C3",
+      "isActive": true
+    },
+    {
+      "id": "HS12C304",
+      "name": "Nguyễn Quốc Đạt",
+      "grade": 12,
+      "className": "12C3",
+      "isActive": true
+    },
+    {
+      "id": "HS12C305",
+      "name": "Phạm Minh Yến",
+      "grade": 12,
+      "className": "12C3",
+      "isActive": true
+    },
+    {
+      "id": "HS12C401",
+      "name": "Phan Đình Huy",
+      "grade": 12,
+      "className": "12C4",
+      "isActive": true
+    },
+    {
+      "id": "HS12C402",
+      "name": "Đặng Văn Phương",
+      "grade": 12,
+      "className": "12C4",
+      "isActive": true
+    },
+    {
+      "id": "HS12C403",
+      "name": "Nguyễn Thanh Lâm",
+      "grade": 12,
+      "className": "12C4",
+      "isActive": true
+    },
+    {
+      "id": "HS12C404",
+      "name": "Phạm Ngọc Hương",
+      "grade": 12,
+      "className": "12C4",
+      "isActive": true
+    },
+    {
+      "id": "HS12C405",
+      "name": "Phan Hữu Phong",
+      "grade": 12,
+      "className": "12C4",
+      "isActive": true
+    },
+    {
+      "id": "HS12C501",
+      "name": "Đặng Thị Bình",
+      "grade": 12,
+      "className": "12C5",
+      "isActive": true
+    },
+    {
+      "id": "HS12C502",
+      "name": "Nguyễn Gia Sơn",
+      "grade": 12,
+      "className": "12C5",
+      "isActive": true
+    },
+    {
+      "id": "HS12C503",
+      "name": "Phạm Quốc Dũng",
+      "grade": 12,
+      "className": "12C5",
+      "isActive": true
+    },
+    {
+      "id": "HS12C504",
+      "name": "Phan Minh Việt",
+      "grade": 12,
+      "className": "12C5",
+      "isActive": true
+    },
+    {
+      "id": "HS12C505",
+      "name": "Đặng Đình Hải",
+      "grade": 12,
+      "className": "12C5",
+      "isActive": true
+    },
+    {
+      "id": "HS12C601",
+      "name": "Nguyễn Văn Trang",
+      "grade": 12,
+      "className": "12C6",
+      "isActive": true
+    },
+    {
+      "id": "HS12C602",
+      "name": "Phạm Thanh Khoa",
+      "grade": 12,
+      "className": "12C6",
+      "isActive": true
+    },
+    {
+      "id": "HS12C603",
+      "name": "Phan Ngọc Linh",
+      "grade": 12,
+      "className": "12C6",
+      "isActive": true
+    },
+    {
+      "id": "HS12C604",
+      "name": "Đặng Hữu Nam",
+      "grade": 12,
+      "className": "12C6",
+      "isActive": true
+    },
+    {
+      "id": "HS12C605",
+      "name": "Nguyễn Thị An",
+      "grade": 12,
+      "className": "12C6",
+      "isActive": true
+    },
+    {
+      "id": "HS12C701",
+      "name": "Phạm Gia Quân",
+      "grade": 12,
+      "className": "12C7",
+      "isActive": true
+    },
+    {
+      "id": "HS12C702",
+      "name": "Phan Quốc Cường",
+      "grade": 12,
+      "className": "12C7",
+      "isActive": true
+    },
+    {
+      "id": "HS12C703",
+      "name": "Đặng Minh Tâm",
+      "grade": 12,
+      "className": "12C7",
+      "isActive": true
+    },
+    {
+      "id": "HS12C704",
+      "name": "Nguyễn Đình Đạt",
+      "grade": 12,
+      "className": "12C7",
+      "isActive": true
+    },
+    {
+      "id": "HS12C705",
+      "name": "Phạm Văn Yến",
+      "grade": 12,
+      "className": "12C7",
+      "isActive": true
+    },
+    {
+      "id": "HS12C801",
+      "name": "Phan Thanh Huy",
+      "grade": 12,
+      "className": "12C8",
+      "isActive": true
+    },
+    {
+      "id": "HS12C802",
+      "name": "Đặng Ngọc Phương",
+      "grade": 12,
+      "className": "12C8",
+      "isActive": true
+    },
+    {
+      "id": "HS12C803",
+      "name": "Nguyễn Hữu Lâm",
+      "grade": 12,
+      "className": "12C8",
+      "isActive": true
+    },
+    {
+      "id": "HS12C804",
+      "name": "Phạm Thị Hương",
+      "grade": 12,
+      "className": "12C8",
+      "isActive": true
+    },
+    {
+      "id": "HS12C805",
+      "name": "Phan Gia Phong",
+      "grade": 12,
+      "className": "12C8",
+      "isActive": true
+    },
+    {
+      "id": "HS12C901",
+      "name": "Đặng Quốc Bình",
+      "grade": 12,
+      "className": "12C9",
+      "isActive": true
+    },
+    {
+      "id": "HS12C902",
+      "name": "Nguyễn Minh Sơn",
+      "grade": 12,
+      "className": "12C9",
+      "isActive": true
+    },
+    {
+      "id": "HS12C903",
+      "name": "Phạm Đình Dũng",
+      "grade": 12,
+      "className": "12C9",
+      "isActive": true
+    },
+    {
+      "id": "HS12C904",
+      "name": "Phan Văn Việt",
+      "grade": 12,
+      "className": "12C9",
+      "isActive": true
+    },
+    {
+      "id": "HS12C905",
+      "name": "Đặng Thanh Hải",
+      "grade": 12,
+      "className": "12C9",
+      "isActive": true
+    },
+    {
+      "id": "HS12C1001",
+      "name": "Nguyễn Ngọc Trang",
+      "grade": 12,
+      "className": "12C10",
+      "isActive": true
+    },
+    {
+      "id": "HS12C1002",
+      "name": "Phạm Hữu Khoa",
+      "grade": 12,
+      "className": "12C10",
+      "isActive": true
+    },
+    {
+      "id": "HS12C1003",
+      "name": "Phan Thị Linh",
+      "grade": 12,
+      "className": "12C10",
+      "isActive": true
+    },
+    {
+      "id": "HS12C1004",
+      "name": "Đặng Gia Nam",
+      "grade": 12,
+      "className": "12C10",
+      "isActive": true
+    },
+    {
+      "id": "HS12C1005",
+      "name": "Nguyễn Quốc An",
+      "grade": 12,
+      "className": "12C10",
+      "isActive": true
+    },
+    {
+      "id": "HS100199",
+      "name": "Nguyễn Văn Minh",
+      "grade": 10,
+      "className": "10C1",
+      "isActive": true
+    },
+    {
+      "id": "HS110299",
+      "name": "Nguyễn Văn Minh",
+      "grade": 11,
+      "className": "11C2",
+      "isActive": true
+    }
+  ],
+  "violations": [
+    {
+      "violation_id": "v-aa302752-72eb-4c20-90c7-21584a908692",
+      "request_id": "req-ee9d2e04-3d00-4fe2-a734-2a6008d3a207",
+      "student_id": "HS-BCHDT-01",
+      "student_name": "Lê Văn Hậu",
+      "grade": 10,
+      "class_name": "10C1",
+      "occurred_at": "2026-10-02T19:52:06+07:00",
+      "recorded_at": "2026-10-02T19:52:06+07:00",
+      "updated_at": "2026-10-02T19:52:06+07:00",
+      "violation_date": "02/10/2026",
+      "violation_time": "19:52:06",
+      "month": 10,
+      "year": 2026,
+      "month_key": "10/2026",
+      "violation_code": "PHONE_COMMITMENT",
+      "violation_label": "Dùng ĐT SHDC",
+      "description": "",
+      "location": "Khu A",
+      "recorded_by_id": "usr_admin",
+      "recorded_by_name": "Quản trị viên Đoàn trường",
+      "verification_status": "DA_XAC_NHAN",
+      "handling_rule": "Đề xuất hạ 1 bậc hạnh kiểm tháng cho mỗi lần vi phạm đã xác nhận.",
+      "proposed_downgrade_steps": 1,
+      "approved_downgrade_steps": 1,
+      "decision_status": "CHUA_XU_LY",
+      "handling_result": "Đề xuất hạ 1 bậc hạnh kiểm tháng",
+      "teacher_email": "lytm.angiang@gmail.com",
+      "email_status": "DANG_GUI",
+      "sync_status": "DA_TIEP_NHAN",
+      "attachment_urls": [],
+      "notes": "Sử dụng điện thoại trong giờ học",
+      "history": [
+        {
+          "timestamp": "2026-10-02T19:52:06+07:00",
+          "action": "CREATE",
+          "actor_id": "usr_admin",
+          "actor_name": "Quản trị viên Đoàn trường",
+          "details": "Ghi nhận vi phạm ban đầu"
+        }
+      ],
+      "sheet_synced_at": "2026-10-02T12:52:06.859Z"
+    },
+    {
+      "violation_id": "v-1790945243836-u0rg4",
+      "request_id": "req-d2dc6181-6bc4-422c-a0c1-b4a279a85d96",
+      "student_id": "HS10C102",
+      "student_name": "Phan Hữu Cường",
+      "grade": 10,
+      "class_name": "10C1",
+      "occurred_at": "2026-10-02T19:46:00+07:00",
+      "recorded_at": "2026-10-02T19:47:24+07:00",
+      "updated_at": "2026-10-02T19:47:24+07:00",
+      "violation_date": "02/10/2026",
+      "violation_time": "19:46:00",
+      "month": 10,
+      "year": 2026,
+      "month_key": "10/2026",
+      "violation_code": "VEHICLE_ON_CAMPUS",
+      "violation_label": "Chạy xe trong khuôn viên nhà trường",
+      "description": "",
+      "location": "Khu C",
+      "recorded_by_id": "usr_admin",
+      "recorded_by_name": "Thầy Nguyễn Văn Nam (Bí thư Đoàn)",
+      "verification_status": "DA_XAC_NHAN",
+      "handling_rule": "Đề xuất hạ 1 bậc hạnh kiểm tháng cho mỗi lần vi phạm đã xác nhận.",
+      "proposed_downgrade_steps": 1,
+      "approved_downgrade_steps": 1,
+      "decision_status": "CHUA_XU_LY",
+      "handling_result": "Đề xuất hạ 1 bậc hạnh kiểm tháng",
+      "teacher_email": "lytm.angiang@gmail.com",
+      "email_status": "DANG_GUI",
+      "sync_status": "DA_TIEP_NHAN",
+      "attachment_urls": [],
+      "notes": "",
+      "history": [
+        {
+          "timestamp": "2026-10-02T19:47:24+07:00",
+          "action": "CREATE",
+          "actor_id": "usr_admin",
+          "actor_name": "Thầy Nguyễn Văn Nam (Bí thư Đoàn)",
+          "details": "Ghi nhận vi phạm ban đầu"
+        }
+      ],
+      "sheet_synced_at": "2026-10-02T12:47:24.047Z"
+    },
+    {
+      "violation_id": "v-1790945080078-pn0p6",
+      "request_id": "req-fef00246-cd3b-4b04-92a3-400b34eec959",
+      "student_id": "HS10C101",
+      "student_name": "Phạm Ngọc Quân",
+      "grade": 10,
+      "class_name": "10C1",
+      "occurred_at": "2026-10-02T19:44:00+07:00",
+      "recorded_at": "2026-10-02T19:44:40+07:00",
+      "updated_at": "2026-10-02T19:44:40+07:00",
+      "violation_date": "02/10/2026",
+      "violation_time": "19:44:00",
+      "month": 10,
+      "year": 2026,
+      "month_key": "10/2026",
+      "violation_code": "VEHICLE_ON_CAMPUS",
+      "violation_label": "Chạy xe trong khuôn viên nhà trường",
+      "description": "",
+      "location": "Khu C",
+      "recorded_by_id": "usr_admin",
+      "recorded_by_name": "Thầy Nguyễn Văn Nam (Bí thư Đoàn)",
+      "verification_status": "DA_XAC_NHAN",
+      "handling_rule": "Đề xuất hạ 1 bậc hạnh kiểm tháng cho mỗi lần vi phạm đã xác nhận.",
+      "proposed_downgrade_steps": 1,
+      "approved_downgrade_steps": 1,
+      "decision_status": "CHUA_XU_LY",
+      "handling_result": "Đề xuất hạ 1 bậc hạnh kiểm tháng",
+      "teacher_email": "lytm.angiang@gmail.com",
+      "email_status": "DANG_GUI",
+      "sync_status": "DA_TIEP_NHAN",
+      "attachment_urls": [],
+      "notes": "",
+      "history": [
+        {
+          "timestamp": "2026-10-02T19:44:40+07:00",
+          "action": "CREATE",
+          "actor_id": "usr_admin",
+          "actor_name": "Thầy Nguyễn Văn Nam (Bí thư Đoàn)",
+          "details": "Ghi nhận vi phạm ban đầu"
+        }
+      ],
+      "sheet_synced_at": "2026-10-02T12:44:40.201Z"
+    },
+    {
+      "violation_id": "v-4274a759-6ab0-4735-808b-945500b6a4a2",
+      "request_id": "req-da6fed1d-ddf7-4559-8467-ee7ba6c22a06",
+      "student_id": "HS-TEST-MSG",
+      "student_name": "Nguyễn Văn Test",
+      "grade": 10,
+      "class_name": "10C1",
+      "occurred_at": "2026-10-02T11:17:29+07:00",
+      "recorded_at": "2026-10-02T11:17:29+07:00",
+      "updated_at": "2026-10-02T11:17:29+07:00",
+      "violation_date": "02/10/2026",
+      "violation_time": "11:17:29",
+      "month": 10,
+      "year": 2026,
+      "month_key": "10/2026",
+      "violation_code": "VEHICLE_ON_CAMPUS",
+      "violation_label": "Chạy xe trong khuôn viên nhà trường",
+      "description": "",
+      "location": "Khu C",
+      "recorded_by_id": "usr_admin",
+      "recorded_by_name": "Quản trị viên Đoàn trường",
+      "verification_status": "DA_XAC_NHAN",
+      "handling_rule": "Đề xuất hạ 1 bậc hạnh kiểm tháng cho mỗi lần vi phạm đã xác nhận.",
+      "proposed_downgrade_steps": 1,
+      "approved_downgrade_steps": 1,
+      "decision_status": "CHUA_XU_LY",
+      "handling_result": "Đề xuất hạ 1 bậc hạnh kiểm tháng",
+      "teacher_email": "lytm.angiang@gmail.com",
+      "email_status": "DANG_GUI",
+      "sync_status": "DA_TIEP_NHAN",
+      "attachment_urls": [],
+      "notes": "Chạy xe đạp điện trong sân trường",
+      "history": [
+        {
+          "timestamp": "2026-10-02T11:17:29+07:00",
+          "action": "CREATE",
+          "actor_id": "usr_admin",
+          "actor_name": "Quản trị viên Đoàn trường",
+          "details": "Ghi nhận vi phạm ban đầu"
+        }
+      ],
+      "sheet_synced_at": "2026-10-02T04:17:29.088Z"
+    },
+    {
+      "violation_id": "v-1790914191982-qafrr",
+      "request_id": "req-12e640cf-23c3-4c49-bbd4-95c7f154c03e",
+      "student_id": "HS10C101",
+      "student_name": "Phạm Ngọc Quân",
+      "grade": 10,
+      "class_name": "10C1",
+      "occurred_at": "2026-10-02T11:09:00+07:00",
+      "recorded_at": "2026-10-02T11:09:52+07:00",
+      "updated_at": "2026-10-02T11:09:52+07:00",
+      "violation_date": "02/10/2026",
+      "violation_time": "11:09:00",
+      "month": 10,
+      "year": 2026,
+      "month_key": "10/2026",
+      "violation_code": "VEHICLE_ON_CAMPUS",
+      "violation_label": "Chạy xe trong khuôn viên nhà trường",
+      "description": "",
+      "location": "Khu Sân khấu",
+      "recorded_by_id": "usr_admin",
+      "recorded_by_name": "Thầy Nguyễn Văn Nam (Bí thư Đoàn)",
+      "verification_status": "DA_XAC_NHAN",
+      "handling_rule": "Đề xuất hạ 1 bậc hạnh kiểm tháng cho mỗi lần vi phạm đã xác nhận.",
+      "proposed_downgrade_steps": 1,
+      "approved_downgrade_steps": 1,
+      "decision_status": "CHUA_XU_LY",
+      "handling_result": "Đề xuất hạ 1 bậc hạnh kiểm tháng",
+      "teacher_email": "lytm.angiang@gmail.com",
+      "email_status": "DANG_GUI",
+      "sync_status": "DA_TIEP_NHAN",
+      "attachment_urls": [],
+      "notes": "",
+      "history": [
+        {
+          "timestamp": "2026-10-02T11:09:52+07:00",
+          "action": "CREATE",
+          "actor_id": "usr_admin",
+          "actor_name": "Thầy Nguyễn Văn Nam (Bí thư Đoàn)",
+          "details": "Ghi nhận vi phạm ban đầu"
+        }
+      ],
+      "sheet_synced_at": "2026-10-02T04:09:52.147Z"
+    },
+    {
+      "violation_id": "v-1790914145158-e0ozg",
+      "request_id": "req-abd77298-7c26-4155-946a-0bfe034de626",
+      "student_id": "HS10C101",
+      "student_name": "Phạm Ngọc Quân",
+      "grade": 10,
+      "class_name": "10C1",
+      "occurred_at": "2026-10-02T11:09:00+07:00",
+      "recorded_at": "2026-10-02T11:09:06+07:00",
+      "updated_at": "2026-10-02T11:09:06+07:00",
+      "violation_date": "02/10/2026",
+      "violation_time": "11:09:00",
+      "month": 10,
+      "year": 2026,
+      "month_key": "10/2026",
+      "violation_code": "VEHICLE_ON_CAMPUS",
+      "violation_label": "Chạy xe trong khuôn viên nhà trường",
+      "description": "",
+      "location": "Khu Căn tin GV",
+      "recorded_by_id": "usr_admin",
+      "recorded_by_name": "Thầy Nguyễn Văn Nam (Bí thư Đoàn)",
+      "verification_status": "DA_XAC_NHAN",
+      "handling_rule": "Đề xuất hạ 1 bậc hạnh kiểm tháng cho mỗi lần vi phạm đã xác nhận.",
+      "proposed_downgrade_steps": 1,
+      "approved_downgrade_steps": 1,
+      "decision_status": "CHUA_XU_LY",
+      "handling_result": "Đề xuất hạ 1 bậc hạnh kiểm tháng",
+      "teacher_email": "lytm.angiang@gmail.com",
+      "email_status": "DANG_GUI",
+      "sync_status": "DA_TIEP_NHAN",
+      "attachment_urls": [],
+      "notes": "",
+      "history": [
+        {
+          "timestamp": "2026-10-02T11:09:06+07:00",
+          "action": "CREATE",
+          "actor_id": "usr_admin",
+          "actor_name": "Thầy Nguyễn Văn Nam (Bí thư Đoàn)",
+          "details": "Ghi nhận vi phạm ban đầu"
+        }
+      ],
+      "sheet_synced_at": "2026-10-02T04:09:06.563Z"
+    },
+    {
+      "violation_id": "v-1790914069842-k8uyr",
+      "request_id": "req-4175d041-cff4-4c02-a1fe-279a6d5348e2",
+      "student_id": "HS10C102",
+      "student_name": "Phan Hữu Cường",
+      "grade": 10,
+      "class_name": "10C1",
+      "occurred_at": "2026-10-02T11:07:00+07:00",
+      "recorded_at": "2026-10-02T11:07:49+07:00",
+      "updated_at": "2026-10-02T11:07:49+07:00",
+      "violation_date": "02/10/2026",
+      "violation_time": "11:07:00",
+      "month": 10,
+      "year": 2026,
+      "month_key": "10/2026",
+      "violation_code": "VEHICLE_ON_CAMPUS",
+      "violation_label": "Chạy xe trong khuôn viên nhà trường",
+      "description": "",
+      "location": "SHDC",
+      "recorded_by_id": "usr_admin",
+      "recorded_by_name": "Thầy Nguyễn Văn Nam (Bí thư Đoàn)",
+      "verification_status": "DA_XAC_NHAN",
+      "handling_rule": "Đề xuất hạ 1 bậc hạnh kiểm tháng cho mỗi lần vi phạm đã xác nhận.",
+      "proposed_downgrade_steps": 1,
+      "approved_downgrade_steps": 1,
+      "decision_status": "CHUA_XU_LY",
+      "handling_result": "Đề xuất hạ 1 bậc hạnh kiểm tháng",
+      "teacher_email": "lytm.angiang@gmail.com",
+      "email_status": "DANG_GUI",
+      "sync_status": "DA_TIEP_NHAN",
+      "attachment_urls": [],
+      "notes": "",
+      "history": [
+        {
+          "timestamp": "2026-10-02T11:07:49+07:00",
+          "action": "CREATE",
+          "actor_id": "usr_admin",
+          "actor_name": "Thầy Nguyễn Văn Nam (Bí thư Đoàn)",
+          "details": "Ghi nhận vi phạm ban đầu"
+        }
+      ],
+      "sheet_synced_at": "2026-10-02T04:07:49.884Z"
+    },
+    {
+      "violation_id": "v-1790914056138-4cgpl",
+      "request_id": "req-5961af36-39b2-4ec9-9ce6-e6984650a796",
+      "student_id": "HS10C101",
+      "student_name": "Phạm Ngọc Quân",
+      "grade": 10,
+      "class_name": "10C1",
+      "occurred_at": "2026-10-02T11:07:00+07:00",
+      "recorded_at": "2026-10-02T11:07:36+07:00",
+      "updated_at": "2026-10-02T11:07:36+07:00",
+      "violation_date": "02/10/2026",
+      "violation_time": "11:07:00",
+      "month": 10,
+      "year": 2026,
+      "month_key": "10/2026",
+      "violation_code": "VEHICLE_ON_CAMPUS",
+      "violation_label": "Chạy xe trong khuôn viên nhà trường",
+      "description": "",
+      "location": "Khu C",
+      "recorded_by_id": "usr_admin",
+      "recorded_by_name": "Thầy Nguyễn Văn Nam (Bí thư Đoàn)",
+      "verification_status": "DA_XAC_NHAN",
+      "handling_rule": "Đề xuất hạ 1 bậc hạnh kiểm tháng cho mỗi lần vi phạm đã xác nhận.",
+      "proposed_downgrade_steps": 1,
+      "approved_downgrade_steps": 1,
+      "decision_status": "CHUA_XU_LY",
+      "handling_result": "Đề xuất hạ 1 bậc hạnh kiểm tháng",
+      "teacher_email": "lytm.angiang@gmail.com",
+      "email_status": "DANG_GUI",
+      "sync_status": "DA_TIEP_NHAN",
+      "attachment_urls": [],
+      "notes": "",
+      "history": [
+        {
+          "timestamp": "2026-10-02T11:07:36+07:00",
+          "action": "CREATE",
+          "actor_id": "usr_admin",
+          "actor_name": "Thầy Nguyễn Văn Nam (Bí thư Đoàn)",
+          "details": "Ghi nhận vi phạm ban đầu"
+        }
+      ],
+      "sheet_synced_at": "2026-10-02T04:07:36.411Z"
+    },
+    {
+      "violation_id": "v-1790913834708-cyc9q",
+      "request_id": "req-c5773347-76ad-4eeb-a97b-448a18fd583c",
+      "student_id": "HS10C102",
+      "student_name": "Phan Hữu Cường",
+      "grade": 10,
+      "class_name": "10C1",
+      "occurred_at": "2026-10-02T11:03:00+07:00",
+      "recorded_at": "2026-10-02T11:03:54+07:00",
+      "updated_at": "2026-10-02T11:03:54+07:00",
+      "violation_date": "02/10/2026",
+      "violation_time": "11:03:00",
+      "month": 10,
+      "year": 2026,
+      "month_key": "10/2026",
+      "violation_code": "VEHICLE_ON_CAMPUS",
+      "violation_label": "Chạy xe trong khuôn viên nhà trường",
+      "description": "",
+      "location": "Khu C",
+      "recorded_by_id": "usr_admin",
+      "recorded_by_name": "Thầy Nguyễn Văn Nam (Bí thư Đoàn)",
+      "verification_status": "DA_XAC_NHAN",
+      "handling_rule": "Đề xuất hạ 1 bậc hạnh kiểm tháng cho mỗi lần vi phạm đã xác nhận.",
+      "proposed_downgrade_steps": 1,
+      "approved_downgrade_steps": 1,
+      "decision_status": "CHUA_XU_LY",
+      "handling_result": "Đề xuất hạ 1 bậc hạnh kiểm tháng",
+      "teacher_email": "lytm.angiang@gmail.com",
+      "email_status": "DANG_GUI",
+      "sync_status": "DA_TIEP_NHAN",
+      "attachment_urls": [],
+      "notes": "",
+      "history": [
+        {
+          "timestamp": "2026-10-02T11:03:54+07:00",
+          "action": "CREATE",
+          "actor_id": "usr_admin",
+          "actor_name": "Thầy Nguyễn Văn Nam (Bí thư Đoàn)",
+          "details": "Ghi nhận vi phạm ban đầu"
+        }
+      ],
+      "sheet_synced_at": "2026-10-02T04:03:54.752Z"
+    },
+    {
+      "violation_id": "v-1790913771102-e09ux",
+      "request_id": "req-50f8c7f4-ee2f-4550-998a-ee280768ed6f",
+      "student_id": "HS10C101",
+      "student_name": "Phạm Ngọc Quân",
+      "grade": 10,
+      "class_name": "10C1",
+      "occurred_at": "2026-10-02T11:00:00+07:00",
+      "recorded_at": "2026-10-02T11:02:51+07:00",
+      "updated_at": "2026-10-02T11:02:51+07:00",
+      "violation_date": "02/10/2026",
+      "violation_time": "11:00:00",
+      "month": 10,
+      "year": 2026,
+      "month_key": "10/2026",
+      "violation_code": "VEHICLE_ON_CAMPUS",
+      "violation_label": "Chạy xe trong khuôn viên nhà trường",
+      "description": "",
+      "location": "Khu C",
+      "recorded_by_id": "usr_admin",
+      "recorded_by_name": "Thầy Nguyễn Văn Nam (Bí thư Đoàn)",
+      "verification_status": "DA_XAC_NHAN",
+      "handling_rule": "Đề xuất hạ 1 bậc hạnh kiểm tháng cho mỗi lần vi phạm đã xác nhận.",
+      "proposed_downgrade_steps": 1,
+      "approved_downgrade_steps": 1,
+      "decision_status": "CHUA_XU_LY",
+      "handling_result": "Đề xuất hạ 1 bậc hạnh kiểm tháng",
+      "teacher_email": "lytm.angiang@gmail.com",
+      "email_status": "DANG_GUI",
+      "sync_status": "DA_TIEP_NHAN",
+      "attachment_urls": [],
+      "notes": "",
+      "history": [
+        {
+          "timestamp": "2026-10-02T11:02:51+07:00",
+          "action": "CREATE",
+          "actor_id": "usr_admin",
+          "actor_name": "Thầy Nguyễn Văn Nam (Bí thư Đoàn)",
+          "details": "Ghi nhận vi phạm ban đầu"
+        }
+      ],
+      "sheet_synced_at": "2026-10-02T04:02:51.880Z"
+    },
+    {
+      "violation_id": "v-1790913439080-hgbxi",
+      "request_id": "req-02c0d881-6ecc-4799-9d09-0e99deade945",
+      "student_id": "HS10C102",
+      "student_name": "Phan Hữu Cường",
+      "grade": 10,
+      "class_name": "10C1",
+      "occurred_at": "2026-10-02T10:57:00+07:00",
+      "recorded_at": "2026-10-02T10:57:19+07:00",
+      "updated_at": "2026-10-02T10:57:19+07:00",
+      "violation_date": "02/10/2026",
+      "violation_time": "10:57:00",
+      "month": 10,
+      "year": 2026,
+      "month_key": "10/2026",
+      "violation_code": "PHONE_COMMITMENT",
+      "violation_label": "Dùng ĐT SHDC",
+      "description": "",
+      "location": "Khu C",
+      "recorded_by_id": "usr_admin",
+      "recorded_by_name": "Thầy Nguyễn Văn Nam (Bí thư Đoàn)",
+      "verification_status": "DA_XAC_NHAN",
+      "handling_rule": "Đề xuất hạ 1 bậc hạnh kiểm tháng cho mỗi lần vi phạm đã xác nhận.",
+      "proposed_downgrade_steps": 1,
+      "approved_downgrade_steps": 1,
+      "decision_status": "CHUA_XU_LY",
+      "handling_result": "Đề xuất hạ 1 bậc hạnh kiểm tháng",
+      "teacher_email": "lytm.angiang@gmail.com",
+      "email_status": "DANG_GUI",
+      "sync_status": "DA_TIEP_NHAN",
+      "attachment_urls": [],
+      "notes": "",
+      "history": [
+        {
+          "timestamp": "2026-10-02T10:57:19+07:00",
+          "action": "CREATE",
+          "actor_id": "usr_admin",
+          "actor_name": "Thầy Nguyễn Văn Nam (Bí thư Đoàn)",
+          "details": "Ghi nhận vi phạm ban đầu"
+        }
+      ],
+      "sheet_synced_at": "2026-10-02T03:57:19.125Z"
+    },
+    {
+      "violation_id": "v-1790913409322-30oa2",
+      "request_id": "req-b4966167-fe15-4125-8b7e-dd11f5d6da12",
+      "student_id": "HS10C102",
+      "student_name": "Phan Hữu Cường",
+      "grade": 10,
+      "class_name": "10C1",
+      "occurred_at": "2026-10-02T10:56:00+07:00",
+      "recorded_at": "2026-10-02T10:56:50+07:00",
+      "updated_at": "2026-10-02T10:56:50+07:00",
+      "violation_date": "02/10/2026",
+      "violation_time": "10:56:00",
+      "month": 10,
+      "year": 2026,
+      "month_key": "10/2026",
+      "violation_code": "PHONE_COMMITMENT",
+      "violation_label": "Dùng ĐT SHDC",
+      "description": "",
+      "location": "Khu C",
+      "recorded_by_id": "usr_admin",
+      "recorded_by_name": "Thầy Nguyễn Văn Nam (Bí thư Đoàn)",
+      "verification_status": "DA_XAC_NHAN",
+      "handling_rule": "Đề xuất hạ 1 bậc hạnh kiểm tháng cho mỗi lần vi phạm đã xác nhận.",
+      "proposed_downgrade_steps": 1,
+      "approved_downgrade_steps": 1,
+      "decision_status": "CHUA_XU_LY",
+      "handling_result": "Đề xuất hạ 1 bậc hạnh kiểm tháng",
+      "teacher_email": "lytm.angiang@gmail.com",
+      "email_status": "DANG_GUI",
+      "sync_status": "DA_TIEP_NHAN",
+      "attachment_urls": [],
+      "notes": "",
+      "history": [
+        {
+          "timestamp": "2026-10-02T10:56:50+07:00",
+          "action": "CREATE",
+          "actor_id": "usr_admin",
+          "actor_name": "Thầy Nguyễn Văn Nam (Bí thư Đoàn)",
+          "details": "Ghi nhận vi phạm ban đầu"
+        }
+      ],
+      "sheet_synced_at": "2026-10-02T03:56:50.552Z"
+    },
+    {
+      "violation_id": "v-1790913390055-g1b4a",
+      "request_id": "req-74d39801-3b98-47b0-8cc8-c1966913ff8b",
+      "student_id": "HS10C101",
+      "student_name": "Phạm Ngọc Quân",
+      "grade": 10,
+      "class_name": "10C1",
+      "occurred_at": "2026-10-02T10:48:00+07:00",
+      "recorded_at": "2026-10-02T10:56:30+07:00",
+      "updated_at": "2026-10-02T10:56:30+07:00",
+      "violation_date": "02/10/2026",
+      "violation_time": "10:48:00",
+      "month": 10,
+      "year": 2026,
+      "month_key": "10/2026",
+      "violation_code": "VEHICLE_ON_CAMPUS",
+      "violation_label": "Chạy xe trong khuôn viên nhà trường",
+      "description": "",
+      "location": "Khu C",
+      "recorded_by_id": "usr_admin",
+      "recorded_by_name": "Thầy Nguyễn Văn Nam (Bí thư Đoàn)",
+      "verification_status": "DA_XAC_NHAN",
+      "handling_rule": "Đề xuất hạ 1 bậc hạnh kiểm tháng cho mỗi lần vi phạm đã xác nhận.",
+      "proposed_downgrade_steps": 1,
+      "approved_downgrade_steps": 1,
+      "decision_status": "CHUA_XU_LY",
+      "handling_result": "Đề xuất hạ 1 bậc hạnh kiểm tháng",
+      "teacher_email": "lytm.angiang@gmail.com",
+      "email_status": "DANG_GUI",
+      "sync_status": "DA_TIEP_NHAN",
+      "attachment_urls": [],
+      "notes": "",
+      "history": [
+        {
+          "timestamp": "2026-10-02T10:56:30+07:00",
+          "action": "CREATE",
+          "actor_id": "usr_admin",
+          "actor_name": "Thầy Nguyễn Văn Nam (Bí thư Đoàn)",
+          "details": "Ghi nhận vi phạm ban đầu"
+        }
+      ],
+      "sheet_synced_at": "2026-10-02T03:56:30.276Z"
+    },
+    {
+      "violation_id": "v-1790912595476-33s1q",
+      "request_id": "req-fedfc6aa-cb4b-40e3-a424-4529981090b9",
+      "student_id": "HS10C101",
+      "student_name": "Phạm Ngọc Quân",
+      "grade": 10,
+      "class_name": "10C1",
+      "occurred_at": "2026-10-02T10:42:00+07:00",
+      "recorded_at": "2026-10-02T10:43:15+07:00",
+      "updated_at": "2026-10-02T10:45:25+07:00",
+      "violation_date": "02/10/2026",
+      "violation_time": "10:42:00",
+      "month": 10,
+      "year": 2026,
+      "month_key": "10/2026",
+      "violation_code": "VEHICLE_ON_CAMPUS",
+      "violation_label": "Chạy xe trong khuôn viên nhà trường",
+      "description": "",
+      "location": "Khu C",
+      "recorded_by_id": "usr_admin",
+      "recorded_by_name": "Thầy Nguyễn Văn Nam (Bí thư Đoàn)",
+      "verification_status": "DA_XAC_NHAN",
+      "handling_rule": "Đề xuất hạ 1 bậc hạnh kiểm tháng cho mỗi lần vi phạm đã xác nhận.",
+      "proposed_downgrade_steps": 1,
+      "approved_downgrade_steps": 1,
+      "decision_status": "DA_XU_LY",
+      "handling_result": "Đề xuất hạ 1 bậc hạnh kiểm tháng",
+      "teacher_email": "gvcn.10c1@thpt.edu.vn",
+      "email_status": "DANG_GUI",
+      "sync_status": "DA_TIEP_NHAN",
+      "attachment_urls": [],
+      "notes": "",
+      "history": [
+        {
+          "timestamp": "2026-10-02T10:43:15+07:00",
+          "action": "CREATE",
+          "actor_id": "usr_admin",
+          "actor_name": "Thầy Nguyễn Văn Nam (Bí thư Đoàn)",
+          "details": "Ghi nhận vi phạm ban đầu"
+        },
+        {
+          "timestamp": "2026-10-02T10:45:21+07:00",
+          "action": "UPDATE_DECISION",
+          "actor_id": "usr_admin",
+          "actor_name": "Thầy Nguyễn Văn Nam (Bí thư Đoàn)",
+          "reason": "Cập nhật quyết định xử lý",
+          "details": "Trạng thái: DA_XU_LY, Bậc hạ duyệt: 1"
+        },
+        {
+          "timestamp": "2026-10-02T10:45:25+07:00",
+          "action": "UPDATE_DECISION",
+          "actor_id": "usr_admin",
+          "actor_name": "Thầy Nguyễn Văn Nam (Bí thư Đoàn)",
+          "reason": "Cập nhật quyết định xử lý",
+          "details": "Trạng thái: DA_XU_LY, Bậc hạ duyệt: 1"
+        }
+      ],
+      "sheet_synced_at": "2026-10-02T03:43:15.516Z"
+    },
+    {
+      "violation_id": "v-1790912574219-oo762",
+      "request_id": "req-0539a208-80c7-493c-ac7f-67af0cceb4a9",
+      "student_id": "HS10C104",
+      "student_name": "Nguyễn Gia Đạt",
+      "grade": 10,
+      "class_name": "10C1",
+      "occurred_at": "2026-10-02T10:42:00+07:00",
+      "recorded_at": "2026-10-02T10:42:54+07:00",
+      "updated_at": "2026-10-02T10:42:54+07:00",
+      "violation_date": "02/10/2026",
+      "violation_time": "10:42:00",
+      "month": 10,
+      "year": 2026,
+      "month_key": "10/2026",
+      "violation_code": "PHONE_COMMITMENT",
+      "violation_label": "Dùng ĐT SHDC",
+      "description": "",
+      "location": "Khu C",
+      "recorded_by_id": "usr_admin",
+      "recorded_by_name": "Thầy Nguyễn Văn Nam (Bí thư Đoàn)",
+      "verification_status": "DA_XAC_NHAN",
+      "handling_rule": "Đề xuất hạ 1 bậc hạnh kiểm tháng cho mỗi lần vi phạm đã xác nhận.",
+      "proposed_downgrade_steps": 1,
+      "approved_downgrade_steps": 1,
+      "decision_status": "CHUA_XU_LY",
+      "handling_result": "Đề xuất hạ 1 bậc hạnh kiểm tháng",
+      "teacher_email": "gvcn.10c1@thpt.edu.vn",
+      "email_status": "DANG_GUI",
+      "sync_status": "DA_TIEP_NHAN",
+      "attachment_urls": [],
+      "notes": "",
+      "history": [
+        {
+          "timestamp": "2026-10-02T10:42:54+07:00",
+          "action": "CREATE",
+          "actor_id": "usr_admin",
+          "actor_name": "Thầy Nguyễn Văn Nam (Bí thư Đoàn)",
+          "details": "Ghi nhận vi phạm ban đầu"
+        }
+      ],
+      "sheet_synced_at": "2026-10-02T03:42:54.404Z"
+    },
+    {
+      "violation_id": "v-1790912499985-yfn11",
+      "request_id": "req-489d1c66-702e-4c89-96ac-d9de9bc585d8",
+      "student_id": "HS10C102",
+      "student_name": "Phan Hữu Cường",
+      "grade": 10,
+      "class_name": "10C1",
+      "occurred_at": "2026-10-02T10:41:00+07:00",
+      "recorded_at": "2026-10-02T10:41:40+07:00",
+      "updated_at": "2026-10-02T10:41:40+07:00",
+      "violation_date": "02/10/2026",
+      "violation_time": "10:41:00",
+      "month": 10,
+      "year": 2026,
+      "month_key": "10/2026",
+      "violation_code": "PHONE_COMMITMENT",
+      "violation_label": "Dùng ĐT SHDC",
+      "description": "",
+      "location": "Khu C",
+      "recorded_by_id": "usr_admin",
+      "recorded_by_name": "Thầy Nguyễn Văn Nam (Bí thư Đoàn)",
+      "verification_status": "DA_XAC_NHAN",
+      "handling_rule": "Đề xuất hạ 1 bậc hạnh kiểm tháng cho mỗi lần vi phạm đã xác nhận.",
+      "proposed_downgrade_steps": 1,
+      "approved_downgrade_steps": 1,
+      "decision_status": "CHUA_XU_LY",
+      "handling_result": "Đề xuất hạ 1 bậc hạnh kiểm tháng",
+      "teacher_email": "gvcn.10c1@thpt.edu.vn",
+      "email_status": "DANG_GUI",
+      "sync_status": "DA_TIEP_NHAN",
+      "attachment_urls": [],
+      "notes": "",
+      "history": [
+        {
+          "timestamp": "2026-10-02T10:41:40+07:00",
+          "action": "CREATE",
+          "actor_id": "usr_admin",
+          "actor_name": "Thầy Nguyễn Văn Nam (Bí thư Đoàn)",
+          "details": "Ghi nhận vi phạm ban đầu"
+        }
+      ],
+      "sheet_synced_at": "2026-10-02T03:41:40.142Z"
+    },
+    {
+      "violation_id": "v-1790912460721-1mu0n",
+      "request_id": "req-89e897bf-375c-43d6-aed7-f036e777b6f5",
+      "student_id": "HS10C101",
+      "student_name": "Phạm Ngọc Quân",
+      "grade": 10,
+      "class_name": "10C1",
+      "occurred_at": "2026-10-02T10:40:00+07:00",
+      "recorded_at": "2026-10-02T10:41:00+07:00",
+      "updated_at": "2026-10-02T10:41:00+07:00",
+      "violation_date": "02/10/2026",
+      "violation_time": "10:40:00",
+      "month": 10,
+      "year": 2026,
+      "month_key": "10/2026",
+      "violation_code": "PHONE_COMMITMENT",
+      "violation_label": "Dùng ĐT SHDC",
+      "description": "",
+      "location": "Khu C",
+      "recorded_by_id": "usr_admin",
+      "recorded_by_name": "Thầy Nguyễn Văn Nam (Bí thư Đoàn)",
+      "verification_status": "DA_XAC_NHAN",
+      "handling_rule": "Đề xuất hạ 1 bậc hạnh kiểm tháng cho mỗi lần vi phạm đã xác nhận.",
+      "proposed_downgrade_steps": 1,
+      "approved_downgrade_steps": 1,
+      "decision_status": "CHUA_XU_LY",
+      "handling_result": "Đề xuất hạ 1 bậc hạnh kiểm tháng",
+      "teacher_email": "gvcn.10c1@thpt.edu.vn",
+      "email_status": "DANG_GUI",
+      "sync_status": "DA_TIEP_NHAN",
+      "attachment_urls": [],
+      "notes": "",
+      "history": [
+        {
+          "timestamp": "2026-10-02T10:41:00+07:00",
+          "action": "CREATE",
+          "actor_id": "usr_admin",
+          "actor_name": "Thầy Nguyễn Văn Nam (Bí thư Đoàn)",
+          "details": "Ghi nhận vi phạm ban đầu"
+        }
+      ],
+      "sheet_synced_at": "2026-10-02T03:41:00.757Z"
+    },
+    {
+      "violation_id": "v-1790912443545-bpnea",
+      "request_id": "req-d7af55cb-b037-4892-b17e-5b937fe7abcb",
+      "student_id": "HS10C102",
+      "student_name": "Phan Hữu Cường",
+      "grade": 10,
+      "class_name": "10C1",
+      "occurred_at": "2026-10-02T10:40:00+07:00",
+      "recorded_at": "2026-10-02T10:40:44+07:00",
+      "updated_at": "2026-10-02T10:40:44+07:00",
+      "violation_date": "02/10/2026",
+      "violation_time": "10:40:00",
+      "month": 10,
+      "year": 2026,
+      "month_key": "10/2026",
+      "violation_code": "PHONE_COMMITMENT",
+      "violation_label": "Dùng ĐT SHDC",
+      "description": "",
+      "location": "Khu C",
+      "recorded_by_id": "usr_admin",
+      "recorded_by_name": "Thầy Nguyễn Văn Nam (Bí thư Đoàn)",
+      "verification_status": "DA_XAC_NHAN",
+      "handling_rule": "Đề xuất hạ 1 bậc hạnh kiểm tháng cho mỗi lần vi phạm đã xác nhận.",
+      "proposed_downgrade_steps": 1,
+      "approved_downgrade_steps": 1,
+      "decision_status": "CHUA_XU_LY",
+      "handling_result": "Đề xuất hạ 1 bậc hạnh kiểm tháng",
+      "teacher_email": "gvcn.10c1@thpt.edu.vn",
+      "email_status": "DANG_GUI",
+      "sync_status": "DA_TIEP_NHAN",
+      "attachment_urls": [],
+      "notes": "",
+      "history": [
+        {
+          "timestamp": "2026-10-02T10:40:44+07:00",
+          "action": "CREATE",
+          "actor_id": "usr_admin",
+          "actor_name": "Thầy Nguyễn Văn Nam (Bí thư Đoàn)",
+          "details": "Ghi nhận vi phạm ban đầu"
+        }
+      ],
+      "sheet_synced_at": "2026-10-02T03:40:44.990Z"
+    },
+    {
+      "violation_id": "v-1790912126067-6fqwh",
+      "request_id": "req-93cc640f-8905-4177-9d36-c25d7f04303a",
+      "student_id": "HS10C103",
+      "student_name": "Đặng Thị Tâm",
+      "grade": 10,
+      "class_name": "10C1",
+      "occurred_at": "2026-10-02T10:35:00+07:00",
+      "recorded_at": "2026-10-02T10:35:26+07:00",
+      "updated_at": "2026-10-02T10:35:26+07:00",
+      "violation_date": "02/10/2026",
+      "violation_time": "10:35:00",
+      "month": 10,
+      "year": 2026,
+      "month_key": "10/2026",
+      "violation_code": "PHONE_COMMITMENT",
+      "violation_label": "Dùng ĐT SHDC",
+      "description": "",
+      "location": "Khu C",
+      "recorded_by_id": "usr_admin",
+      "recorded_by_name": "Thầy Nguyễn Văn Nam (Bí thư Đoàn)",
+      "verification_status": "DA_XAC_NHAN",
+      "handling_rule": "Đề xuất hạ 1 bậc hạnh kiểm tháng cho mỗi lần vi phạm đã xác nhận.",
+      "proposed_downgrade_steps": 1,
+      "approved_downgrade_steps": 1,
+      "decision_status": "CHUA_XU_LY",
+      "handling_result": "Đề xuất hạ 1 bậc hạnh kiểm tháng",
+      "teacher_email": "gvcn.10c1@thpt.edu.vn",
+      "email_status": "DANG_GUI",
+      "sync_status": "DA_TIEP_NHAN",
+      "attachment_urls": [],
+      "notes": "",
+      "history": [
+        {
+          "timestamp": "2026-10-02T10:35:26+07:00",
+          "action": "CREATE",
+          "actor_id": "usr_admin",
+          "actor_name": "Thầy Nguyễn Văn Nam (Bí thư Đoàn)",
+          "details": "Ghi nhận vi phạm ban đầu"
+        }
+      ],
+      "sheet_synced_at": "2026-10-02T03:35:26.107Z"
+    },
+    {
+      "violation_id": "v-1790912114348-cir86",
+      "request_id": "req-bf320dbf-1d41-4b8f-9b4d-6a20ea9aabfb",
+      "student_id": "HS10C101",
+      "student_name": "Phạm Ngọc Quân",
+      "grade": 10,
+      "class_name": "10C1",
+      "occurred_at": "2026-10-02T10:34:00+07:00",
+      "recorded_at": "2026-10-02T10:35:14+07:00",
+      "updated_at": "2026-10-02T10:35:14+07:00",
+      "violation_date": "02/10/2026",
+      "violation_time": "10:34:00",
+      "month": 10,
+      "year": 2026,
+      "month_key": "10/2026",
+      "violation_code": "PHONE_COMMITMENT",
+      "violation_label": "Dùng ĐT SHDC",
+      "description": "",
+      "location": "Khu C",
+      "recorded_by_id": "usr_admin",
+      "recorded_by_name": "Thầy Nguyễn Văn Nam (Bí thư Đoàn)",
+      "verification_status": "DA_XAC_NHAN",
+      "handling_rule": "Đề xuất hạ 1 bậc hạnh kiểm tháng cho mỗi lần vi phạm đã xác nhận.",
+      "proposed_downgrade_steps": 1,
+      "approved_downgrade_steps": 1,
+      "decision_status": "CHUA_XU_LY",
+      "handling_result": "Đề xuất hạ 1 bậc hạnh kiểm tháng",
+      "teacher_email": "gvcn.10c1@thpt.edu.vn",
+      "email_status": "DANG_GUI",
+      "sync_status": "DA_TIEP_NHAN",
+      "attachment_urls": [],
+      "notes": "",
+      "history": [
+        {
+          "timestamp": "2026-10-02T10:35:14+07:00",
+          "action": "CREATE",
+          "actor_id": "usr_admin",
+          "actor_name": "Thầy Nguyễn Văn Nam (Bí thư Đoàn)",
+          "details": "Ghi nhận vi phạm ban đầu"
+        }
+      ],
+      "sheet_synced_at": "2026-10-02T03:35:14.524Z"
+    },
+    {
+      "violation_id": "v-1790911547382-paxm4",
+      "request_id": "req-b88e9d21-79a2-4d4c-af1e-5eb73826f241",
+      "student_id": "HS100199",
+      "student_name": "Nguyễn Văn Minh",
+      "grade": 10,
+      "class_name": "10C1",
+      "occurred_at": "2026-10-02T10:25:00+07:00",
+      "recorded_at": "2026-10-02T10:25:47+07:00",
+      "updated_at": "2026-10-02T10:25:47+07:00",
+      "violation_date": "02/10/2026",
+      "violation_time": "10:25:00",
+      "month": 10,
+      "year": 2026,
+      "month_key": "10/2026",
+      "violation_code": "VEHICLE_ON_CAMPUS",
+      "violation_label": "Chạy xe trong khuôn viên nhà trường",
+      "description": "",
+      "location": "Khu C",
+      "recorded_by_id": "usr_admin",
+      "recorded_by_name": "Thầy Nguyễn Văn Nam (Bí thư Đoàn)",
+      "verification_status": "DA_XAC_NHAN",
+      "handling_rule": "Đề xuất hạ 1 bậc hạnh kiểm tháng cho mỗi lần vi phạm đã xác nhận.",
+      "proposed_downgrade_steps": 1,
+      "approved_downgrade_steps": 1,
+      "decision_status": "CHUA_XU_LY",
+      "handling_result": "Đề xuất hạ 1 bậc hạnh kiểm tháng",
+      "teacher_email": "gvcn.10c1@thpt.edu.vn",
+      "email_status": "DANG_GUI",
+      "sync_status": "DA_TIEP_NHAN",
+      "attachment_urls": [],
+      "notes": "",
+      "history": [
+        {
+          "timestamp": "2026-10-02T10:25:47+07:00",
+          "action": "CREATE",
+          "actor_id": "usr_admin",
+          "actor_name": "Thầy Nguyễn Văn Nam (Bí thư Đoàn)",
+          "details": "Ghi nhận vi phạm ban đầu"
+        }
+      ],
+      "sheet_synced_at": "2026-10-02T03:25:47.570Z"
+    },
+    {
+      "violation_id": "v-1790911472262-hm0q2",
+      "request_id": "req-0630c4dc-f38d-405c-a36a-f70f73e8c97d",
+      "student_id": "HS10C101",
+      "student_name": "Phạm Ngọc Quân",
+      "grade": 10,
+      "class_name": "10C1",
+      "occurred_at": "2026-10-02T10:16:00+07:00",
+      "recorded_at": "2026-10-02T10:24:33+07:00",
+      "updated_at": "2026-10-02T10:24:33+07:00",
+      "violation_date": "02/10/2026",
+      "violation_time": "10:16:00",
+      "month": 10,
+      "year": 2026,
+      "month_key": "10/2026",
+      "violation_code": "VEHICLE_ON_CAMPUS",
+      "violation_label": "Chạy xe trong khuôn viên nhà trường",
+      "description": "",
+      "location": "Khu C",
+      "recorded_by_id": "usr_admin",
+      "recorded_by_name": "Thầy Nguyễn Văn Nam (Bí thư Đoàn)",
+      "verification_status": "DA_XAC_NHAN",
+      "handling_rule": "Đề xuất hạ 1 bậc hạnh kiểm tháng cho mỗi lần vi phạm đã xác nhận.",
+      "proposed_downgrade_steps": 1,
+      "approved_downgrade_steps": 1,
+      "decision_status": "CHUA_XU_LY",
+      "handling_result": "Đề xuất hạ 1 bậc hạnh kiểm tháng",
+      "teacher_email": "gvcn.10c1@thpt.edu.vn",
+      "email_status": "DANG_GUI",
+      "sync_status": "DA_TIEP_NHAN",
+      "attachment_urls": [],
+      "notes": "",
+      "history": [
+        {
+          "timestamp": "2026-10-02T10:24:33+07:00",
+          "action": "CREATE",
+          "actor_id": "usr_admin",
+          "actor_name": "Thầy Nguyễn Văn Nam (Bí thư Đoàn)",
+          "details": "Ghi nhận vi phạm ban đầu"
+        }
+      ],
+      "sheet_synced_at": "2026-10-02T03:24:33.759Z"
+    },
+    {
+      "violation_id": "v-1790910715836-v2a4a",
+      "request_id": "req-21ab3582-75c4-4772-af47-c109f2994dd5",
+      "student_id": "HS10C102",
+      "student_name": "Phan Hữu Cường",
+      "grade": 10,
+      "class_name": "10C1",
+      "occurred_at": "2026-10-02T10:10:00+07:00",
+      "recorded_at": "2026-10-02T10:11:55+07:00",
+      "updated_at": "2026-10-02T10:24:40+07:00",
+      "violation_date": "02/10/2026",
+      "violation_time": "10:10:00",
+      "month": 10,
+      "year": 2026,
+      "month_key": "10/2026",
+      "violation_code": "VEHICLE_ON_CAMPUS",
+      "violation_label": "Chạy xe trong khuôn viên nhà trường",
+      "description": "",
+      "location": "Khu C",
+      "recorded_by_id": "usr_admin",
+      "recorded_by_name": "Thầy Nguyễn Văn Nam (Bí thư Đoàn)",
+      "verification_status": "DA_XAC_NHAN",
+      "handling_rule": "Đề xuất hạ 1 bậc hạnh kiểm tháng cho mỗi lần vi phạm đã xác nhận.",
+      "proposed_downgrade_steps": 1,
+      "approved_downgrade_steps": 1,
+      "decision_status": "DA_XU_LY",
+      "handling_result": "Đề xuất hạ 1 bậc hạnh kiểm tháng",
+      "teacher_email": "gvcn.10c1@thpt.edu.vn",
+      "email_status": "DANG_GUI",
+      "sync_status": "DA_TIEP_NHAN",
+      "attachment_urls": [],
+      "notes": "",
+      "history": [
+        {
+          "timestamp": "2026-10-02T10:11:55+07:00",
+          "action": "CREATE",
+          "actor_id": "usr_admin",
+          "actor_name": "Thầy Nguyễn Văn Nam (Bí thư Đoàn)",
+          "details": "Ghi nhận vi phạm ban đầu"
+        },
+        {
+          "timestamp": "2026-10-02T10:24:40+07:00",
+          "action": "UPDATE_DECISION",
+          "actor_id": "usr_admin",
+          "actor_name": "Thầy Nguyễn Văn Nam (Bí thư Đoàn)",
+          "reason": "Cập nhật quyết định xử lý",
+          "details": "Trạng thái: DA_XU_LY, Bậc hạ duyệt: 1"
+        }
+      ],
+      "sheet_synced_at": "2026-10-02T03:11:55.884Z"
+    },
+    {
+      "violation_id": "v-1790910536725-sbgy2",
+      "request_id": "req-d1e8c708-82e5-4b8e-bd89-b21198320184",
+      "student_id": "HS10C101",
+      "student_name": "Phạm Ngọc Quân",
+      "grade": 10,
+      "class_name": "10C1",
+      "occurred_at": "2026-10-02T10:08:00+07:00",
+      "recorded_at": "2026-10-02T10:08:56+07:00",
+      "updated_at": "2026-10-02T10:08:56+07:00",
+      "violation_date": "02/10/2026",
+      "violation_time": "10:08:00",
+      "month": 10,
+      "year": 2026,
+      "month_key": "10/2026",
+      "violation_code": "VEHICLE_ON_CAMPUS",
+      "violation_label": "Chạy xe trong khuôn viên nhà trường",
+      "description": "",
+      "location": "Khu C",
+      "recorded_by_id": "usr_admin",
+      "recorded_by_name": "Thầy Nguyễn Văn Nam (Bí thư Đoàn)",
+      "verification_status": "DA_XAC_NHAN",
+      "handling_rule": "Đề xuất hạ 1 bậc hạnh kiểm tháng cho mỗi lần vi phạm đã xác nhận.",
+      "proposed_downgrade_steps": 1,
+      "approved_downgrade_steps": 1,
+      "decision_status": "CHUA_XU_LY",
+      "handling_result": "Đề xuất hạ 1 bậc hạnh kiểm tháng",
+      "teacher_email": "gvcn.10c1@thpt.edu.vn",
+      "email_status": "THAT_BAI",
+      "sync_status": "LOI",
+      "attachment_urls": [],
+      "notes": "",
+      "history": [
+        {
+          "timestamp": "2026-10-02T10:08:56+07:00",
+          "action": "CREATE",
+          "actor_id": "usr_admin",
+          "actor_name": "Thầy Nguyễn Văn Nam (Bí thư Đoàn)",
+          "details": "Ghi nhận vi phạm ban đầu"
+        }
+      ],
+      "sync_error": "Lỗi 401 Unauthorized từ Make. Hãy kiểm tra cài đặt Webhook trên Make (tắt IP restriction / API Key hoặc tạo Custom Webhook thông thường)."
+    },
+    {
+      "violation_id": "v-1790910517845-nn67w",
+      "request_id": "req-e7419e0c-c093-49cf-bb87-460ba9662067",
+      "student_id": "HS100199",
+      "student_name": "Nguyễn Văn Minh",
+      "grade": 10,
+      "class_name": "10C1",
+      "occurred_at": "2026-10-02T10:08:00+07:00",
+      "recorded_at": "2026-10-02T10:08:37+07:00",
+      "updated_at": "2026-10-02T10:08:37+07:00",
+      "violation_date": "02/10/2026",
+      "violation_time": "10:08:00",
+      "month": 10,
+      "year": 2026,
+      "month_key": "10/2026",
+      "violation_code": "VEHICLE_ON_CAMPUS",
+      "violation_label": "Chạy xe trong khuôn viên nhà trường",
+      "description": "",
+      "location": "Khu C",
+      "recorded_by_id": "usr_admin",
+      "recorded_by_name": "Thầy Nguyễn Văn Nam (Bí thư Đoàn)",
+      "verification_status": "DA_XAC_NHAN",
+      "handling_rule": "Đề xuất hạ 1 bậc hạnh kiểm tháng cho mỗi lần vi phạm đã xác nhận.",
+      "proposed_downgrade_steps": 1,
+      "approved_downgrade_steps": 1,
+      "decision_status": "CHUA_XU_LY",
+      "handling_result": "Đề xuất hạ 1 bậc hạnh kiểm tháng",
+      "teacher_email": "gvcn.10c1@thpt.edu.vn",
+      "email_status": "THAT_BAI",
+      "sync_status": "LOI",
+      "attachment_urls": [],
+      "notes": "",
+      "history": [
+        {
+          "timestamp": "2026-10-02T10:08:37+07:00",
+          "action": "CREATE",
+          "actor_id": "usr_admin",
+          "actor_name": "Thầy Nguyễn Văn Nam (Bí thư Đoàn)",
+          "details": "Ghi nhận vi phạm ban đầu"
+        }
+      ],
+      "sync_error": "Lỗi 401 Unauthorized từ Make. Hãy kiểm tra cài đặt Webhook trên Make (tắt IP restriction / API Key hoặc tạo Custom Webhook thông thường)."
+    },
+    {
+      "violation_id": "v-1790910391302-umnad",
+      "request_id": "req-f8987c98-f196-47f7-958f-3306c4caa321",
+      "student_id": "HS100199",
+      "student_name": "Nguyễn Văn Minh",
+      "grade": 10,
+      "class_name": "10C1",
+      "occurred_at": "2026-10-02T10:06:00+07:00",
+      "recorded_at": "2026-10-02T10:06:31+07:00",
+      "updated_at": "2026-10-02T10:06:31+07:00",
+      "violation_date": "02/10/2026",
+      "violation_time": "10:06:00",
+      "month": 10,
+      "year": 2026,
+      "month_key": "10/2026",
+      "violation_code": "VEHICLE_ON_CAMPUS",
+      "violation_label": "Chạy xe trong khuôn viên nhà trường",
+      "description": "sfssdf",
+      "location": "Khu C",
+      "recorded_by_id": "usr_admin",
+      "recorded_by_name": "Thầy Nguyễn Văn Nam (Bí thư Đoàn)",
+      "verification_status": "DA_XAC_NHAN",
+      "handling_rule": "Đề xuất hạ 1 bậc hạnh kiểm tháng cho mỗi lần vi phạm đã xác nhận.",
+      "proposed_downgrade_steps": 1,
+      "approved_downgrade_steps": 1,
+      "decision_status": "CHUA_XU_LY",
+      "handling_result": "Đề xuất hạ 1 bậc hạnh kiểm tháng",
+      "teacher_email": "gvcn.10c1@thpt.edu.vn",
+      "email_status": "THAT_BAI",
+      "sync_status": "LOI",
+      "attachment_urls": [],
+      "notes": "",
+      "history": [
+        {
+          "timestamp": "2026-10-02T10:06:31+07:00",
+          "action": "CREATE",
+          "actor_id": "usr_admin",
+          "actor_name": "Thầy Nguyễn Văn Nam (Bí thư Đoàn)",
+          "details": "Ghi nhận vi phạm ban đầu"
+        }
+      ],
+      "sync_error": "Lỗi 401 Unauthorized từ Make. Hãy kiểm tra cài đặt Webhook trên Make (tắt IP restriction / API Key hoặc tạo Custom Webhook thông thường)."
+    },
+    {
+      "violation_id": "v-1790910347279-3ez54",
+      "request_id": "req-7d13af1c-9a36-4836-872f-04ee2d6835fa",
+      "student_id": "HS10C104",
+      "student_name": "Nguyễn Gia Đạt",
+      "grade": 10,
+      "class_name": "10C1",
+      "occurred_at": "2026-10-02T10:05:00+07:00",
+      "recorded_at": "2026-10-02T10:05:47+07:00",
+      "updated_at": "2026-10-02T10:05:47+07:00",
+      "violation_date": "02/10/2026",
+      "violation_time": "10:05:00",
+      "month": 10,
+      "year": 2026,
+      "month_key": "10/2026",
+      "violation_code": "VEHICLE_ON_CAMPUS",
+      "violation_label": "Chạy xe trong khuôn viên nhà trường",
+      "description": "",
+      "location": "Khu C",
+      "recorded_by_id": "usr_admin",
+      "recorded_by_name": "Thầy Nguyễn Văn Nam (Bí thư Đoàn)",
+      "verification_status": "DA_XAC_NHAN",
+      "handling_rule": "Đề xuất hạ 1 bậc hạnh kiểm tháng cho mỗi lần vi phạm đã xác nhận.",
+      "proposed_downgrade_steps": 1,
+      "approved_downgrade_steps": 1,
+      "decision_status": "CHUA_XU_LY",
+      "handling_result": "Đề xuất hạ 1 bậc hạnh kiểm tháng",
+      "teacher_email": "gvcn.10c1@thpt.edu.vn",
+      "email_status": "THAT_BAI",
+      "sync_status": "LOI",
+      "attachment_urls": [],
+      "notes": "",
+      "history": [
+        {
+          "timestamp": "2026-10-02T10:05:47+07:00",
+          "action": "CREATE",
+          "actor_id": "usr_admin",
+          "actor_name": "Thầy Nguyễn Văn Nam (Bí thư Đoàn)",
+          "details": "Ghi nhận vi phạm ban đầu"
+        }
+      ],
+      "sync_error": "Lỗi 401 Unauthorized từ Make. Hãy kiểm tra cài đặt Webhook trên Make (tắt IP restriction / API Key hoặc tạo Custom Webhook thông thường)."
+    },
+    {
+      "violation_id": "v-1790910328826-bug0y",
+      "request_id": "req-cf793151-02f8-43ad-b88b-303d696c7a35",
+      "student_id": "HS10C104",
+      "student_name": "Nguyễn Gia Đạt",
+      "grade": 10,
+      "class_name": "10C1",
+      "occurred_at": "2026-10-02T10:02:00+07:00",
+      "recorded_at": "2026-10-02T10:05:30+07:00",
+      "updated_at": "2026-10-02T10:05:30+07:00",
+      "violation_date": "02/10/2026",
+      "violation_time": "10:02:00",
+      "month": 10,
+      "year": 2026,
+      "month_key": "10/2026",
+      "violation_code": "VEHICLE_ON_CAMPUS",
+      "violation_label": "Chạy xe trong khuôn viên nhà trường",
+      "description": "",
+      "location": "Khu C",
+      "recorded_by_id": "usr_admin",
+      "recorded_by_name": "Thầy Nguyễn Văn Nam (Bí thư Đoàn)",
+      "verification_status": "DA_XAC_NHAN",
+      "handling_rule": "Đề xuất hạ 1 bậc hạnh kiểm tháng cho mỗi lần vi phạm đã xác nhận.",
+      "proposed_downgrade_steps": 1,
+      "approved_downgrade_steps": 1,
+      "decision_status": "CHUA_XU_LY",
+      "handling_result": "Đề xuất hạ 1 bậc hạnh kiểm tháng",
+      "teacher_email": "gvcn.10c1@thpt.edu.vn",
+      "email_status": "THAT_BAI",
+      "sync_status": "LOI",
+      "attachment_urls": [],
+      "notes": "",
+      "history": [
+        {
+          "timestamp": "2026-10-02T10:05:30+07:00",
+          "action": "CREATE",
+          "actor_id": "usr_admin",
+          "actor_name": "Thầy Nguyễn Văn Nam (Bí thư Đoàn)",
+          "details": "Ghi nhận vi phạm ban đầu"
+        }
+      ],
+      "sync_error": "Lỗi 401 Unauthorized từ Make. Hãy kiểm tra cài đặt Webhook trên Make (tắt IP restriction / API Key hoặc tạo Custom Webhook thông thường)."
+    },
+    {
+      "violation_id": "v-8a422c92-4491-4e8c-bc35-adb7681ad91b",
+      "request_id": "req-9cad3ca1-0972-4f15-87fc-2410f427c783",
+      "student_id": "10C1",
+      "student_name": "Nguyễn Văn An",
+      "grade": 10,
+      "class_name": "10C1",
+      "occurred_at": "2026-10-02T10:00:49+07:00",
+      "recorded_at": "2026-10-02T10:00:49+07:00",
+      "updated_at": "2026-10-02T10:00:49+07:00",
+      "violation_date": "02/10/2026",
+      "violation_time": "10:00:49",
+      "month": 10,
+      "year": 2026,
+      "month_key": "10/2026",
+      "violation_code": "VEHICLE_ON_CAMPUS",
+      "violation_label": "Chạy xe trong khuôn viên nhà trường",
+      "description": "Chạy xe trong khuôn viên nhà trường (Dữ liệu mẫu thử nghiệm)",
+      "location": "Khu C",
+      "recorded_by_id": "usr_admin",
+      "recorded_by_name": "Thầy Nguyễn Văn Nam (Bí thư Đoàn)",
+      "verification_status": "DA_XAC_NHAN",
+      "handling_rule": "Đề xuất hạ 1 bậc hạnh kiểm tháng cho mỗi lần vi phạm đã xác nhận.",
+      "proposed_downgrade_steps": 1,
+      "approved_downgrade_steps": 1,
+      "decision_status": "CHUA_XU_LY",
+      "handling_result": "Đề xuất hạ 1 bậc hạnh kiểm tháng",
+      "teacher_email": "gvcn.10c1@thpt.edu.vn",
+      "email_status": "THAT_BAI",
+      "sync_status": "LOI",
+      "attachment_urls": [],
+      "notes": "Kiểm thử Webhook Make và Google Sheet",
+      "history": [
+        {
+          "timestamp": "2026-10-02T10:00:49+07:00",
+          "action": "CREATE",
+          "actor_id": "usr_admin",
+          "actor_name": "Thầy Nguyễn Văn Nam (Bí thư Đoàn)",
+          "details": "Ghi nhận vi phạm ban đầu"
+        }
+      ],
+      "sync_error": "Make Webhook trả về mã lỗi HTTP 401: Unauthorized."
+    },
+    {
+      "violation_id": "v-1790909991932-u2a8h",
+      "request_id": "req-3b1547ca-c2cb-45a5-83cb-fc0043b47b84",
+      "student_id": "HS10C103",
+      "student_name": "Đặng Thị Tâm",
+      "grade": 10,
+      "class_name": "10C1",
+      "occurred_at": "2026-10-02T09:59:00+07:00",
+      "recorded_at": "2026-10-02T09:59:52+07:00",
+      "updated_at": "2026-10-02T09:59:52+07:00",
+      "violation_date": "02/10/2026",
+      "violation_time": "09:59:00",
+      "month": 10,
+      "year": 2026,
+      "month_key": "10/2026",
+      "violation_code": "VEHICLE_ON_CAMPUS",
+      "violation_label": "Chạy xe trong khuôn viên nhà trường",
+      "description": "",
+      "location": "Khu C",
+      "recorded_by_id": "usr_admin",
+      "recorded_by_name": "Thầy Nguyễn Văn Nam (Bí thư Đoàn)",
+      "verification_status": "DA_XAC_NHAN",
+      "handling_rule": "Đề xuất hạ 1 bậc hạnh kiểm tháng cho mỗi lần vi phạm đã xác nhận.",
+      "proposed_downgrade_steps": 1,
+      "approved_downgrade_steps": 1,
+      "decision_status": "CHUA_XU_LY",
+      "handling_result": "Đề xuất hạ 1 bậc hạnh kiểm tháng",
+      "teacher_email": "gvcn.10c1@thpt.edu.vn",
+      "email_status": "THAT_BAI",
+      "sync_status": "LOI",
+      "attachment_urls": [],
+      "notes": "",
+      "history": [
+        {
+          "timestamp": "2026-10-02T09:59:52+07:00",
+          "action": "CREATE",
+          "actor_id": "usr_admin",
+          "actor_name": "Thầy Nguyễn Văn Nam (Bí thư Đoàn)",
+          "details": "Ghi nhận vi phạm ban đầu"
+        }
+      ],
+      "sync_error": "Make Webhook trả về mã lỗi HTTP 401: Unauthorized."
+    },
+    {
+      "violation_id": "v-1790909915611-cg8fz",
+      "request_id": "req-9b13b520-a465-418f-9c96-01fa8e381927",
+      "student_id": "10C1",
+      "student_name": "Phạm Ngọc Quân",
+      "grade": 10,
+      "class_name": "10C1",
+      "occurred_at": "2026-10-02T09:57:00+07:00",
+      "recorded_at": "2026-10-02T09:58:35+07:00",
+      "updated_at": "2026-10-02T09:58:35+07:00",
+      "violation_date": "02/10/2026",
+      "violation_time": "09:57:00",
+      "month": 10,
+      "year": 2026,
+      "month_key": "10/2026",
+      "violation_code": "VEHICLE_ON_CAMPUS",
+      "violation_label": "Chạy xe trong khuôn viên nhà trường",
+      "description": "",
+      "location": "Khu C",
+      "recorded_by_id": "usr_admin",
+      "recorded_by_name": "Thầy Nguyễn Văn Nam (Bí thư Đoàn)",
+      "verification_status": "DA_XAC_NHAN",
+      "handling_rule": "Đề xuất hạ 1 bậc hạnh kiểm tháng cho mỗi lần vi phạm đã xác nhận.",
+      "proposed_downgrade_steps": 1,
+      "approved_downgrade_steps": 1,
+      "decision_status": "CHUA_XU_LY",
+      "handling_result": "Đề xuất hạ 1 bậc hạnh kiểm tháng",
+      "teacher_email": "gvcn.10c1@thpt.edu.vn",
+      "email_status": "THAT_BAI",
+      "sync_status": "LOI",
+      "attachment_urls": [],
+      "notes": "",
+      "history": [
+        {
+          "timestamp": "2026-10-02T09:58:35+07:00",
+          "action": "CREATE",
+          "actor_id": "usr_admin",
+          "actor_name": "Thầy Nguyễn Văn Nam (Bí thư Đoàn)",
+          "details": "Ghi nhận vi phạm ban đầu"
+        }
+      ],
+      "sync_error": "Make Webhook trả về mã lỗi HTTP 401: Unauthorized."
+    },
+    {
+      "violation_id": "v-1790909691197-07ab2",
+      "request_id": "req-8f077e4a-3ebd-4e91-93cd-bba969387bba",
+      "student_id": "HS10C101",
+      "student_name": "Phạm Ngọc Quân",
+      "grade": 10,
+      "class_name": "10C1",
+      "occurred_at": "2026-10-02T09:43:00+07:00",
+      "recorded_at": "2026-10-02T09:54:53+07:00",
+      "updated_at": "2026-10-02T09:54:53+07:00",
+      "violation_date": "02/10/2026",
+      "violation_time": "09:43:00",
+      "month": 10,
+      "year": 2026,
+      "month_key": "10/2026",
+      "violation_code": "VEHICLE_ON_CAMPUS",
+      "violation_label": "Chạy xe trong khuôn viên nhà trường",
+      "description": "",
+      "location": "Khu C",
+      "recorded_by_id": "usr_admin",
+      "recorded_by_name": "Thầy Nguyễn Văn Nam (Bí thư Đoàn)",
+      "verification_status": "DA_XAC_NHAN",
+      "handling_rule": "Đề xuất hạ 1 bậc hạnh kiểm tháng cho mỗi lần vi phạm đã xác nhận.",
+      "proposed_downgrade_steps": 1,
+      "approved_downgrade_steps": 1,
+      "decision_status": "CHUA_XU_LY",
+      "handling_result": "Đề xuất hạ 1 bậc hạnh kiểm tháng",
+      "teacher_email": "gvcn.10c1@thpt.edu.vn",
+      "email_status": "CHUA_GUI",
+      "sync_status": "CHUA_GUI",
+      "attachment_urls": [],
+      "notes": "",
+      "history": [
+        {
+          "timestamp": "2026-10-02T09:54:53+07:00",
+          "action": "CREATE",
+          "actor_id": "usr_admin",
+          "actor_name": "Thầy Nguyễn Văn Nam (Bí thư Đoàn)",
+          "details": "Ghi nhận vi phạm ban đầu"
+        }
+      ],
+      "sync_error": "Chưa cấu hình MAKE_WEBHOOK_URL. Dữ liệu đã lưu cục bộ tại hệ thống trường."
+    },
+    {
+      "violation_id": "v-seed-001",
+      "request_id": "req-seed-001",
+      "student_id": "HS100101",
+      "student_name": "Nguyễn Văn An",
+      "grade": 10,
+      "class_name": "10C1",
+      "occurred_at": "2026-10-01T07:15:00+07:00",
+      "recorded_at": "2026-10-01T07:30:00+07:00",
+      "updated_at": "2026-10-01T07:30:00+07:00",
+      "violation_date": "01/10/2026",
+      "violation_time": "07:15:00",
+      "month": 10,
+      "year": 2026,
+      "month_key": "10/2026",
+      "violation_code": "VEHICLE_ON_CAMPUS",
+      "violation_label": "Chạy xe trong khuôn viên nhà trường",
+      "description": "Chạy xe máy điện vào sâu sân trường giờ chào cờ",
+      "location": "Khu vực tượng đài sân trước",
+      "recorded_by_id": "usr_recorder",
+      "recorded_by_name": "Nguyễn Minh Quân (Ban Trật tự Sao đỏ)",
+      "verification_status": "DA_XAC_NHAN",
+      "handling_rule": "Đề xuất hạ 1 bậc hạnh kiểm tháng cho mỗi lần vi phạm đã xác nhận.",
+      "proposed_downgrade_steps": 1,
+      "approved_downgrade_steps": 1,
+      "decision_status": "DA_XU_LY",
+      "handling_result": "Hạ 1 bậc hạnh kiểm tháng 10/2026",
+      "teacher_email": "gvcn.10c1@thpt.edu.vn",
+      "email_status": "DA_GUI",
+      "email_sent_at": "2026-10-01T07:31:00+07:00",
+      "email_message_id": "msg-seed-1001",
+      "sync_status": "DA_GHI_SHEET",
+      "sheet_synced_at": "2026-10-01T07:30:30+07:00",
+      "attachment_urls": [],
+      "notes": "Học sinh đã thừa nhận vi phạm"
+    },
+    {
+      "violation_id": "v-seed-002",
+      "request_id": "req-seed-002",
+      "student_id": "HS100102",
+      "student_name": "Trần Thị Mai",
+      "grade": 10,
+      "class_name": "10C1",
+      "occurred_at": "2026-10-01T08:45:00+07:00",
+      "recorded_at": "2026-10-01T09:00:00+07:00",
+      "updated_at": "2026-10-01T09:00:00+07:00",
+      "violation_date": "01/10/2026",
+      "violation_time": "08:45:00",
+      "month": 10,
+      "year": 2026,
+      "month_key": "10/2026",
+      "violation_code": "PHONE_REPORT",
+      "violation_label": "Sử dụng điện thoại (Biên bản)",
+      "description": "Chơi game trong tiết Toán có lập biên bản tịch thu tạm giữ",
+      "location": "Phòng học 10C1 tầng 2",
+      "recorded_by_id": "usr_recorder",
+      "recorded_by_name": "Nguyễn Minh Quân (Ban Trật tự Sao đỏ)",
+      "verification_status": "DA_XAC_NHAN",
+      "handling_rule": "Xử lý theo quy định nhà trường. Không tự quy đổi hạ bậc. Chờ người có thẩm quyền quyết định.",
+      "proposed_downgrade_steps": 0,
+      "approved_downgrade_steps": 0,
+      "decision_status": "CHO_QUYET_DINH",
+      "handling_result": "Chờ xử lý theo quy định",
+      "teacher_email": "gvcn.10c1@thpt.edu.vn",
+      "email_status": "DA_GUI",
+      "email_sent_at": "2026-10-01T09:01:00+07:00",
+      "email_message_id": "msg-seed-1002",
+      "sync_status": "DA_GHI_SHEET",
+      "sheet_synced_at": "2026-10-01T09:00:30+07:00",
+      "attachment_urls": [],
+      "notes": "Đã lập biên bản gửi Ban Giám hiệu"
+    }
+  ],
+  "conductEvaluations": [],
+  "users": [
+    {
+      "id": "usr_admin",
+      "name": "Thầy Nguyễn Văn Nam (Bí thư Đoàn)",
+      "role": "admin",
+      "email": "bithu.doan@thpt.edu.vn"
+    },
+    {
+      "id": "usr_recorder",
+      "name": "Nguyễn Minh Quân (Ban Trật tự Sao đỏ)",
+      "role": "recorder",
+      "email": "saodo@thpt.edu.vn"
+    },
+    {
+      "id": "usr_approver",
+      "name": "Cô Trần Thị Hương (Phó Hiệu trưởng)",
+      "role": "approver",
+      "email": "bgh.huong@thpt.edu.vn"
+    },
+    {
+      "id": "usr_gvcn_10c1",
+      "name": "Thầy Lê Văn Hùng (GVCN 10C1)",
+      "role": "homeroom_teacher",
+      "assignedClass": "10C1",
+      "email": "gvcn.10c1@thpt.edu.vn"
+    },
+    {
+      "id": "usr_gvcn_12c10",
+      "name": "Cô Phạm Thị Lan (GVCN 12C10)",
+      "role": "homeroom_teacher",
+      "assignedClass": "12C10",
+      "email": "gvcn.12c10@thpt.edu.vn"
+    }
+  ]
+}
