@@ -33,7 +33,10 @@ export function buildWebhookPayload(
   const ngayThangNam = record.violation_date; // 02/10/2026
   const teacherDisplayName = teacherName || `Chủ nhiệm ${record.class_name}`;
   const notesText = record.notes && record.notes.trim() ? record.notes.trim() : 'Không';
-  const handlingText = record.handling_result || record.handling_rule || 'Theo quy định nhà trường';
+  const handlingText = record.handling_result || record.handling_rule || 'Kiểm điểm trước lớp hoặc xử lý theo quyết định nhà trường';
+  const violationDisplay = record.description && record.description.trim()
+    ? `${record.violation_label} (${record.description.trim()})`
+    : record.violation_label;
 
   // NỘI DUNG THÔNG BÁO BỐ CỤC RÕ RÀNG THEO YÊU CẦU ĐỂ GVCN DỄ ĐỌC
   const messagePlain = `Kính gửi Thầy/Cô: ${teacherDisplayName} (GVCN lớp ${record.class_name}),
@@ -41,7 +44,7 @@ export function buildWebhookPayload(
 BCH ĐT thông báo học sinh sau vừa vi phạm nề nếp:
 - Họ và tên học sinh: ${record.student_name}
 - Lớp: ${record.class_name}
-- Hành vi vi phạm: ${record.violation_label}
+- Hành vi vi phạm: ${violationDisplay}
 - Ngày vi phạm: ${ngayThangNam} (Tháng vi phạm: ${thangChu})
 - Địa điểm: ${record.location}
 - Hướng đề xuất xử lý: ${handlingText}
@@ -52,49 +55,49 @@ Kính đề nghị Thầy/Cô phối hợp nhắc nhở và giáo dục học si
 Trân trọng!
 BCH Đoàn trường THPT Nguyễn Chí Thanh`;
 
-  const messageHtml = `<div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333333; max-width: 600px; padding: 20px; border: 1px solid #e2e8f0; border-radius: 8px; background-color: #ffffff;">
+  const messageHtml = `<div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333333; max-width: 600px; padding: 20px; border: 1px solid #cbd5e1; border-radius: 8px; background-color: #ffffff;">
     <p style="margin-top: 0; font-size: 14px;">
-      Kính gửi Thầy/Cô: <b>${teacherDisplayName}</b> — Giáo viên Chủ nhiệm lớp <b>${record.class_name}</b>,
+      Kính gửi Thầy/Cô: <b style="color: #1e3a8a;">${teacherDisplayName} (GVCN lớp ${record.class_name})</b>,
     </p>
     <p style="font-size: 14px; margin-bottom: 12px;">
-      BCH ĐT xin thông báo trường hợp học sinh của lớp vừa được ghi nhận vi phạm nề nếp với thông tin chi tiết như sau:
+      BCH ĐT thông báo học sinh sau vừa vi phạm nề nếp:
     </p>
     <table style="width: 100%; border-collapse: collapse; margin-bottom: 16px; background-color: #f8fafc; border: 1px solid #cbd5e1; border-radius: 6px;">
       <tr>
-        <td style="padding: 10px 14px; border-bottom: 1px solid #e2e8f0; width: 35%; color: #64748b; font-size: 13px;">Họ và tên học sinh:</td>
+        <td style="padding: 10px 14px; border-bottom: 1px solid #e2e8f0; width: 35%; color: #64748b; font-size: 13px;">- Họ và tên học sinh:</td>
         <td style="padding: 10px 14px; border-bottom: 1px solid #e2e8f0; font-weight: bold; color: #1e3a8a; font-size: 14px;">${record.student_name}</td>
       </tr>
       <tr>
-        <td style="padding: 10px 14px; border-bottom: 1px solid #e2e8f0; color: #64748b; font-size: 13px;">Lớp:</td>
+        <td style="padding: 10px 14px; border-bottom: 1px solid #e2e8f0; color: #64748b; font-size: 13px;">- Lớp:</td>
         <td style="padding: 10px 14px; border-bottom: 1px solid #e2e8f0; font-weight: bold; color: #0f172a; font-size: 13px;">${record.class_name}</td>
       </tr>
       <tr>
-        <td style="padding: 10px 14px; border-bottom: 1px solid #e2e8f0; color: #64748b; font-size: 13px;">Hành vi vi phạm:</td>
-        <td style="padding: 10px 14px; border-bottom: 1px solid #e2e8f0; color: #b91c1c; font-weight: bold; font-size: 13px;">${record.violation_label}</td>
+        <td style="padding: 10px 14px; border-bottom: 1px solid #e2e8f0; color: #64748b; font-size: 13px;">- Hành vi vi phạm:</td>
+        <td style="padding: 10px 14px; border-bottom: 1px solid #e2e8f0; color: #dc2626; font-weight: bold; font-size: 13px;">${violationDisplay}</td>
       </tr>
       <tr>
-        <td style="padding: 10px 14px; border-bottom: 1px solid #e2e8f0; color: #64748b; font-size: 13px;">Thời gian vi phạm:</td>
-        <td style="padding: 10px 14px; border-bottom: 1px solid #e2e8f0; font-size: 13px;">Ngày <b>${ngayThangNam}</b> (Tính vào nề nếp <b>${thangChu}</b>)</td>
+        <td style="padding: 10px 14px; border-bottom: 1px solid #e2e8f0; color: #64748b; font-size: 13px;">- Ngày vi phạm:</td>
+        <td style="padding: 10px 14px; border-bottom: 1px solid #e2e8f0; font-size: 13px;"><b>${ngayThangNam}</b> (Tháng vi phạm: <b style="color: #0369a1;">${thangChu}</b>)</td>
       </tr>
       <tr>
-        <td style="padding: 10px 14px; border-bottom: 1px solid #e2e8f0; color: #64748b; font-size: 13px;">Địa điểm:</td>
-        <td style="padding: 10px 14px; border-bottom: 1px solid #e2e8f0; font-size: 13px;">${record.location}</td>
+        <td style="padding: 10px 14px; border-bottom: 1px solid #e2e8f0; color: #64748b; font-size: 13px;">- Địa điểm:</td>
+        <td style="padding: 10px 14px; border-bottom: 1px solid #e2e8f0; font-size: 13px; font-weight: 600;">${record.location}</td>
       </tr>
       <tr>
-        <td style="padding: 10px 14px; border-bottom: 1px solid #e2e8f0; color: #64748b; font-size: 13px;">Đề xuất hướng xử lý:</td>
-        <td style="padding: 10px 14px; border-bottom: 1px solid #e2e8f0; color: #c2410c; font-weight: bold; font-size: 13px;">${handlingText}</td>
+        <td style="padding: 10px 14px; border-bottom: 1px solid #e2e8f0; color: #64748b; font-size: 13px;">- Hướng đề xuất xử lý:</td>
+        <td style="padding: 10px 14px; border-bottom: 1px solid #e2e8f0; color: #d97706; font-weight: bold; font-size: 13px;">${handlingText}</td>
       </tr>
       <tr>
-        <td style="padding: 10px 14px; color: #64748b; font-size: 13px;">Ghi chú thêm:</td>
+        <td style="padding: 10px 14px; color: #64748b; font-size: 13px;">- Ghi chú:</td>
         <td style="padding: 10px 14px; font-style: italic; color: #475569; font-size: 13px;">${notesText}</td>
       </tr>
     </table>
-    <p style="font-size: 13px; color: #475569; margin-bottom: 20px;">
-      👉 Kính đề nghị Thầy/Cô nắm bắt thông tin, nhắc nhở và phối hợp cùng gia đình giáo dục học sinh nhằm nâng cao ý thức chấp hành nội quy nhà trường.
+    <p style="font-size: 13px; color: #334155; margin-bottom: 16px;">
+      Kính đề nghị Thầy/Cô phối hợp nhắc nhở và giáo dục học sinh.
     </p>
     <div style="border-top: 1px dashed #cbd5e1; padding-top: 12px; font-size: 13px;">
-      <p style="margin: 0; font-size: 14px;"><b>BCH Đoàn trường THPT Nguyễn Chí Thanh</b></p>
-      <p style="margin: 4px 0 0 0; color: #64748b; font-size: 12px;">Email này được gửi tự động từ Hệ thống Quản lý Nề nếp học sinh.</p>
+      <p style="margin: 0; font-weight: bold; color: #0f172a;">Trân trọng!</p>
+      <p style="margin: 2px 0 0 0; font-weight: bold; color: #1e3a8a; font-size: 14px;">BCH Đoàn trường THPT Nguyễn Chí Thanh</p>
     </div>
 </div>`;
 
@@ -105,22 +108,23 @@ BCH Đoàn trường THPT Nguyễn Chí Thanh`;
     // CỘT DỮ LIỆU MESSAGE BỐ CỤC ĐẦY ĐỦ RÕ RÀNG THEO YÊU CẦU
     message: messagePlain,                     // Dành cho Sheets hoặc Gmail Plain text
     message_plain: messagePlain,
-    message_html: messageHtml,                 // Mẫu bảng HTML chuẩn có viền xanh, tự xuống hàng 100%
+    message_html: messageHtml,                 // Mẫu bảng HTML chuẩn có viền và màu chữ nổi bật
+    message_table: messageHtml,
     message_br: messageWithBr,                 // Văn bản có thẻ <br/> tự xuống dòng trong HTML
-    message_email: messagePreLine,             // Tự xuống dòng trong cả chế độ HTML lẫn Plain text
+    message_email: messageHtml,                // Mặc định dạng HTML bảng có màu chữ
     noi_dung_thong_bao: messagePlain,
-    noi_dung_email: messageWithBr,             // Có thẻ <br/> xuống dòng ngay lập tức trong Gmail HTML
+    noi_dung_email: messageHtml,               // Gửi email dạng HTML bảng màu sắc đẹp mắt
     noi_dung_html: messageHtml,
     'Message': messagePlain,
     'Message HTML': messageHtml,
     'Nội dung thông báo': messagePlain,
-    'Nội dung email': messageWithBr,
+    'Nội dung email': messageHtml,
     'Nội dung HTML': messageHtml,
 
     // 1. CÁC TRƯỜNG TIẾNG VIỆT DỄ ĐỌC GHI VÀO GOOGLE SHEET (Theo đúng yêu cầu)
     ho_ten: record.student_name,               // Họ tên học sinh
     lop: record.class_name,                    // Lớp
-    loai_vi_pham: record.violation_label,      // Loại vi phạm
+    loai_vi_pham: violationDisplay,            // Loại vi phạm
     ngay_thang_nam: ngayThangNam,              // Ngày tháng năm (dd/MM/yyyy)
     thang: thangViPham,                        // TÁCH CỘT THÁNG RIÊNG ĐỂ LỌC DỮ LIỆU THEO THÁNG (vd: 10)
     thang_chu: thangChu,                       // Tháng dạng chữ (vd: "Tháng 10")
@@ -148,12 +152,12 @@ BCH Đoàn trường THPT Nguyễn Chí Thanh`;
     'Họ tên học sinh': record.student_name,
     'Họ và tên': record.student_name,
     'Lớp': record.class_name,
-    'Loại vi phạm': record.violation_label,
+    'Loại vi phạm': violationDisplay,
     'Ngày tháng năm': ngayThangNam,
     'Tháng': thangViPham,                      // Cột tháng riêng
     'Tháng vi phạm': thangChu,
     'Địa điểm': record.location,
-    'Hướng xử lý': record.handling_result || record.handling_rule,
+    'Hướng xử lý': handlingText,
     'Email GVCN': teacherEmail,                // Khóa có dấu cho Make / Gmail
     'Email chủ nhiệm': teacherEmail,
     'Tên GVCN': teacherName,

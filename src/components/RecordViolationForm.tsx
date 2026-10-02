@@ -67,7 +67,6 @@ export const RecordViolationForm: React.FC<RecordViolationFormProps> = ({
   const [otherRuleText, setOtherRuleText] = useState<string>('');
 
   // UI States
-  const [isReviewOpen, setIsReviewOpen] = useState<boolean>(false);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [submittedRecord, setSubmittedRecord] = useState<ViolationRecord | null>(null);
@@ -134,7 +133,7 @@ export const RecordViolationForm: React.FC<RecordViolationFormProps> = ({
   const currentTeacher = teachers.find((t) => t.className === selectedClass);
   const currentDef = VIOLATION_DEFINITIONS[violationCode];
 
-  const handleOpenReview = (e: React.FormEvent) => {
+  const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrorMessage(null);
 
@@ -155,15 +154,7 @@ export const RecordViolationForm: React.FC<RecordViolationFormProps> = ({
       return;
     }
 
-    setIsReviewOpen(true);
-  };
-
-  const handleConfirmSubmit = async () => {
-    if (!studentName.trim() || isSubmitting) return;
-
     setIsSubmitting(true);
-    setErrorMessage(null);
-
     const clientViolationId = `v-${Date.now()}-${Math.random().toString(36).substring(2, 7)}`;
     const effectiveId = getEffectiveStudentId();
     const effectiveLoc = getEffectiveLocation();
@@ -183,10 +174,8 @@ export const RecordViolationForm: React.FC<RecordViolationFormProps> = ({
       });
 
       setSubmittedRecord(record);
-      setIsReviewOpen(false);
     } catch (err: any) {
       setErrorMessage(err.message || 'Có lỗi xảy ra khi ghi nhận vi phạm');
-      setIsReviewOpen(false);
     } finally {
       setIsSubmitting(false);
     }
@@ -198,8 +187,6 @@ export const RecordViolationForm: React.FC<RecordViolationFormProps> = ({
     setDescription('');
     setNotes('');
     setOccurredAtInput(parseToVietnamParts(new Date()).htmlInputDateTime);
-    setLocationPreset('Khu C');
-    setCustomLocation('');
     generateNewStudentId(selectedClass || '10C1');
   };
 
@@ -258,18 +245,18 @@ export const RecordViolationForm: React.FC<RecordViolationFormProps> = ({
             )}
           </div>
 
-          <div className="flex justify-center gap-2 pt-2">
+          <div className="flex flex-wrap justify-center gap-2.5 pt-2">
             <button
               onClick={handleResetForNewRecord}
-              className="px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs rounded-lg shadow-xs transition cursor-pointer"
+              className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white font-bold text-xs rounded-lg shadow-xs transition cursor-pointer flex items-center gap-1.5"
             >
-              Ghi nhận tiếp
+              <span>+ Ghi nhận tiếp học sinh khác (Lớp {selectedClass})</span>
             </button>
             <button
               onClick={() => onSuccessNavigate(submittedRecord.violation_id)}
-              className="px-5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-800 font-semibold text-xs rounded-lg border border-slate-300 transition cursor-pointer"
+              className="px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-800 font-semibold text-xs rounded-lg border border-slate-300 transition cursor-pointer"
             >
-              Xem nhật ký đã gửi
+              Xem sổ nhật ký đã gửi
             </button>
           </div>
         </div>
@@ -334,7 +321,7 @@ export const RecordViolationForm: React.FC<RecordViolationFormProps> = ({
             </div>
           )}
 
-          <form onSubmit={handleOpenReview} className="p-5 space-y-4 text-xs">
+          <form onSubmit={handleFormSubmit} className="p-5 space-y-4 text-xs">
             {/* 1. Thông tin học sinh vi phạm */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               {/* Họ và tên học sinh - Nhập tự do, không gợi ý */}
@@ -585,89 +572,23 @@ export const RecordViolationForm: React.FC<RecordViolationFormProps> = ({
             <div className="pt-2">
               <button
                 type="submit"
-                className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm rounded-lg shadow-xs transition flex items-center justify-center gap-2 cursor-pointer"
+                disabled={isSubmitting}
+                className="w-full py-3.5 bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white font-bold text-sm rounded-lg shadow-xs transition flex items-center justify-center gap-2 cursor-pointer disabled:opacity-60"
               >
-                <Send className="w-4 h-4" />
-                <span>Ghi nhận và gửi qua Google Sheet</span>
+                {isSubmitting ? (
+                  <>
+                    <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                    <span>Đang gửi tự động qua Google Sheet...</span>
+                  </>
+                ) : (
+                  <>
+                    <Send className="w-4 h-4" />
+                    <span>Ghi nhận & Tự động gửi qua Google Sheet</span>
+                  </>
+                )}
               </button>
             </div>
           </form>
-        </div>
-      )}
-
-      {/* CONFIRMATION MODAL */}
-      {isReviewOpen && (
-        <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-2xs flex items-center justify-center p-4">
-          <div className="bg-white rounded-xl shadow-xl max-w-sm w-full p-5 border border-slate-200 space-y-3.5 text-xs">
-            <div className="flex justify-between items-center border-b pb-2">
-              <h3 className="font-bold text-sm text-slate-900 flex items-center gap-1.5">
-                <Eye className="w-4 h-4 text-blue-600" />
-                Xác nhận gửi qua Google Sheet
-              </h3>
-              <button
-                onClick={() => setIsReviewOpen(false)}
-                className="text-slate-400 hover:text-slate-600"
-              >
-                <X className="w-4 h-4" />
-              </button>
-            </div>
-
-            <div className="bg-slate-50 p-3 rounded-lg border border-slate-200 space-y-2">
-              <div className="flex justify-between">
-                <span className="text-slate-500">Học sinh:</span>
-                <span className="font-bold text-slate-900">{studentName} ({getEffectiveStudentId()})</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-slate-500">Lớp:</span>
-                <span className="font-bold text-blue-700">{selectedClass}</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-slate-500">Địa điểm:</span>
-                <span className="font-semibold text-slate-900">{getEffectiveLocation()}</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-slate-500">Loại vi phạm:</span>
-                <span className="font-medium text-slate-800 text-right">{currentDef.label}</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-slate-500">Thời điểm:</span>
-                <span className="font-mono text-slate-700">{occurredAtInput.replace('T', ' ')}</span>
-              </div>
-              <div className="flex justify-between border-t border-slate-200 pt-1.5">
-                <span className="text-slate-500">Hướng xử lý:</span>
-                <span className="font-bold text-amber-700 text-right">
-                  {violationCode === 'PHONE_REPORT'
-                    ? 'Chờ xử lý theo quy định'
-                    : violationCode === 'OTHER'
-                    ? otherRuleText || 'Theo quyết định'
-                    : 'Đề xuất hạ 1 bậc'}
-                </span>
-              </div>
-              <div className="flex justify-between text-[11px] text-slate-500">
-                <span>GVCN:</span>
-                <span className="font-semibold text-slate-800">{currentTeacher?.teacherName || `Thầy/Cô Chủ nhiệm ${selectedClass}`}</span>
-              </div>
-            </div>
-
-            <div className="flex justify-end gap-2 pt-1">
-              <button
-                type="button"
-                onClick={() => setIsReviewOpen(false)}
-                disabled={isSubmitting}
-                className="px-3 py-1.5 border border-slate-300 rounded text-slate-700 hover:bg-slate-100"
-              >
-                Sửa lại
-              </button>
-              <button
-                type="button"
-                onClick={handleConfirmSubmit}
-                disabled={isSubmitting}
-                className="px-4 py-1.5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded shadow-xs flex items-center gap-1.5 disabled:opacity-50 cursor-pointer"
-              >
-                {isSubmitting ? 'Đang gửi...' : 'Gửi qua Google Sheet'}
-              </button>
-            </div>
-          </div>
         </div>
       )}
     </div>

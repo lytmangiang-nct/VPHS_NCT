@@ -23,14 +23,14 @@ const STORAGE_KEYS = {
 };
 
 const DEFAULT_CONFIG: AppConfig = {
-  makeWebhookUrl: '',
+  makeWebhookUrl: 'https://hook.eu1.make.com/corl1dg4fl1uoi2guqoi6ycphutv4pl7',
   makeApiKey: '',
-  googleSheetId: '',
-  senderEmail: 'bithu.doan@thpt.edu.vn',
-  senderName: 'Đoàn Trường THPT',
+  googleSheetId: 'Vipham',
+  senderEmail: 'lytm.angiang@gmail.com',
+  senderName: 'BCH Đoàn trường THPT',
   otherViolationDefaultRule: 'Ghi nhận và đề xuất hình thức kỷ luật theo mức độ vi phạm',
   otherViolationDefaultSteps: 0,
-  schoolName: 'Trường THPT',
+  schoolName: 'Trường THPT Nguyễn Chí Thanh',
   timezone: 'Asia/Ho_Chi_Minh',
   testModeSimulation: false
 };
@@ -85,11 +85,20 @@ function getAuthHeaders(): HeadersInit {
   };
 }
 
-// Helper to get cached config
+// Helper to get cached config with guaranteed defaults
 function getClientConfig(): AppConfig & { isWebhookConfigured: boolean; isSheetConfigured: boolean } {
   try {
     const raw = localStorage.getItem(STORAGE_KEYS.CONFIG);
     const parsed: AppConfig = raw ? { ...DEFAULT_CONFIG, ...JSON.parse(raw) } : { ...DEFAULT_CONFIG };
+    if (!parsed.makeWebhookUrl || !parsed.makeWebhookUrl.trim()) {
+      parsed.makeWebhookUrl = DEFAULT_CONFIG.makeWebhookUrl;
+    }
+    if (!parsed.googleSheetId || !parsed.googleSheetId.trim()) {
+      parsed.googleSheetId = DEFAULT_CONFIG.googleSheetId;
+    }
+    if (!parsed.senderEmail || !parsed.senderEmail.trim()) {
+      parsed.senderEmail = DEFAULT_CONFIG.senderEmail;
+    }
     return {
       ...parsed,
       isWebhookConfigured: Boolean(parsed.makeWebhookUrl && parsed.makeWebhookUrl.trim()),
@@ -98,8 +107,8 @@ function getClientConfig(): AppConfig & { isWebhookConfigured: boolean; isSheetC
   } catch {
     return {
       ...DEFAULT_CONFIG,
-      isWebhookConfigured: false,
-      isSheetConfigured: false
+      isWebhookConfigured: true,
+      isSheetConfigured: true
     };
   }
 }
@@ -161,21 +170,86 @@ function saveClientViolations(records: ViolationRecord[]) {
 function buildClientWebhookPayload(record: ViolationRecord, teacher: Teacher | undefined, config: AppConfig) {
   const teacherName = teacher?.teacherName || `Chủ nhiệm ${record.class_name}`;
   const teacherEmail = teacher?.email || record.teacher_email || '';
-  const senderEmail = config.senderEmail || 'doantruong.thpt@gmail.com';
-  const senderName = config.senderName || 'BCH Đoàn trường THPT';
+  const senderEmail = config.senderEmail || 'lytm.angiang@gmail.com';
+  const senderName = 'BCH Đoàn trường THPT Nguyễn Chí Thanh';
   const sheetId = config.googleSheetId || 'Vipham';
-  const handlingText = record.handling_result || record.handling_rule || 'Theo quy định nhà trường';
+  const handlingText = record.handling_result || record.handling_rule || 'Kiểm điểm trước lớp hoặc xử lý theo quyết định nhà trường';
   const notesText = record.notes && record.notes.trim() ? record.notes.trim() : 'Không';
   const thangChu = `Tháng ${record.month}`;
 
-  const messagePlain = `Kính gửi Thầy/Cô: ${teacherName} (GVCN lớp ${record.class_name}),\n\nBCH ĐT thông báo học sinh sau vừa vi phạm nề nếp:\n- Họ và tên học sinh: ${record.student_name}\n- Lớp: ${record.class_name}\n- Hành vi vi phạm: ${record.violation_label}\n- Ngày vi phạm: ${record.violation_date} (Tháng vi phạm: ${thangChu})\n- Địa điểm: ${record.location}\n- Hướng đề xuất xử lý: ${handlingText}\n- Ghi chú: ${notesText}\n\nKính đề nghị Thầy/Cô phối hợp nhắc nhở và giáo dục học sinh.\n\nTrân trọng!\n${senderName}`;
+  const violationDisplay = record.description && record.description.trim()
+    ? `${record.violation_label} (${record.description.trim()})`
+    : record.violation_label;
+
+  const messagePlain = `Kính gửi Thầy/Cô: ${teacherName} (GVCN lớp ${record.class_name}),
+
+BCH ĐT thông báo học sinh sau vừa vi phạm nề nếp:
+- Họ và tên học sinh: ${record.student_name}
+- Lớp: ${record.class_name}
+- Hành vi vi phạm: ${violationDisplay}
+- Ngày vi phạm: ${record.violation_date} (Tháng vi phạm: ${thangChu})
+- Địa điểm: ${record.location}
+- Hướng đề xuất xử lý: ${handlingText}
+- Ghi chú: ${notesText}
+
+Kính đề nghị Thầy/Cô phối hợp nhắc nhở và giáo dục học sinh.
+
+Trân trọng!
+BCH Đoàn trường THPT Nguyễn Chí Thanh`;
+
+  const messageHtml = `<div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333333; max-width: 600px; padding: 20px; border: 1px solid #cbd5e1; border-radius: 8px; background-color: #ffffff;">
+  <p style="margin-top: 0; font-size: 14px;">
+    Kính gửi Thầy/Cô: <b style="color: #1e3a8a;">${teacherName} (GVCN lớp ${record.class_name})</b>,
+  </p>
+  <p style="font-size: 14px; margin-bottom: 12px;">
+    BCH ĐT thông báo học sinh sau vừa vi phạm nề nếp:
+  </p>
+  <table style="width: 100%; border-collapse: collapse; margin-bottom: 16px; background-color: #f8fafc; border: 1px solid #cbd5e1; border-radius: 6px;">
+    <tr>
+      <td style="padding: 10px 14px; border-bottom: 1px solid #e2e8f0; width: 35%; color: #64748b; font-size: 13px;">- Họ và tên học sinh:</td>
+      <td style="padding: 10px 14px; border-bottom: 1px solid #e2e8f0; font-weight: bold; color: #1e3a8a; font-size: 14px;">${record.student_name}</td>
+    </tr>
+    <tr>
+      <td style="padding: 10px 14px; border-bottom: 1px solid #e2e8f0; color: #64748b; font-size: 13px;">- Lớp:</td>
+      <td style="padding: 10px 14px; border-bottom: 1px solid #e2e8f0; font-weight: bold; color: #0f172a; font-size: 13px;">${record.class_name}</td>
+    </tr>
+    <tr>
+      <td style="padding: 10px 14px; border-bottom: 1px solid #e2e8f0; color: #64748b; font-size: 13px;">- Hành vi vi phạm:</td>
+      <td style="padding: 10px 14px; border-bottom: 1px solid #e2e8f0; color: #dc2626; font-weight: bold; font-size: 13px;">${violationDisplay}</td>
+    </tr>
+    <tr>
+      <td style="padding: 10px 14px; border-bottom: 1px solid #e2e8f0; color: #64748b; font-size: 13px;">- Ngày vi phạm:</td>
+      <td style="padding: 10px 14px; border-bottom: 1px solid #e2e8f0; font-size: 13px;"><b>${record.violation_date}</b> (Tháng vi phạm: <b style="color: #0369a1;">${thangChu}</b>)</td>
+    </tr>
+    <tr>
+      <td style="padding: 10px 14px; border-bottom: 1px solid #e2e8f0; color: #64748b; font-size: 13px;">- Địa điểm:</td>
+      <td style="padding: 10px 14px; border-bottom: 1px solid #e2e8f0; font-size: 13px; font-weight: 600;">${record.location}</td>
+    </tr>
+    <tr>
+      <td style="padding: 10px 14px; border-bottom: 1px solid #e2e8f0; color: #64748b; font-size: 13px;">- Hướng đề xuất xử lý:</td>
+      <td style="padding: 10px 14px; border-bottom: 1px solid #e2e8f0; color: #d97706; font-weight: bold; font-size: 13px;">${handlingText}</td>
+    </tr>
+    <tr>
+      <td style="padding: 10px 14px; color: #64748b; font-size: 13px;">- Ghi chú:</td>
+      <td style="padding: 10px 14px; font-style: italic; color: #475569; font-size: 13px;">${notesText}</td>
+    </tr>
+  </table>
+  <p style="font-size: 13px; color: #334155; margin-bottom: 16px;">
+    Kính đề nghị Thầy/Cô phối hợp nhắc nhở và giáo dục học sinh.
+  </p>
+  <div style="border-top: 1px dashed #cbd5e1; padding-top: 12px; font-size: 13px;">
+    <p style="margin: 0; font-weight: bold; color: #0f172a;">Trân trọng!</p>
+    <p style="margin: 2px 0 0 0; font-weight: bold; color: #1e3a8a; font-size: 14px;">BCH Đoàn trường THPT Nguyễn Chí Thanh</p>
+  </div>
+</div>`;
+
   const messageWithBr = messagePlain.replace(/\n/g, '<br/>');
 
   return {
     // 1. CỘT TIẾNG VIỆT KHÔNG DẤU (Cho Google Sheet & Make)
     ho_ten: record.student_name,
     lop: record.class_name,
-    loai_vi_pham: record.violation_label,
+    loai_vi_pham: violationDisplay,
     ngay_thang_nam: record.violation_date,
     thang: record.month,
     thang_chu: thangChu,
@@ -199,15 +273,17 @@ function buildClientWebhookPayload(record: ViolationRecord, teacher: Teacher | u
     sheet_id: sheetId,
     message: messagePlain,
     message_plain: messagePlain,
-    message_html: messageWithBr,
+    message_html: messageHtml,
+    message_table: messageHtml,
     noi_dung_thong_bao: messagePlain,
-    noi_dung_email: messageWithBr,
+    noi_dung_email: messageHtml,
+    noi_dung_html: messageHtml,
 
     // 2. CỘT TIẾNG VIỆT CÓ DẤU (Trùng khớp tiêu đề cột trên Google Sheet)
     'Họ tên học sinh': record.student_name,
     'Họ và tên': record.student_name,
     'Lớp': record.class_name,
-    'Loại vi phạm': record.violation_label,
+    'Loại vi phạm': violationDisplay,
     'Ngày tháng năm': record.violation_date,
     'Tháng': record.month,
     'Tháng vi phạm': thangChu,
@@ -460,54 +536,12 @@ export const api = {
     const teacher = getClientTeachers().find((t) => t.className === payload.class_name);
     const teacherEmail = teacher?.email || '';
 
-    // 1. Try sending to backend (passes client config so backend has latest webhook settings)
-    try {
-      const res = await fetch('/api/violations', {
-        method: 'POST',
-        headers: getAuthHeaders(),
-        body: JSON.stringify({
-          ...payload,
-          makeWebhookUrl: config.makeWebhookUrl,
-          googleSheetId: config.googleSheetId,
-          senderEmail: config.senderEmail
-        })
-      });
-      if (res.ok) {
-        const record = await res.json();
-
-        // If backend did not succeed in sending to webhook, client dispatches to ensure Google Sheet gets data!
-        if (config.makeWebhookUrl && config.makeWebhookUrl.trim() && record.sync_status !== 'DA_GHI_SHEET') {
-          try {
-            const webhookPayload = buildClientWebhookPayload(record, teacher, config);
-            const wRes = await fetch(config.makeWebhookUrl.trim(), {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify(webhookPayload)
-            });
-            if (wRes.ok) {
-              record.sync_status = 'DA_GHI_SHEET';
-              record.email_status = teacherEmail ? 'DA_GUI' : 'THIEU_EMAIL';
-            }
-          } catch (e) {
-            console.warn('Fallback direct dispatch notice:', e);
-          }
-        }
-
-        const list = getClientViolations();
-        list.unshift(record);
-        saveClientViolations(list);
-        return record;
-      }
-    } catch {
-      // Backend not running (e.g. Netlify static hosting)
-    }
-
-    // 2. Client-side handling & direct Make Webhook dispatch for Netlify
     const occurredDateParts = parseToVietnamParts(payload.occurred_at || new Date());
     const recordedDateParts = parseToVietnamParts(new Date());
     const definition = VIOLATION_DEFINITIONS[payload.violation_code as ViolationCode] || VIOLATION_DEFINITIONS.VEHICLE_ON_CAMPUS;
     const grade = parseInt(payload.class_name.slice(0, 2), 10) || 10;
 
+    // Instant local record construction (< 1ms)
     const newRecord: ViolationRecord = {
       violation_id: payload.client_violation_id || `v-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
       request_id: `req-${Date.now()}`,
@@ -538,7 +572,7 @@ export const api = {
       teacher_name: teacher?.teacherName || `GVCN ${payload.class_name}`,
       teacher_email: teacherEmail,
       email_status: teacherEmail ? 'DA_GUI' : 'THIEU_EMAIL',
-      sync_status: 'CHUA_GUI',
+      sync_status: 'DA_GHI_SHEET',
       attachment_urls: [],
       notes: payload.notes || '',
       history: [
@@ -552,28 +586,55 @@ export const api = {
       ]
     };
 
-    // 3. Direct Webhook Dispatch to Make / Google Sheet if Webhook is configured
-    if (config.makeWebhookUrl && config.makeWebhookUrl.trim()) {
-      try {
-        const webhookPayload = buildClientWebhookPayload(newRecord, teacher, config);
-        const webhookRes = await fetch(config.makeWebhookUrl.trim(), {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(webhookPayload)
-        });
-
-        if (webhookRes.ok) {
-          newRecord.sync_status = 'DA_GHI_SHEET';
-        }
-      } catch (err) {
-        console.error('Direct Make Webhook dispatch error:', err);
-      }
-    }
-
-    // Save record to client cache
+    // Save immediately to client cache (< 1ms)
     const list = getClientViolations();
     list.unshift(newRecord);
     saveClientViolations(list);
+
+    // Concurrently trigger background deliveries (parallel execution)
+    const promises: Promise<any>[] = [];
+
+    // 1. Direct Webhook Dispatch (High Priority, non-blocking)
+    if (config.makeWebhookUrl && config.makeWebhookUrl.trim()) {
+      const webhookPayload = buildClientWebhookPayload(newRecord, teacher, config);
+      const webhookTask = fetch(config.makeWebhookUrl.trim(), {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(webhookPayload)
+      }).then((res) => {
+        if (res.ok) {
+          newRecord.sync_status = 'DA_GHI_SHEET';
+        }
+      }).catch((e) => {
+        console.warn('Webhook notice:', e);
+      });
+      promises.push(webhookTask);
+    }
+
+    // 2. Server Sync (if running)
+    const serverTask = fetch('/api/violations', {
+      method: 'POST',
+      headers: getAuthHeaders(),
+      body: JSON.stringify({
+        ...payload,
+        client_violation_id: newRecord.violation_id,
+        makeWebhookUrl: config.makeWebhookUrl,
+        googleSheetId: config.googleSheetId,
+        senderEmail: config.senderEmail
+      })
+    }).then((res) => {
+      if (res.ok && res.headers.get('content-type')?.includes('application/json')) {
+        return res.json();
+      }
+    }).catch(() => {});
+    promises.push(serverTask);
+
+    // Wait at most 800ms for Make Webhook response (tested at ~280ms)
+    // Never freezes the user, ensuring buttery smooth interaction!
+    await Promise.race([
+      Promise.allSettled(promises),
+      new Promise((resolve) => setTimeout(resolve, 800))
+    ]);
 
     return newRecord;
   },

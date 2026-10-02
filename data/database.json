@@ -1182,6 +1182,13 @@
       "grade": 10,
       "className": "10C1",
       "isActive": true
+    },
+    {
+      "id": "HS10C108",
+      "name": "Trần Bảo Ngọc",
+      "grade": 10,
+      "className": "10C1",
+      "isActive": true
     }
   ],
   "violations": [
