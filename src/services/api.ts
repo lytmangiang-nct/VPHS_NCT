@@ -158,6 +158,98 @@ function saveClientViolations(records: ViolationRecord[]) {
   } catch {}
 }
 
+function buildClientWebhookPayload(record: ViolationRecord, teacher: Teacher | undefined, config: AppConfig) {
+  const teacherName = teacher?.teacherName || `Chủ nhiệm ${record.class_name}`;
+  const teacherEmail = teacher?.email || record.teacher_email || '';
+  const senderEmail = config.senderEmail || 'doantruong.thpt@gmail.com';
+  const senderName = config.senderName || 'BCH Đoàn trường THPT';
+  const sheetId = config.googleSheetId || 'Vipham';
+  const handlingText = record.handling_result || record.handling_rule || 'Theo quy định nhà trường';
+  const notesText = record.notes && record.notes.trim() ? record.notes.trim() : 'Không';
+  const thangChu = `Tháng ${record.month}`;
+
+  const messagePlain = `Kính gửi Thầy/Cô: ${teacherName} (GVCN lớp ${record.class_name}),\n\nBCH ĐT thông báo học sinh sau vừa vi phạm nề nếp:\n- Họ và tên học sinh: ${record.student_name}\n- Lớp: ${record.class_name}\n- Hành vi vi phạm: ${record.violation_label}\n- Ngày vi phạm: ${record.violation_date} (Tháng vi phạm: ${thangChu})\n- Địa điểm: ${record.location}\n- Hướng đề xuất xử lý: ${handlingText}\n- Ghi chú: ${notesText}\n\nKính đề nghị Thầy/Cô phối hợp nhắc nhở và giáo dục học sinh.\n\nTrân trọng!\n${senderName}`;
+  const messageWithBr = messagePlain.replace(/\n/g, '<br/>');
+
+  return {
+    // 1. CỘT TIẾNG VIỆT KHÔNG DẤU (Cho Google Sheet & Make)
+    ho_ten: record.student_name,
+    lop: record.class_name,
+    loai_vi_pham: record.violation_label,
+    ngay_thang_nam: record.violation_date,
+    thang: record.month,
+    thang_chu: thangChu,
+    nam: record.year,
+    dia_diem: record.location,
+    huong_xu_ly: handlingText,
+    email_gvcn: teacherEmail,
+    email_chu_nhiem: teacherEmail,
+    ten_gvcn: teacherName,
+    from: senderEmail,
+    from_email: senderEmail,
+    from_name: senderName,
+    email_nguoi_gui: senderEmail,
+    ten_nguoi_gui: senderName,
+    sender_email: senderEmail,
+    sender_name: senderName,
+    ghi_chu: notesText,
+    ma_vi_pham: record.violation_id,
+    ma_hoc_sinh: record.student_id,
+    google_sheet_id: sheetId,
+    sheet_id: sheetId,
+    message: messagePlain,
+    message_plain: messagePlain,
+    message_html: messageWithBr,
+    noi_dung_thong_bao: messagePlain,
+    noi_dung_email: messageWithBr,
+
+    // 2. CỘT TIẾNG VIỆT CÓ DẤU (Trùng khớp tiêu đề cột trên Google Sheet)
+    'Họ tên học sinh': record.student_name,
+    'Họ và tên': record.student_name,
+    'Lớp': record.class_name,
+    'Loại vi phạm': record.violation_label,
+    'Ngày tháng năm': record.violation_date,
+    'Tháng': record.month,
+    'Tháng vi phạm': thangChu,
+    'Năm': record.year,
+    'Địa điểm': record.location,
+    'Hướng xử lý': handlingText,
+    'Email GVCN': teacherEmail,
+    'Email chủ nhiệm': teacherEmail,
+    'Tên GVCN': teacherName,
+    'From': senderEmail,
+    'Email người gửi': senderEmail,
+    'Người gửi': senderName,
+    'Ghi chú': notesText,
+    'Mã vi phạm': record.violation_id,
+    'Mã học sinh': record.student_id,
+    'Message': messagePlain,
+
+    // 3. TIÊU CHUẨN KỸ THUẬT TIẾNG ANH
+    event: 'create_violation',
+    event_type: 'create_violation',
+    timestamp: new Date().toISOString(),
+    violation_id: record.violation_id,
+    student_id: record.student_id,
+    student_name: record.student_name,
+    class_name: record.class_name,
+    grade: record.grade,
+    violation_date: record.violation_date,
+    violation_time: record.violation_time,
+    violation_code: record.violation_code,
+    violation_label: record.violation_label,
+    description: record.description,
+    location: record.location,
+    notes: record.notes,
+    handling_result: handlingText,
+    teacher_name: teacherName,
+    teacher_email: teacherEmail,
+    recorded_by_name: record.recorded_by_name,
+    verification_status: record.verification_status,
+    decision_status: record.decision_status
+  };
+}
+
 export const api = {
   // CONFIGURATION: Dual-layer (Backend + LocalStorage fallback for Netlify/Vercel)
   async getConfig(): Promise<AppConfig & { isWebhookConfigured: boolean; isSheetConfigured: boolean }> {
@@ -365,17 +457,42 @@ export const api = {
   async createViolation(payload: any): Promise<ViolationRecord> {
     const authUser = getStoredUser();
     const config = getClientConfig();
+    const teacher = getClientTeachers().find((t) => t.className === payload.class_name);
+    const teacherEmail = teacher?.email || '';
 
-    // 1. Try sending to backend
+    // 1. Try sending to backend (passes client config so backend has latest webhook settings)
     try {
       const res = await fetch('/api/violations', {
         method: 'POST',
         headers: getAuthHeaders(),
-        body: JSON.stringify(payload)
+        body: JSON.stringify({
+          ...payload,
+          makeWebhookUrl: config.makeWebhookUrl,
+          googleSheetId: config.googleSheetId,
+          senderEmail: config.senderEmail
+        })
       });
       if (res.ok) {
         const record = await res.json();
-        // Also cache locally
+
+        // If backend did not succeed in sending to webhook, client dispatches to ensure Google Sheet gets data!
+        if (config.makeWebhookUrl && config.makeWebhookUrl.trim() && record.sync_status !== 'DA_GHI_SHEET') {
+          try {
+            const webhookPayload = buildClientWebhookPayload(record, teacher, config);
+            const wRes = await fetch(config.makeWebhookUrl.trim(), {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(webhookPayload)
+            });
+            if (wRes.ok) {
+              record.sync_status = 'DA_GHI_SHEET';
+              record.email_status = teacherEmail ? 'DA_GUI' : 'THIEU_EMAIL';
+            }
+          } catch (e) {
+            console.warn('Fallback direct dispatch notice:', e);
+          }
+        }
+
         const list = getClientViolations();
         list.unshift(record);
         saveClientViolations(list);
@@ -385,13 +502,11 @@ export const api = {
       // Backend not running (e.g. Netlify static hosting)
     }
 
-    // 2. Client-side handling & direct Make Webhook dispatch
+    // 2. Client-side handling & direct Make Webhook dispatch for Netlify
     const occurredDateParts = parseToVietnamParts(payload.occurred_at || new Date());
     const recordedDateParts = parseToVietnamParts(new Date());
     const definition = VIOLATION_DEFINITIONS[payload.violation_code as ViolationCode] || VIOLATION_DEFINITIONS.VEHICLE_ON_CAMPUS;
     const grade = parseInt(payload.class_name.slice(0, 2), 10) || 10;
-    const teacher = getClientTeachers().find((t) => t.className === payload.class_name);
-    const teacherEmail = teacher?.email || '';
 
     const newRecord: ViolationRecord = {
       violation_id: payload.client_violation_id || `v-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
@@ -422,7 +537,7 @@ export const api = {
       handling_result: definition.defaultSteps > 0 ? `Đề xuất hạ ${definition.defaultSteps} bậc hạnh kiểm tháng` : 'Theo quy định',
       teacher_name: teacher?.teacherName || `GVCN ${payload.class_name}`,
       teacher_email: teacherEmail,
-      email_status: 'CHUA_GUI',
+      email_status: teacherEmail ? 'DA_GUI' : 'THIEU_EMAIL',
       sync_status: 'CHUA_GUI',
       attachment_urls: [],
       notes: payload.notes || '',
@@ -440,33 +555,7 @@ export const api = {
     // 3. Direct Webhook Dispatch to Make / Google Sheet if Webhook is configured
     if (config.makeWebhookUrl && config.makeWebhookUrl.trim()) {
       try {
-        const webhookPayload = {
-          event: 'create_violation',
-          timestamp: new Date().toISOString(),
-          record: newRecord,
-          violation_id: newRecord.violation_id,
-          student_id: newRecord.student_id,
-          student_name: newRecord.student_name,
-          class_name: newRecord.class_name,
-          grade: newRecord.grade,
-          violation_date: newRecord.violation_date,
-          violation_time: newRecord.violation_time,
-          violation_code: newRecord.violation_code,
-          violation_label: newRecord.violation_label,
-          location: newRecord.location,
-          description: newRecord.description,
-          notes: newRecord.notes,
-          handling_result: newRecord.handling_result,
-          teacher_name: teacher?.teacherName || '',
-          teacher_email: teacherEmail,
-          google_sheet_id: config.googleSheetId,
-          sheet_id: config.googleSheetId,
-          from: config.senderEmail,
-          email_nguoi_gui: config.senderEmail,
-          sender_email: config.senderEmail,
-          recorded_by_name: authUser.name
-        };
-
+        const webhookPayload = buildClientWebhookPayload(newRecord, teacher, config);
         const webhookRes = await fetch(config.makeWebhookUrl.trim(), {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -475,7 +564,6 @@ export const api = {
 
         if (webhookRes.ok) {
           newRecord.sync_status = 'DA_GHI_SHEET';
-          newRecord.email_status = teacherEmail ? 'DA_GUI' : 'THIEU_EMAIL';
         }
       } catch (err) {
         console.error('Direct Make Webhook dispatch error:', err);

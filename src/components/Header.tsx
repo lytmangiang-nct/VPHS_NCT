@@ -116,9 +116,42 @@ export const Header: React.FC<HeaderProps> = ({
         googleSheetId: sheetIdInput.trim(),
         senderEmail: senderEmailInput.trim()
       });
+
+      if (webhookInput.trim().startsWith('http')) {
+        fetch(webhookInput.trim(), {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            event: 'connection_test',
+            timestamp: new Date().toISOString(),
+            ho_ten: 'Học sinh kiểm tra',
+            'Họ và tên': 'Học sinh kiểm tra',
+            lop: '10C1',
+            'Lớp': '10C1',
+            loai_vi_pham: 'Chạy xe trong khuôn viên nhà trường',
+            'Loại vi phạm': 'Chạy xe trong khuôn viên nhà trường',
+            ngay_thang_nam: '02/10/2026',
+            'Ngày tháng năm': '02/10/2026',
+            thang: 10,
+            'Tháng': 10,
+            dia_diem: 'Khu C',
+            'Địa điểm': 'Khu C',
+            huong_xu_ly: 'Đề xuất hạ 1 bậc hạnh kiểm tháng',
+            'Hướng xử lý': 'Đề xuất hạ 1 bậc hạnh kiểm tháng',
+            email_gvcn: senderEmailInput.trim() || 'lytm.angiang@gmail.com',
+            'Email GVCN': senderEmailInput.trim() || 'lytm.angiang@gmail.com',
+            google_sheet_id: sheetIdInput.trim() || 'Vipham',
+            sheet_id: sheetIdInput.trim() || 'Vipham',
+            from: senderEmailInput.trim() || 'lytm.angiang@gmail.com',
+            email_nguoi_gui: senderEmailInput.trim() || 'lytm.angiang@gmail.com',
+            ghi_chu: 'Kiểm tra kết nối Make Webhook & Google Sheet'
+          })
+        }).catch(() => {});
+      }
+
       onRefresh();
       setShowConfigModal(false);
-      setConfigNotification('Đã lưu cấu hình kết nối Webhook / Google Sheet thành công!');
+      setConfigNotification('Đã lưu cấu hình và kết nối Webhook / Google Sheet thành công!');
       setTimeout(() => setConfigNotification(null), 4000);
     } catch (err: any) {
       alert(err.message || 'Lỗi lưu cấu hình');

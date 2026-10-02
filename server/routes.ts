@@ -494,14 +494,29 @@ router.post('/violations', async (req: Request, res: Response) => {
       ]
     };
 
+    // Effective Webhook URL & Config
+    const webhookUrl = (req.body.makeWebhookUrl && String(req.body.makeWebhookUrl).trim()) || dbData.config.makeWebhookUrl;
+    const effectiveConfig = {
+      ...dbData.config,
+      googleSheetId: (req.body.googleSheetId && String(req.body.googleSheetId).trim()) || dbData.config.googleSheetId,
+      senderEmail: (req.body.senderEmail && String(req.body.senderEmail).trim()) || dbData.config.senderEmail
+    };
+
+    if (req.body.makeWebhookUrl && String(req.body.makeWebhookUrl).trim() !== dbData.config.makeWebhookUrl) {
+      dbData.config.makeWebhookUrl = String(req.body.makeWebhookUrl).trim();
+    }
+    if (req.body.googleSheetId && String(req.body.googleSheetId).trim() !== dbData.config.googleSheetId) {
+      dbData.config.googleSheetId = String(req.body.googleSheetId).trim();
+    }
+
     // Dispatch to Webhook Make
     const dispatchResult = await dispatchWebhook(
       newRecord,
       'create_violation',
-      dbData.config.makeWebhookUrl,
+      webhookUrl,
       teacher,
       dbData.config.makeApiKey,
-      dbData.config
+      effectiveConfig
     );
 
     newRecord.sync_status = dispatchResult.sync_status;

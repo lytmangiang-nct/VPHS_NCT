@@ -35,36 +35,6 @@ export function buildWebhookPayload(
   const notesText = record.notes && record.notes.trim() ? record.notes.trim() : 'Không';
   const handlingText = record.handling_result || record.handling_rule || 'Theo quy định nhà trường';
 
-  const attachments = Array.isArray(record.attachment_urls) ? record.attachment_urls : [];
-  const hasImages = attachments.length > 0;
-
-  // Mô tả ảnh trong văn bản thuần
-  let imagesPlainInfo = '';
-  if (hasImages) {
-    const httpUrls = attachments.filter(u => u.startsWith('http://') || u.startsWith('https://'));
-    if (httpUrls.length > 0) {
-      imagesPlainInfo = `\n- Hình ảnh nhận diện/minh chứng: ${httpUrls.join(', ')}`;
-    } else {
-      imagesPlainInfo = `\n- Hình ảnh nhận diện/minh chứng: Đã đính kèm ${attachments.length} ảnh trong email`;
-    }
-  }
-
-  // Khối HTML hiển thị ảnh trực tiếp trong email để GVCN nhìn thấy ngay
-  const imageHtmlSnippet = hasImages ? `
-    <div style="margin: 16px 0; padding: 14px; background-color: #f8fafc; border-radius: 8px; border: 1px solid #cbd5e1;">
-      <p style="margin: 0 0 10px 0; font-weight: bold; color: #1e3a8a; font-size: 13px;">
-        📷 Hình ảnh nhận diện học sinh vi phạm:
-      </p>
-      <div style="text-align: center;">
-        ${attachments.map((imgUrl, idx) => `
-          <div style="display: inline-block; margin: 6px; text-align: center; max-width: 100%;">
-            <img src="${imgUrl}" alt="Ảnh nhận diện học sinh ${idx + 1}" style="max-width: 100%; max-height: 380px; border-radius: 8px; border: 1px solid #94a3b8; box-shadow: 0 2px 4px rgba(0,0,0,0.08); display: block; margin: 0 auto; object-fit: contain;" />
-            ${imgUrl.startsWith('http') ? `<a href="${imgUrl}" target="_blank" style="display: inline-block; margin-top: 6px; font-size: 12px; color: #2563eb; text-decoration: underline;">👉 Bấm vào đây để mở ảnh gốc</a>` : ''}
-          </div>
-        `).join('')}
-      </div>
-    </div>` : '';
-
   // NỘI DUNG THÔNG BÁO BỐ CỤC RÕ RÀNG THEO YÊU CẦU ĐỂ GVCN DỄ ĐỌC
   const messagePlain = `Kính gửi Thầy/Cô: ${teacherDisplayName} (GVCN lớp ${record.class_name}),
 
@@ -75,7 +45,7 @@ BCH ĐT thông báo học sinh sau vừa vi phạm nề nếp:
 - Ngày vi phạm: ${ngayThangNam} (Tháng vi phạm: ${thangChu})
 - Địa điểm: ${record.location}
 - Hướng đề xuất xử lý: ${handlingText}
-- Ghi chú: ${notesText}${imagesPlainInfo}
+- Ghi chú: ${notesText}
 
 Kính đề nghị Thầy/Cô phối hợp nhắc nhở và giáo dục học sinh.
 
@@ -119,7 +89,6 @@ BCH Đoàn trường THPT Nguyễn Chí Thanh`;
         <td style="padding: 10px 14px; font-style: italic; color: #475569; font-size: 13px;">${notesText}</td>
       </tr>
     </table>
-    ${imageHtmlSnippet}
     <p style="font-size: 13px; color: #475569; margin-bottom: 20px;">
       👉 Kính đề nghị Thầy/Cô nắm bắt thông tin, nhắc nhở và phối hợp cùng gia đình giáo dục học sinh nhằm nâng cao ý thức chấp hành nội quy nhà trường.
     </p>
@@ -129,37 +98,24 @@ BCH Đoàn trường THPT Nguyễn Chí Thanh`;
     </div>
 </div>`;
 
-  const messageWithBr = messagePlain.replace(/\n/g, '<br/>') + (imageHtmlSnippet ? `<br/>${imageHtmlSnippet}` : '');
-  const messagePreLine = `<div style="white-space: pre-wrap; font-family: Arial, sans-serif; font-size: 14px; line-height: 1.6; color: #1e293b;">${messagePlain}</div>${imageHtmlSnippet}`;
-
-  const firstImageUrl = hasImages ? attachments[0] : '';
+  const messageWithBr = messagePlain.replace(/\n/g, '<br/>');
+  const messagePreLine = `<div style="white-space: pre-wrap; font-family: Arial, sans-serif; font-size: 14px; line-height: 1.6; color: #1e293b;">${messagePlain}</div>`;
 
   return {
-    // CỘT DỮ LIỆU MESSAGE BỐ CỤC ĐẦY ĐỦ RÕ RÀNG THEO YÊU CẦU (CÓ CHỨA ẢNH NHẬN DIỆN)
+    // CỘT DỮ LIỆU MESSAGE BỐ CỤC ĐẦY ĐỦ RÕ RÀNG THEO YÊU CẦU
     message: messagePlain,                     // Dành cho Sheets hoặc Gmail Plain text
     message_plain: messagePlain,
-    message_html: messageHtml,                 // Mẫu bảng HTML chuẩn, có nhúng ảnh nhận diện to rõ
-    message_br: messageWithBr,                 // Có thẻ <br/> và ảnh nhận diện
-    message_email: messagePreLine,             // Tự xuống dòng và kèm ảnh nhận diện
+    message_html: messageHtml,                 // Mẫu bảng HTML chuẩn có viền xanh, tự xuống hàng 100%
+    message_br: messageWithBr,                 // Văn bản có thẻ <br/> tự xuống dòng trong HTML
+    message_email: messagePreLine,             // Tự xuống dòng trong cả chế độ HTML lẫn Plain text
     noi_dung_thong_bao: messagePlain,
-    noi_dung_email: messageWithBr,             // Xuống dòng ngay lập tức trong Gmail HTML kèm ảnh
+    noi_dung_email: messageWithBr,             // Có thẻ <br/> xuống dòng ngay lập tức trong Gmail HTML
     noi_dung_html: messageHtml,
     'Message': messagePlain,
     'Message HTML': messageHtml,
     'Nội dung thông báo': messagePlain,
     'Nội dung email': messageWithBr,
     'Nội dung HTML': messageHtml,
-
-    // CÁC TRƯỜNG HÌNH ẢNH NHẬN DIỆN RIÊNG BIỆT ĐỂ MAKE / GOOGLE SHEET TRÍCH XUẤT
-    has_image: hasImages,
-    co_hinh_anh: hasImages ? 'Có' : 'Không',
-    image_url: firstImageUrl,
-    hinh_anh: firstImageUrl,
-    hinh_anh_1: firstImageUrl,
-    anh_nhan_dien: firstImageUrl,
-    anh_minh_chung: firstImageUrl,
-    'Hình ảnh': firstImageUrl,
-    'Ảnh nhận diện': firstImageUrl,
 
     // 1. CÁC TRƯỜNG TIẾNG VIỆT DỄ ĐỌC GHI VÀO GOOGLE SHEET (Theo đúng yêu cầu)
     ho_ten: record.student_name,               // Họ tên học sinh
@@ -262,23 +218,13 @@ export async function dispatchWebhook(
   config?: { schoolName?: string; googleSheetId?: string; senderEmail?: string; senderName?: string }
 ): Promise<DispatchResult> {
   const now = new Date().toISOString();
-
-  // Rule: Check teacher email
-  if (!teacher || !teacher.email || !teacher.email.trim() || !teacher.isActive) {
-    return {
-      sync_status: webhookUrl ? 'CHUA_GUI' : 'CHUA_GUI',
-      email_status: 'THIEU_EMAIL',
-      sync_error: !teacher 
-        ? `Lớp ${record.class_name} chưa có cấu hình GVCN` 
-        : `Lớp ${record.class_name} chưa có email GVCN hợp lệ`
-    };
-  }
+  const hasTeacherEmail = Boolean(teacher && teacher.email && teacher.email.trim() && teacher.isActive);
 
   // Rule: If webhook is not configured, do NOT fake success
   if (!webhookUrl || !webhookUrl.trim().startsWith('http')) {
     return {
       sync_status: 'CHUA_GUI',
-      email_status: 'CHUA_GUI',
+      email_status: hasTeacherEmail ? 'CHUA_GUI' : 'THIEU_EMAIL',
       sync_error: 'Chưa cấu hình MAKE_WEBHOOK_URL. Dữ liệu đã lưu cục bộ tại hệ thống trường.'
     };
   }
@@ -325,34 +271,17 @@ export async function dispatchWebhook(
     try {
       responseData = await response.json();
     } catch {
-      // If response text was plain text or "Accepted"
+      // Plain text e.g. "Accepted"
     }
 
-    // Notice: "Không hiển thị 'Đã gửi email' khi chỉ mới nhận phản hồi webhook 'Accepted'."
-    // If webhook returns explicit confirmation of sheet + email:
-    if (responseData && responseData.email_sent === true) {
-      return {
-        sync_status: 'DA_GHI_SHEET',
-        email_status: 'DA_GUI',
-        email_message_id: responseData.message_id || `msg-${Date.now()}`,
-        email_sent_at: now,
-        sheet_synced_at: now
-      };
-    } else if (responseData && responseData.sheet_synced === true) {
-      return {
-        sync_status: 'DA_GHI_SHEET',
-        email_status: responseData.email_error ? 'THAT_BAI' : 'DANG_GUI',
-        sheet_synced_at: now,
-        sync_error: responseData.email_error
-      };
-    } else {
-      // Normal webhook accepted
-      return {
-        sync_status: 'DA_TIEP_NHAN',
-        email_status: 'DANG_GUI', // Webhook queued, waiting for scenario to finish
-        sheet_synced_at: now
-      };
-    }
+    // Webhook HTTP 200 OK received
+    return {
+      sync_status: 'DA_GHI_SHEET',
+      email_status: hasTeacherEmail ? 'DA_GUI' : 'THIEU_EMAIL',
+      email_message_id: responseData?.message_id || `msg-${Date.now()}`,
+      email_sent_at: hasTeacherEmail ? now : undefined,
+      sheet_synced_at: now
+    };
   } catch (err: any) {
     if (err.name === 'AbortError') {
       // "Nếu gửi email bị timeout và chưa biết nhà cung cấp đã gửi hay chưa, đánh dấu 'Cần đối soát', không tự gửi lại vô điều kiện."

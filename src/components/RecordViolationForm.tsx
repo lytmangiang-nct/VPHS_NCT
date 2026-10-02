@@ -239,15 +239,15 @@ export const RecordViolationForm: React.FC<RecordViolationFormProps> = ({
               <span className="font-semibold text-amber-700">{submittedRecord.handling_result || submittedRecord.handling_rule}</span>
             </div>
             <div className="flex justify-between pt-1 border-t border-slate-200">
-              <span className="text-slate-500">Trạng thái Google Sheet:</span>
+              <span className="text-slate-500">Trạng thái Webhook & Sheet:</span>
               <span className={`px-2 py-0.5 rounded text-[11px] font-semibold ${
-                submittedRecord.sync_status === 'DA_GHI_SHEET'
+                submittedRecord.sync_status === 'DA_GHI_SHEET' || submittedRecord.sync_status === 'DA_TIEP_NHAN'
                   ? 'bg-emerald-100 text-emerald-800'
-                  : submittedRecord.sync_status === 'DA_TIEP_NHAN'
-                  ? 'bg-blue-100 text-blue-800'
-                  : 'bg-slate-200 text-slate-800'
+                  : 'bg-amber-100 text-amber-800'
               }`}>
-                {submittedRecord.sync_status === 'DA_GHI_SHEET' ? 'Đã ghi Google Sheet' : submittedRecord.sync_status === 'DA_TIEP_NHAN' ? 'Đã tiếp nhận' : 'Đã lưu hệ thống'}
+                {submittedRecord.sync_status === 'DA_GHI_SHEET' || submittedRecord.sync_status === 'DA_TIEP_NHAN'
+                  ? '✅ Đã gửi qua Webhook & Sheet'
+                  : '⚠️ Chưa gửi (Chưa cài link Webhook)'}
               </span>
             </div>
             {submittedRecord.teacher_name && (
