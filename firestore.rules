@@ -10,9 +10,9 @@ service cloud.firestore {
       return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
     }
 
-    // Danh sách 28 GVCN: Đọc và cập nhật đồng bộ tức thì trên mọi thiết bị
+    // Danh sách 28 GVCN: Tự động đồng bộ thời gian thực trên mọi thiết bị
     match /teachers/{classId} {
-      allow read: if isValidId(classId);
+      allow read: if true;
       allow create, update: if isValidId(classId)
         && request.resource.data.className is string
         && request.resource.data.className.size() <= 10;
@@ -21,20 +21,19 @@ service cloud.firestore {
 
     // Cấu hình hệ thống (Webhook Make, Google Sheet ID)
     match /system/{configId} {
-      allow read: if isValidId(configId);
+      allow read: if true;
       allow create, update: if isValidId(configId);
       allow delete: if false;
     }
 
     // Nhật ký vi phạm học sinh
     match /violations/{violationId} {
-      allow read: if isValidId(violationId);
-      allow create: if isValidId(violationId)
+      allow read: if true;
+      allow create, update: if isValidId(violationId)
         && request.resource.data.student_name is string
         && request.resource.data.student_name.size() <= 100
         && request.resource.data.class_name is string
         && request.resource.data.class_name.size() <= 10;
-      allow update: if isValidId(violationId);
       allow delete: if isValidId(violationId);
     }
   }

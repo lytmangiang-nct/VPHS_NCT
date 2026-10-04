@@ -1100,6 +1100,10 @@ export const api = {
     });
 
     saveClientTeachers(merged);
+    // Write all to Firestore Cloud Database
+    merged.forEach((t) => {
+      setDoc(doc(db, 'teachers', t.className), t, { merge: true }).catch(() => {});
+    });
     fetch('/api/teachers/bulk', {
       method: 'POST',
       headers: getAuthHeaders(),
