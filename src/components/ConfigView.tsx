@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   Settings,
   Link,
@@ -14,7 +14,9 @@ import {
   Download,
   Plus,
   RefreshCw,
-  Info
+  Info,
+  Upload,
+  Cloud
 } from 'lucide-react';
 import { ALL_CLASSES, AppConfig, Student, Teacher, User } from '../types/index.ts';
 import { api } from '../services/api.ts';
@@ -47,6 +49,7 @@ export const ConfigView: React.FC<ConfigViewProps> = ({ currentUser, onConfigUpd
   const [testingWebhook, setTestingWebhook] = useState<boolean>(false);
   const [copiedPayload, setCopiedPayload] = useState<boolean>(false);
   const [activeSubTab, setActiveSubTab] = useState<'settings' | 'teachers' | 'students' | 'make_docs' | 'sheets_docs'>('settings');
+  const csvConfigInputRef = useRef<HTMLInputElement>(null);
 
   const loadData = async () => {
     try {
@@ -424,23 +427,67 @@ export const ConfigView: React.FC<ConfigViewProps> = ({ currentUser, onConfigUpd
       {/* SUB-TAB 2: TEACHERS (28 Classes) */}
       {activeSubTab === 'teachers' && (
         <div className="bg-white rounded-xl shadow-xs border border-slate-200 p-6 space-y-4">
-          <div className="flex justify-between items-center">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div>
-              <h3 className="font-bold text-sm text-slate-900">
-                Danh sách Giáo viên chủ nhiệm 28 Lớp (Tab Google Sheet: GVCN)
-              </h3>
-              <p className="text-xs text-slate-500">
-                Mỗi lớp chỉ có 1 cấu hình GVCN. Email được tra cứu nội bộ trên server trước khi gửi thông báo.
+              <div className="flex items-center gap-2">
+                <h3 className="font-bold text-sm text-slate-900">
+                  Danh sách Giáo viên chủ nhiệm 28 Lớp (Tab Google Sheet: GVCN)
+                </h3>
+                <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                  Cloud Firestore
+                </span>
+              </div>
+              <p className="text-xs text-slate-500 mt-0.5">
+                Mỗi lớp có 1 cấu hình GVCN. Dữ liệu tự động đồng bộ thời gian thực vĩnh viễn trên mọi thiết bị.
               </p>
             </div>
-            <a
-              href="/api/sheets-export/GVCN"
-              download="GVCN_28_LOP.csv"
-              className="px-3 py-1.5 bg-white border border-slate-300 hover:bg-slate-50 text-slate-700 text-xs font-semibold rounded-lg flex items-center gap-1.5"
-            >
-              <Download className="w-3.5 h-3.5 text-emerald-600" />
-              <span>Xuất CSV GVCN</span>
-            </a>
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={() => {
+                  const csv = api.exportTeachersCsv(teachers);
+                  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+                  const url = URL.createObjectURL(blob);
+                  const a = document.createElement('a');
+                  a.href = url;
+                  a.download = 'GVCN_28_LOP.csv';
+                  a.click();
+                  URL.revokeObjectURL(url);
+                }}
+                className="px-3 py-1.5 bg-white border border-slate-300 hover:bg-slate-50 text-slate-700 text-xs font-semibold rounded-lg flex items-center gap-1.5 cursor-pointer shadow-2xs"
+              >
+                <Download className="w-3.5 h-3.5 text-emerald-600" />
+                <span>Xuất CSV</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => csvConfigInputRef.current?.click()}
+                className="px-3 py-1.5 bg-white border border-slate-300 hover:bg-slate-50 text-slate-700 text-xs font-semibold rounded-lg flex items-center gap-1.5 cursor-pointer shadow-2xs"
+              >
+                <Upload className="w-3.5 h-3.5 text-blue-600" />
+                <span>Nhập CSV</span>
+              </button>
+              <input
+                ref={csvConfigInputRef}
+                type="file"
+                accept=".csv"
+                onChange={(e) => {
+                  const file = e.target.files?.[0];
+                  if (!file) return;
+                  const reader = new FileReader();
+                  reader.onload = (ev) => {
+                    const text = ev.target?.result as string;
+                    const res = api.importTeachersCsv(text);
+                    setTeachers(res.imported);
+                    alert(`Đã nhập thành công ${res.count} lớp từ file CSV!`);
+                  };
+                  reader.readAsText(file);
+                  e.target.value = '';
+                }}
+                className="hidden"
+              />
+            </div>
           </div>
 
           <div className="overflow-x-auto max-h-[500px]">

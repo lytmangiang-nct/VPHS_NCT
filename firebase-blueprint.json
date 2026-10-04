@@ -1,0 +1,79 @@
+{
+  "entities": {
+    "Teacher": {
+      "title": "Teacher",
+      "description": "Thông tin Giáo viên chủ nhiệm theo lớp",
+      "type": "object",
+      "properties": {
+        "className": { "type": "string", "maxLength": 10 },
+        "teacherName": { "type": "string", "maxLength": 100 },
+        "email": { "type": "string", "maxLength": 150 },
+        "isActive": { "type": "boolean" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["className", "teacherName", "email"]
+    },
+    "AppConfig": {
+      "title": "AppConfig",
+      "description": "Cấu hình hệ thống Webhook Make và Google Sheet",
+      "type": "object",
+      "properties": {
+        "makeWebhookUrl": { "type": "string", "maxLength": 500 },
+        "makeApiKey": { "type": "string", "maxLength": 200 },
+        "googleSheetId": { "type": "string", "maxLength": 200 },
+        "senderEmail": { "type": "string", "maxLength": 150 },
+        "senderName": { "type": "string", "maxLength": 150 },
+        "otherViolationDefaultRule": { "type": "string", "maxLength": 500 },
+        "otherViolationDefaultSteps": { "type": "number" },
+        "schoolName": { "type": "string", "maxLength": 200 },
+        "timezone": { "type": "string", "maxLength": 50 },
+        "testModeSimulation": { "type": "boolean" },
+        "updatedAt": { "type": "string" }
+      }
+    },
+    "ViolationRecord": {
+      "title": "ViolationRecord",
+      "description": "Bản ghi vi phạm nề nếp của học sinh",
+      "type": "object",
+      "properties": {
+        "violation_id": { "type": "string", "maxLength": 128 },
+        "student_id": { "type": "string", "maxLength": 50 },
+        "student_name": { "type": "string", "maxLength": 100 },
+        "class_name": { "type": "string", "maxLength": 10 },
+        "grade": { "type": "number" },
+        "violation_code": { "type": "string", "maxLength": 50 },
+        "violation_label": { "type": "string", "maxLength": 100 },
+        "description": { "type": "string", "maxLength": 1000 },
+        "location": { "type": "string", "maxLength": 100 },
+        "violation_date": { "type": "string", "maxLength": 20 },
+        "violation_time": { "type": "string", "maxLength": 20 },
+        "occurred_at": { "type": "string", "maxLength": 50 },
+        "recorded_at": { "type": "string", "maxLength": 50 },
+        "month": { "type": "number" },
+        "year": { "type": "number" },
+        "month_key": { "type": "string", "maxLength": 10 },
+        "teacher_name": { "type": "string", "maxLength": 100 },
+        "teacher_email": { "type": "string", "maxLength": 150 },
+        "handling_result": { "type": "string", "maxLength": 200 },
+        "verification_status": { "type": "string", "maxLength": 50 },
+        "decision_status": { "type": "string", "maxLength": 50 },
+        "notes": { "type": "string", "maxLength": 1000 }
+      },
+      "required": ["violation_id", "student_name", "class_name", "violation_code"]
+    }
+  },
+  "firestore": {
+    "/teachers/{classId}": {
+      "schema": "Teacher",
+      "description": "Danh sách 28 GVCN theo lớp"
+    },
+    "/system/config": {
+      "schema": "AppConfig",
+      "description": "Cấu hình chung của ứng dụng"
+    },
+    "/violations/{violationId}": {
+      "schema": "ViolationRecord",
+      "description": "Danh sách các vi phạm học sinh đã ghi nhận"
+    }
+  }
+}

@@ -90,12 +90,16 @@ export const RecordViolationForm: React.FC<RecordViolationFormProps> = ({
 
   useEffect(() => {
     api.getTeachers().then(setTeachers).catch(() => {});
+    const unsub = api.subscribeTeachers((liveTeachers) => {
+      setTeachers(liveTeachers);
+    });
     api.getClasses().then((res) => {
       setAvailableClasses(res.all || ALL_CLASSES);
     }).catch(() => {});
     api.getConfig().then((cfg) => {
       setOtherRuleText(cfg.otherViolationDefaultRule || VIOLATION_DEFINITIONS.OTHER.defaultRule);
     }).catch(() => {});
+    return () => unsub();
   }, []);
 
   // Tự động sinh mã mới khi lớp thay đổi hoặc khi khởi động

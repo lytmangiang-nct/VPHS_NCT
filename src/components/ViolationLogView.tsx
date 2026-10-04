@@ -75,7 +75,25 @@ export const ViolationLogView: React.FC<ViolationLogViewProps> = ({
 
   useEffect(() => {
     fetchViolations();
-  }, [selectedClass, selectedMonthKey, selectedCode]);
+    const unsub = api.subscribeViolations((liveViolations) => {
+      let filtered = liveViolations;
+      if (selectedClass) filtered = filtered.filter((v) => v.class_name === selectedClass);
+      if (selectedMonthKey) filtered = filtered.filter((v) => v.month_key === selectedMonthKey);
+      if (selectedCode) filtered = filtered.filter((v) => v.violation_code === selectedCode);
+      if (search) {
+        const q = search.toLowerCase().trim();
+        filtered = filtered.filter(
+          (v) =>
+            v.student_name.toLowerCase().includes(q) ||
+            v.student_id.toLowerCase().includes(q) ||
+            v.description.toLowerCase().includes(q) ||
+            v.violation_id.toLowerCase().includes(q)
+        );
+      }
+      setViolations(filtered);
+    });
+    return () => unsub();
+  }, [selectedClass, selectedMonthKey, selectedCode, search]);
 
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();

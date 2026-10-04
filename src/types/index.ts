@@ -33,6 +33,7 @@ export interface Teacher {
   teacherName: string;
   email: string;
   isActive: boolean;
+  updatedAt?: string;
 }
 
 export interface ViolationRecord {

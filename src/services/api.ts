@@ -12,6 +12,20 @@ import {
   ViolationRecord
 } from '../types/index.ts';
 import { parseToVietnamParts } from '../utils/datetime.ts';
+import {
+  db,
+  doc,
+  getDoc,
+  setDoc,
+  getDocs,
+  collection,
+  onSnapshot,
+  deleteDoc,
+  testConnection
+} from './firebase.ts';
+
+// Test Firestore connection on boot
+testConnection().catch(() => {});
 
 // Keys for client-side storage cache (supports static deployments like Netlify/Vercel)
 const STORAGE_KEYS = {
@@ -19,8 +33,34 @@ const STORAGE_KEYS = {
   USER: 'app_active_user',
   TEACHERS: 'app_teachers_cache',
   VIOLATIONS: 'app_violations_cache',
-  STUDENTS: 'app_students_cache'
+  STUDENTS: 'app_students_cache',
+  LAST_SYNC: 'app_last_sync_time'
 };
+
+export interface SyncDataPackage {
+  version: number;
+  exportedAt: string;
+  sourceDevice?: string;
+  config: AppConfig;
+  teachers: Teacher[];
+  violations?: ViolationRecord[];
+  students?: Student[];
+}
+
+export function utf8ToBase64(str: string): string {
+  const bytes = new TextEncoder().encode(str);
+  let bin = '';
+  for (let i = 0; i < bytes.length; i++) {
+    bin += String.fromCharCode(bytes[i]);
+  }
+  return btoa(bin);
+}
+
+export function base64ToUtf8(base64: string): string {
+  const bin = atob(base64);
+  const bytes = Uint8Array.from(bin, (c) => c.charCodeAt(0));
+  return new TextDecoder().decode(bytes);
+}
 
 const DEFAULT_CONFIG: AppConfig = {
   makeWebhookUrl: 'https://hook.eu1.make.com/corl1dg4fl1uoi2guqoi6ycphutv4pl7',
@@ -327,29 +367,53 @@ BCH Đoàn trường THPT Nguyễn Chí Thanh`;
 }
 
 export const api = {
-  // CONFIGURATION: Dual-layer (Backend + LocalStorage fallback for Netlify/Vercel)
+  // CONFIGURATION: Multi-layer (Firestore Cloud DB + Express + LocalStorage cache)
   async getConfig(): Promise<AppConfig & { isWebhookConfigured: boolean; isSheetConfigured: boolean }> {
+    // 1. Try Firebase Firestore Cloud Database
+    try {
+      const snap = await getDoc(doc(db, 'system', 'config'));
+      if (snap.exists()) {
+        const cloudData = snap.data() as AppConfig;
+        const merged = { ...DEFAULT_CONFIG, ...cloudData };
+        saveClientConfig(merged);
+        return {
+          ...merged,
+          isWebhookConfigured: Boolean(merged.makeWebhookUrl && merged.makeWebhookUrl.trim()),
+          isSheetConfigured: Boolean(merged.googleSheetId && merged.googleSheetId.trim())
+        };
+      } else {
+        // Seed default config to Firestore Cloud
+        setDoc(doc(db, 'system', 'config'), DEFAULT_CONFIG).catch(() => {});
+      }
+    } catch (e) {
+      console.warn('Firestore getConfig offline:', e);
+    }
+
+    // 2. Try backend server if running
     try {
       const res = await fetch('/api/config', { headers: getAuthHeaders() });
       if (res.ok) {
         const data = await res.json();
-        // Sync with local storage
-        try {
-          localStorage.setItem(STORAGE_KEYS.CONFIG, JSON.stringify(data));
-        } catch {}
+        saveClientConfig(data);
         return data;
       }
-    } catch {
-      // Backend not reachable (e.g. Netlify static hosting)
-    }
+    } catch {}
+
+    // 3. Fallback to client localStorage
     return getClientConfig();
   },
 
   async updateConfig(payload: Partial<AppConfig>): Promise<void> {
-    // 1. Always save immediately to client storage
     saveClientConfig(payload);
 
-    // 2. Also attempt to sync with backend if running
+    // Save to Firebase Firestore Cloud Database immediately
+    try {
+      await setDoc(doc(db, 'system', 'config'), payload, { merge: true });
+    } catch (e) {
+      console.warn('Firestore updateConfig error:', e);
+    }
+
+    // Also attempt backend sync
     try {
       const res = await fetch('/api/config', {
         method: 'POST',
@@ -362,9 +426,7 @@ export const api = {
           localStorage.setItem(STORAGE_KEYS.CONFIG, JSON.stringify(synced));
         } catch {}
       }
-    } catch {
-      // If deployed to Netlify without Express server, local storage persistence is sufficient!
-    }
+    } catch {}
   },
 
   async getUsers(): Promise<User[]> {
@@ -384,6 +446,38 @@ export const api = {
   },
 
   async getTeachers(): Promise<Teacher[]> {
+    // 1. Try Firebase Firestore Cloud Database (Source of Truth across all devices)
+    try {
+      const snap = await getDocs(collection(db, 'teachers'));
+      if (!snap.empty) {
+        const cloudTeachers: Teacher[] = [];
+        snap.forEach((d) => {
+          cloudTeachers.push(d.data() as Teacher);
+        });
+        const sorted = ALL_CLASSES.map((cls) => {
+          const found = cloudTeachers.find((t) => t.className === cls);
+          return found || {
+            className: cls,
+            teacherName: `Thầy/Cô GVCN ${cls}`,
+            email: '',
+            isActive: true
+          };
+        });
+        saveClientTeachers(sorted);
+        return sorted;
+      } else {
+        // Seed current teachers to Firestore Cloud
+        const seeds = getClientTeachers();
+        seeds.forEach((t) => {
+          setDoc(doc(db, 'teachers', t.className), t).catch(() => {});
+        });
+        return seeds;
+      }
+    } catch (e) {
+      console.warn('Firestore getTeachers offline:', e);
+    }
+
+    // 2. Try Backend server if running
     try {
       const res = await fetch('/api/teachers', { headers: getAuthHeaders() });
       if (res.ok) {
@@ -392,6 +486,7 @@ export const api = {
         return data;
       }
     } catch {}
+
     return getClientTeachers();
   },
 
@@ -400,18 +495,26 @@ export const api = {
     const idx = list.findIndex((t) => t.className === className);
     let updatedTeacher: Teacher;
     if (idx !== -1) {
-      updatedTeacher = { ...list[idx], ...data };
+      updatedTeacher = { ...list[idx], ...data, updatedAt: new Date().toISOString() };
       list[idx] = updatedTeacher;
     } else {
       updatedTeacher = {
         className,
         teacherName: data.teacherName || `Thầy/Cô GVCN ${className}`,
         email: data.email || '',
-        isActive: true
+        isActive: true,
+        updatedAt: new Date().toISOString()
       };
       list.push(updatedTeacher);
     }
     saveClientTeachers(list);
+
+    // Save to Firebase Firestore Cloud Database immediately
+    try {
+      await setDoc(doc(db, 'teachers', className), updatedTeacher, { merge: true });
+    } catch (e) {
+      console.warn('Firestore updateTeacher error:', e);
+    }
 
     try {
       const res = await fetch(`/api/teachers/${className}`, {
@@ -495,6 +598,40 @@ export const api = {
   },
 
   async getViolations(params?: Record<string, string>): Promise<ViolationRecord[]> {
+    // 1. Try Firebase Firestore Cloud Database first
+    try {
+      const snap = await getDocs(collection(db, 'violations'));
+      if (!snap.empty) {
+        const cloudList: ViolationRecord[] = [];
+        snap.forEach((d) => {
+          cloudList.push(d.data() as ViolationRecord);
+        });
+        cloudList.sort((a, b) => new Date(b.occurred_at || 0).getTime() - new Date(a.occurred_at || 0).getTime());
+        saveClientViolations(cloudList);
+
+        let list = cloudList;
+        if (params) {
+          if (params.class_name) list = list.filter((v) => v.class_name === params.class_name);
+          if (params.month_key) list = list.filter((v) => v.month_key === params.month_key);
+          if (params.violation_code) list = list.filter((v) => v.violation_code === params.violation_code);
+          if (params.search) {
+            const q = params.search.toLowerCase().trim();
+            list = list.filter(
+              (v) =>
+                v.student_name.toLowerCase().includes(q) ||
+                v.student_id.toLowerCase().includes(q) ||
+                v.description.toLowerCase().includes(q) ||
+                v.violation_id.toLowerCase().includes(q)
+            );
+          }
+        }
+        return list;
+      }
+    } catch (e) {
+      console.warn('Firestore getViolations offline:', e);
+    }
+
+    // 2. Try Backend server if running
     try {
       const url = new URL('/api/violations', window.location.origin);
       if (params) {
@@ -594,6 +731,12 @@ export const api = {
     // Concurrently trigger background deliveries (parallel execution)
     const promises: Promise<any>[] = [];
 
+    // 0. Save to Firebase Firestore Cloud Database (Instant Cloud Persistence)
+    const firestoreTask = setDoc(doc(db, 'violations', newRecord.violation_id), newRecord).catch((e) => {
+      console.warn('Firestore createViolation write error:', e);
+    });
+    promises.push(firestoreTask);
+
     // 1. Direct Webhook Dispatch (High Priority, non-blocking)
     if (config.makeWebhookUrl && config.makeWebhookUrl.trim()) {
       const webhookPayload = buildClientWebhookPayload(newRecord, teacher, config);
@@ -649,6 +792,9 @@ export const api = {
       saveClientViolations(list);
     }
 
+    // Update in Firestore Cloud
+    setDoc(doc(db, 'violations', id), payload, { merge: true }).catch(() => {});
+
     try {
       const res = await fetch(`/api/violations/${id}`, {
         method: 'PUT',
@@ -676,6 +822,14 @@ export const api = {
       saveClientViolations(list);
     }
 
+    // Cancel in Firestore Cloud
+    setDoc(doc(db, 'violations', id), {
+      verification_status: 'DA_HUY',
+      decision_status: 'DA_XU_LY',
+      approved_downgrade_steps: 0,
+      handling_result: `Đã hủy vụ việc. Lý do: ${reason}`
+    }, { merge: true }).catch(() => {});
+
     try {
       await fetch(`/api/violations/${id}/cancel`, {
         method: 'POST',
@@ -688,6 +842,9 @@ export const api = {
   async deleteViolation(id: string): Promise<void> {
     const list = getClientViolations().filter((v) => v.violation_id !== id);
     saveClientViolations(list);
+
+    // Delete in Firestore Cloud
+    deleteDoc(doc(db, 'violations', id)).catch(() => {});
 
     try {
       await fetch(`/api/violations/${id}`, {
@@ -753,5 +910,245 @@ export const api = {
       failed: 0,
       results: []
     };
+  },
+
+  // BATCH TEACHERS UPDATE
+  async updateAllTeachers(teachers: Teacher[]): Promise<{ success: boolean; count: number }> {
+    saveClientTeachers(teachers);
+    try {
+      await fetch('/api/teachers/bulk', {
+        method: 'POST',
+        headers: getAuthHeaders(),
+        body: JSON.stringify({ teachers })
+      });
+    } catch {}
+    return { success: true, count: teachers.length };
+  },
+
+  // CROSS-DEVICE SYNC ENGINE
+  getSyncPackage(includeViolations = false): SyncDataPackage {
+    const config = getClientConfig();
+    const teachers = getClientTeachers();
+    const violations = includeViolations ? getClientViolations() : [];
+    return {
+      version: 1,
+      exportedAt: new Date().toISOString(),
+      sourceDevice: typeof navigator !== 'undefined' ? (navigator.userAgent.includes('Mobi') ? 'Điện thoại' : 'Máy tính') : 'Web',
+      config: {
+        makeWebhookUrl: config.makeWebhookUrl,
+        makeApiKey: config.makeApiKey || '',
+        googleSheetId: config.googleSheetId,
+        senderEmail: config.senderEmail,
+        senderName: config.senderName,
+        otherViolationDefaultRule: config.otherViolationDefaultRule,
+        otherViolationDefaultSteps: config.otherViolationDefaultSteps,
+        schoolName: config.schoolName,
+        timezone: config.timezone,
+        testModeSimulation: config.testModeSimulation
+      },
+      teachers,
+      violations
+    };
+  },
+
+  applySyncPackage(pkg: SyncDataPackage): { teachersUpdated: number; violationsUpdated: number; configUpdated: boolean } {
+    let teachersUpdated = 0;
+    let violationsUpdated = 0;
+    let configUpdated = false;
+
+    if (pkg.teachers && Array.isArray(pkg.teachers) && pkg.teachers.length > 0) {
+      const currentTeachers = getClientTeachers();
+      const map = new Map<string, Teacher>();
+      currentTeachers.forEach((t) => map.set(t.className, t));
+
+      pkg.teachers.forEach((t) => {
+        if (t.className) {
+          map.set(t.className, {
+            className: t.className,
+            teacherName: t.teacherName || map.get(t.className)?.teacherName || `Thầy/Cô GVCN ${t.className}`,
+            email: t.email !== undefined ? t.email.trim() : (map.get(t.className)?.email || ''),
+            isActive: t.isActive !== false
+          });
+          teachersUpdated++;
+        }
+      });
+
+      const mergedTeachers = ALL_CLASSES.map((cls) => map.get(cls) || {
+        className: cls,
+        teacherName: `Thầy/Cô GVCN ${cls}`,
+        email: '',
+        isActive: true
+      });
+
+      saveClientTeachers(mergedTeachers);
+      // Attempt backend sync
+      fetch('/api/teachers/bulk', {
+        method: 'POST',
+        headers: getAuthHeaders(),
+        body: JSON.stringify({ teachers: mergedTeachers })
+      }).catch(() => {});
+    }
+
+    if (pkg.config) {
+      saveClientConfig(pkg.config);
+      configUpdated = true;
+    }
+
+    if (pkg.violations && Array.isArray(pkg.violations) && pkg.violations.length > 0) {
+      const currentViolations = getClientViolations();
+      const existingIds = new Set(currentViolations.map((v) => v.violation_id));
+      const newOnes = pkg.violations.filter((v) => v.violation_id && !existingIds.has(v.violation_id));
+      if (newOnes.length > 0) {
+        const combined = [...newOnes, ...currentViolations];
+        saveClientViolations(combined);
+        violationsUpdated = newOnes.length;
+      }
+    }
+
+    try {
+      localStorage.setItem(STORAGE_KEYS.LAST_SYNC, new Date().toISOString());
+    } catch {}
+
+    return { teachersUpdated, violationsUpdated, configUpdated };
+  },
+
+  generateSyncCode(includeViolations = false): string {
+    const pkg = this.getSyncPackage(includeViolations);
+    return utf8ToBase64(JSON.stringify(pkg));
+  },
+
+  generateSyncUrl(includeViolations = false): string {
+    const code = this.generateSyncCode(includeViolations);
+    const origin = typeof window !== 'undefined' ? window.location.origin : '';
+    const pathname = typeof window !== 'undefined' ? window.location.pathname : '';
+    return `${origin}${pathname}#sync=${code}`;
+  },
+
+  parseSyncString(input: string): SyncDataPackage {
+    let clean = input.trim();
+    if (clean.includes('#sync=')) {
+      clean = clean.split('#sync=')[1];
+    }
+    if (clean.startsWith('{') && clean.endsWith('}')) {
+      return JSON.parse(clean);
+    }
+    const jsonStr = base64ToUtf8(clean);
+    return JSON.parse(jsonStr);
+  },
+
+  exportTeachersCsv(teachersList?: Teacher[]): string {
+    const teachers = teachersList || getClientTeachers();
+    const bom = '\uFEFF';
+    const header = 'Lớp,Họ và tên GVCN,Email GVCN,Trạng thái\n';
+    const rows = teachers.map((t) => {
+      const name = (t.teacherName || '').replace(/"/g, '""');
+      const email = (t.email || '').replace(/"/g, '""');
+      const status = t.email ? 'Đang hoạt động' : 'Thiếu email';
+      return `"${t.className}","${name}","${email}","${status}"`;
+    }).join('\n');
+    return bom + header + rows;
+  },
+
+  importTeachersCsv(csvText: string): { count: number; imported: Teacher[] } {
+    const lines = csvText.split(/\r?\n/).filter((l) => l.trim().length > 0);
+    const currentTeachers = getClientTeachers();
+    const map = new Map<string, Teacher>();
+    currentTeachers.forEach((t) => map.set(t.className, t));
+
+    let updatedCount = 0;
+    for (let i = 0; i < lines.length; i++) {
+      const line = lines[i];
+      // Skip header if matches
+      if (i === 0 && (line.toLowerCase().includes('lớp') || line.toLowerCase().includes('classname'))) {
+        continue;
+      }
+
+      // Parse CSV line handling quotes
+      const regex = /(?:^|,)(\"(?:[^\"]+|\"\")*\"|[^,]*)/g;
+      const matches: string[] = [];
+      let match;
+      while ((match = regex.exec(line)) !== null) {
+        let val = match[1] || '';
+        if (val.startsWith('"') && val.endsWith('"')) {
+          val = val.slice(1, -1).replace(/""/g, '"');
+        }
+        matches.push(val.trim());
+      }
+
+      if (matches.length >= 2) {
+        const className = matches[0].toUpperCase();
+        const teacherName = matches[1];
+        const email = matches[2] || '';
+
+        if (ALL_CLASSES.includes(className)) {
+          map.set(className, {
+            className,
+            teacherName: teacherName || map.get(className)?.teacherName || `Thầy/Cô GVCN ${className}`,
+            email: email.trim(),
+            isActive: true
+          });
+          updatedCount++;
+        }
+      }
+    }
+
+    const merged = ALL_CLASSES.map((cls) => map.get(cls) || {
+      className: cls,
+      teacherName: `Thầy/Cô GVCN ${cls}`,
+      email: '',
+      isActive: true
+    });
+
+    saveClientTeachers(merged);
+    fetch('/api/teachers/bulk', {
+      method: 'POST',
+      headers: getAuthHeaders(),
+      body: JSON.stringify({ teachers: merged })
+    }).catch(() => {});
+
+    return { count: updatedCount, imported: merged };
+  },
+
+  // REAL-TIME FIRESTORE SUBSCRIPTIONS (Cross-device < 0.1s sync)
+  subscribeTeachers(callback: (teachers: Teacher[]) => void): () => void {
+    try {
+      return onSnapshot(collection(db, 'teachers'), (snap) => {
+        if (!snap.empty) {
+          const list: Teacher[] = [];
+          snap.forEach((d) => list.push(d.data() as Teacher));
+          const sorted = ALL_CLASSES.map((cls) => {
+            const found = list.find((t) => t.className === cls);
+            return found || {
+              className: cls,
+              teacherName: `Thầy/Cô GVCN ${cls}`,
+              email: '',
+              isActive: true
+            };
+          });
+          saveClientTeachers(sorted);
+          callback(sorted);
+        }
+      }, (err) => {
+        console.warn('Firestore onSnapshot teachers error:', err);
+      });
+    } catch {
+      return () => {};
+    }
+  },
+
+  subscribeViolations(callback: (violations: ViolationRecord[]) => void): () => void {
+    try {
+      return onSnapshot(collection(db, 'violations'), (snap) => {
+        const list: ViolationRecord[] = [];
+        snap.forEach((d) => list.push(d.data() as ViolationRecord));
+        list.sort((a, b) => new Date(b.occurred_at || 0).getTime() - new Date(a.occurred_at || 0).getTime());
+        saveClientViolations(list);
+        callback(list);
+      }, (err) => {
+        console.warn('Firestore onSnapshot violations error:', err);
+      });
+    } catch {
+      return () => {};
+    }
   }
 };

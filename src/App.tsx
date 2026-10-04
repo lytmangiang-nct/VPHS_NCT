@@ -18,22 +18,6 @@ export default function App() {
 
   useEffect(() => {
     fetchConfig();
-
-    const handleFocus = () => {
-      fetchConfig();
-      setRefreshKey((prev) => prev + 1);
-    };
-    window.addEventListener('focus', handleFocus);
-
-    // Auto-sync every 8 seconds so entries from phone appear on PC automatically
-    const interval = setInterval(() => {
-      setRefreshKey((prev) => prev + 1);
-    }, 8000);
-
-    return () => {
-      window.removeEventListener('focus', handleFocus);
-      clearInterval(interval);
-    };
   }, []);
 
   const handleViolationRecorded = (violationId: string) => {
@@ -64,6 +48,7 @@ export default function App() {
           {activeTab === 'record' ? (
             <div className="max-w-3xl mx-auto">
               <RecordViolationForm
+                key={refreshKey}
                 currentUser={currentUser}
                 onSuccessNavigate={handleViolationRecorded}
               />
@@ -82,7 +67,7 @@ export default function App() {
       <footer className="bg-white border-t border-slate-200 py-3 px-3 sm:px-6 lg:px-8 text-center text-xs text-slate-500 w-full">
         <div className="w-full flex flex-col sm:flex-row items-center justify-between gap-1.5">
           <span className="font-medium text-slate-700">
-            Sổ ghi nhận vi phạm &bull; Gửi toàn bộ trường dữ liệu qua Webhook & Google Sheets
+            Sổ ghi nhận vi phạm &bull; Tự động đồng bộ thời gian thực qua Firebase Firestore & Google Sheets
           </span>
           <span className="font-mono text-[11px] text-slate-400">Múi giờ Asia/Ho_Chi_Minh (+07:00)</span>
         </div>
